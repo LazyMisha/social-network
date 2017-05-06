@@ -12,11 +12,7 @@
         <property name="show_sql">false</property>
         <property name="hbm2ddl.auto">update</property>
 
-        <mapping class="com.trunov.departments.entity.Entity"></mapping>
-        <mapping class="com.trunov.departments.entity.Employee"></mapping>
-        <mapping class="com.trunov.departments.entity.Department"></mapping>
-        <mapping class="com.trunov.departments.entity.Developer"></mapping>
-        <mapping class="com.trunov.departments.entity.Manager"></mapping>
+        <mapping class="com.trunov.departments.entity.User"></mapping>
 
-    </session-factory>
+     </session-factory>
 </hibernate-configuration>
