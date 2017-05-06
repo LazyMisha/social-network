@@ -1,4 +1,4 @@
-package Servlet;
+package servlet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by misha on 06.05.17.
+ * Servlet for Main Page (index.html)
  */
 
 @WebServlet("/servlet")
