@@ -21,10 +21,18 @@
       <scope>test</scope>
     </dependency>
 
+          <dependency>
+              <groupId>javax</groupId>
+              <artifactId>javaee-web-api</artifactId>
+              <version>6.0</version>
+              <scope>provided</scope>
+          </dependency>
+
       <dependency>
           <groupId>javax.servlet.jsp</groupId>
-          <artifactId>javax.servlet.jsp-api</artifactId>
-          <version>2.2.1</version>
+          <artifactId>jsp-api</artifactId>
+          <version>2.1</version>
+          <scope>provided</scope>
       </dependency>
 
       <dependency>
@@ -94,12 +102,9 @@
     <finalName>socialnetwork</finalName>
     <plugins>
       <plugin>
-        <groupId>org.apache.tomcat.maven</groupId>
-        <artifactId>tomcat7-maven-plugin</artifactId>
-        <version>2.2</version>
-        <configuration>
-          <path>/socialnetwork</path>
-        </configuration>
+          <groupId>org.apache.tomcat</groupId>
+          <artifactId>tomcat-catalina</artifactId>
+          <version>7.0.12</version>
       </plugin>
     </plugins>
   </build>
