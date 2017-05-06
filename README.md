@@ -6,3 +6,5 @@
 4. Open browser and type url "http://localhost:8080/socialnetwork/"
 
 Expect opening the main page
+
+Open resources/hibernate.cfg.xml file and type MySQL parameters
