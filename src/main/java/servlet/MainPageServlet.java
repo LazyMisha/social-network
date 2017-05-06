@@ -22,8 +22,12 @@ public class MainPageServlet extends HttpServlet {
             throws ServletException, IOException {
         String firstName = request.getParameter("firstname");
         String surName = request.getParameter("surname");
+        String email = request.getParameter("email");
+        String age = request.getParameter("age");
         System.out.println(firstName);
         System.out.println(surName);
+        System.out.println(email);
+        System.out.println(age);
 
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
@@ -31,19 +35,27 @@ public class MainPageServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print("<h2>Hello </h2>" + firstName + "<h2>Welcom to New Social Network!</h2>");
         out.print("<h3>Your name is " + firstName + "</h3>");
-        out.println("<h3>Your surname is " + surName + "</h3>");
+        out.print("<h3>Your surname is " + surName + "</h3>");
+        out.print("<h3>Your email is " + email + "</h3>");
+        out.print("<h3>Your age is " + age + "</h3>");
         out.close();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request,
+                          HttpServletResponse response)
+            throws ServletException, IOException {
         System.out.println("New servlet application");
 
         request.setCharacterEncoding("utf-8");
 
         String firstName = request.getParameter("firstname");
         String surName = request.getParameter("surname");
+        String email = request.getParameter("email");
+        String age = request.getParameter("age");
         System.out.println(firstName);
         System.out.println(surName);
+        System.out.println(email);
+        System.out.println(age);
 
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
@@ -51,8 +63,9 @@ public class MainPageServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         out.print("<h2>Hello </h2>" + firstName + "<h2>Welcom to New Social Network!</h2>");
         out.print("<h3>Your name is " + firstName + "</h3>");
-        out.println("<h3>Your surname is " + surName + "</h3>");
+        out.print("<h3>Your surname is " + surName + "</h3>");
+        out.print("<h3>Your email is " + email + "</h3>");
+        out.print("<h3>Your age is " + age + "</h3>");
         out.close();
     }
-
 }
