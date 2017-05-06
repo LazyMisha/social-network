@@ -11,7 +11,7 @@ public class UserDao {
 
     private Session session = HibernateUtil.getSessionFactory().openSession();
 
-    public void save (User user){
+    public void save(User user){
         try {
             session.beginTransaction();
             session.save(user);

@@ -1,5 +1,8 @@
 package servlet;
 
+import dao.UserDao;
+import entity.User;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,6 +18,9 @@ import java.io.PrintWriter;
 @WebServlet("/servlet")
 public class MainPageServlet extends HttpServlet {
 
+    User user = new User();
+    UserDao userDao = new UserDao();
+
     private static final long serialVersionUID = 1L;
 
     protected void doGet(HttpServletRequest request,
@@ -28,6 +34,11 @@ public class MainPageServlet extends HttpServlet {
         System.out.println(surName);
         System.out.println(email);
         System.out.println(age);
+        user.setFirstname(firstName);
+        user.setLastname(surName);
+        user.setAge(Integer.parseInt(age));
+        user.setEmail(email);
+        userDao.save(user);
 
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");
@@ -56,6 +67,11 @@ public class MainPageServlet extends HttpServlet {
         System.out.println(surName);
         System.out.println(email);
         System.out.println(age);
+        user.setFirstname(firstName);
+        user.setLastname(surName);
+        user.setAge(Integer.parseInt(age));
+        user.setEmail(email);
+        userDao.save(user);
 
         response.setContentType("text/html");
         response.setCharacterEncoding("utf-8");

@@ -28,7 +28,7 @@ public class User {
     private String lastName;
 
     @Column(name = "email", unique = false, nullable = false, length = 100)
-    private System email;
+    private String email;
 
     public User() {
 
@@ -68,5 +68,12 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastName = lastname;
+    }
+
+    public void setEmail(String email){
+        this.email = email;
+    }
+    public String getEmail(){
+        return email;
     }
 }
