@@ -30,6 +30,9 @@ public class User {
     @Column(name = "email", unique = false, nullable = false, length = 100)
     private String email;
 
+    @Column(name = "password", nullable = false, length = 100)
+    private String password;
+
     public User() {
 
     }
@@ -73,7 +76,16 @@ public class User {
     public void setEmail(String email){
         this.email = email;
     }
+
     public String getEmail(){
         return email;
+    }
+
+    public String getPassword(){
+        return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 }
