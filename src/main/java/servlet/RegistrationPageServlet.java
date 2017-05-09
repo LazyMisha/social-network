@@ -12,11 +12,11 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Servlet for Main Page (index.html)
+ * Servlet for Registration Page (registration.html)
  */
 
 @WebServlet("/servlet")
-public class MainPageServlet extends HttpServlet {
+public class RegistrationPageServlet extends HttpServlet {
 
     User user = new User();
     UserDao userDao = new UserDao();
