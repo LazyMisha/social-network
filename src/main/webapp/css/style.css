@@ -1,0 +1,42 @@
+html {
+  height: 100%; /* Позиционирование footer */
+}
+
+body {
+  position: relative; /* Позиционирование footer */
+  min-height: 100%; /* Позиционирование footer */
+}
+
+main {
+  padding-bottom: 30px; /* Позиционирование footer */
+}
+
+footer {
+  position: absolute; /* Позиционирование footer */
+  bottom: 0; /* Позиционирование footer */
+  width: 100%; /* Позиционирование footer */
+  height: 30px; /* Позиционирование footer */
+}
+
+header {
+	background: #471275;
+	border: 2px solid #2c0d47;
+	color: #fff;
+	text-align: center;
+}
+
+.sidebar-left {
+	color: #1C0430;
+	text-align: left;
+}
+
+.sidebar-left ul {
+	list-style-type: none;
+}
+
+footer {
+	background: #471275;
+	border: 2px solid #2c0d47;
+	color: #fff;
+	text-align: right;
+}
