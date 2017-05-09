@@ -18,9 +18,6 @@ public class User {
     @Column(name = "id", unique = true, nullable = false)
     private long id;
 
-    @Column(name = "age", unique = false, nullable = false)
-    private int age;
-
     @Column(name = "first_name", unique = false, nullable = false, length = 100)
     private String firstName;
 
@@ -29,6 +26,9 @@ public class User {
 
     @Column(name = "email", unique = false, nullable = false, length = 100)
     private String email;
+
+    @Column(name = "date_of_birth", unique = false, nullable = false)
+    private String birthDay;
 
     @Column(name = "password", nullable = false, length = 100)
     private String password;
@@ -49,12 +49,12 @@ public class User {
         this.id = id;
     }
 
-    public int getAge() {
-        return age;
+    public String getBirthDay() {
+        return birthDay;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void setBirthDay(String birthDay) {
+        this.birthDay = birthDay;
     }
 
     public String getFirstname() {

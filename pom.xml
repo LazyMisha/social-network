@@ -98,7 +98,7 @@
       </dependency>
   </dependencies>
 
-  <build>
+    <build>
     <finalName>socialnetwork</finalName>
     <plugins>
       <plugin>
@@ -108,5 +108,4 @@
       </plugin>
     </plugins>
   </build>
-
 </project>
