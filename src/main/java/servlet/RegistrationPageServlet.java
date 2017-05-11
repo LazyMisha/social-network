@@ -15,7 +15,7 @@ import java.io.PrintWriter;
  * Servlet for Registration Page (registration.html)
  */
 
-@WebServlet("/servlet")
+@WebServlet(name="servlet", urlPatterns="/servlet")
 public class RegistrationPageServlet extends HttpServlet {
 
     User user = new User();
