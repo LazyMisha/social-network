@@ -16,4 +16,4 @@ hs_err_pid*
 #files created by NetBeans IDE
 /target/
 /src/main/webapp/META-INF/
-
+nb-configuration.xml
