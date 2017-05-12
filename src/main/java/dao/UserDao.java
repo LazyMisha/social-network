@@ -3,6 +3,7 @@ package dao;
 import entity.User;
 import org.hibernate.Session;
 import util.HibernateUtil;
+import java.util.List;
 
 /**
  * Created by misha on 06.05.17.
@@ -20,5 +21,23 @@ public class UserDao {
             session.getTransaction().rollback();
             System.out.println(e.getMessage());
         }
+    }
+    
+    public boolean isRegistered(String email,String password){
+        try {
+            session.beginTransaction();
+
+            List<User> usersList=session.createQuery("FROM User").list();
+            for(User u:usersList){
+                if((u.getEmail().equals(email))&&(u.getPassword().equals(password))){
+                    return true;
+                }
+            }
+            session.getTransaction().commit();
+        }catch (Exception e){
+            session.getTransaction().rollback();
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
