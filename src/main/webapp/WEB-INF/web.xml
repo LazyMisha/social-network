@@ -10,8 +10,19 @@
         <servlet-name>servlet</servlet-name>
         <servlet-class>servlet.RegistrationPageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <description></description>
+        <display-name>LoginServlet</display-name>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>servlet.LoginServlet</servlet-class>
+    </servlet>
+    
     <servlet-mapping>
         <servlet-name>servlet</servlet-name>
         <url-pattern>/servlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
     </servlet-mapping>
 </web-app>
