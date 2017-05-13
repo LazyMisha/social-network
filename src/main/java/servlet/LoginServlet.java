@@ -1,10 +1,7 @@
-
 package servlet;
 
 import dao.UserDao;
-import entity.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,13 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- *
  * @author Stepanyuk
+ * Servlet for login page (index.html)
  */
 @WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    User user = new User();
     UserDao userDao = new UserDao();
     
     @Override
@@ -31,17 +27,24 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        PrintWriter pw=response.getWriter();
 
-        String email=request.getParameter("email");
-        String password=request.getParameter("password");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
         
         boolean regConfirm=userDao.isRegistered(email, password);
-        ServletContext sc=getServletContext();
-        if(regConfirm)
+
+        ServletContext sc = getServletContext();
+
+        if(regConfirm){
             sc.getRequestDispatcher("/profile.html").forward(request, response);
-        else
+            System.out.println("user successfully registered");
+            System.out.println("email: " + email);
+            System.out.println("password: " + password);
+        }else{
             sc.getRequestDispatcher("/loginerror.html").forward(request, response);
+            System.out.println("user inputted not correct email or password");
+            System.out.println("inputted email: " + email);
+            System.out.println("inputted password: " + password);
+        }
     }
 }
