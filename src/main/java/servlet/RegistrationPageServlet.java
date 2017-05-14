@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Servlet for Registration Page (registration.html)
@@ -20,6 +23,7 @@ public class RegistrationPageServlet extends HttpServlet {
 
     User user = new User();
     UserDao userDao = new UserDao();
+    Date date = null;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,7 +40,7 @@ public class RegistrationPageServlet extends HttpServlet {
         String birthDay = request.getParameter("birth-day");
         String birthMonth = request.getParameter("birth-month");
         String birthYear = request.getParameter("birth-year");
-        String birthDate = birthDay + "/" + birthMonth + "/" + birthYear;
+        String birthDate = birthDay + "-" + birthMonth + "-" + birthYear;
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
@@ -49,16 +53,23 @@ public class RegistrationPageServlet extends HttpServlet {
 
         ServletContext sc = getServletContext();
 
+        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            date = dt.parse(birthDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
         if(pass.isEmpty()){
             sc.getRequestDispatcher("/registration.html").forward(request, response);
             System.out.println("user did not inputted password!");
         }else{
             if(pass.equals(confirmPass)){
-                user.setFirstname(firstName);
-                user.setLastname(surName);
+                user.setFirstName(firstName);
+                user.setLastName(surName);
                 user.setEmail(email);
                 user.setPassword(pass);
-                user.setBirthDay(birthDate);
+                user.setBirthday(date);
                 userDao.save(user);
 
                 sc.getRequestDispatcher("/profile.html").forward(request, response);
