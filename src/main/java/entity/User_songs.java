@@ -3,6 +3,10 @@ import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
 
+/**
+ * create songs in database
+ */
+
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
 @Table(name= "user_songs")

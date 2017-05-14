@@ -7,6 +7,10 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * create music in database
+ */
+
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
 @Table(name="music")

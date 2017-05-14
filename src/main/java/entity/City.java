@@ -3,6 +3,10 @@ package entity;
 import org.hibernate.annotations.OptimisticLockType;
 import javax.persistence.*;
 
+/**
+ * create city in database
+ */
+
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
 @Table(name = "city")

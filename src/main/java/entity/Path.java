@@ -4,6 +4,10 @@ import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
 
+/**
+ * create path in database
+ */
+
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
 @Table(name="path")

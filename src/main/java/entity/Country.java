@@ -3,8 +3,10 @@ package entity;
 import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+
+/**
+ * create country in database
+ */
 
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
