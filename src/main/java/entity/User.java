@@ -32,6 +32,7 @@ public class User {
     private String password;
 
     @Column(name = "date_of_birthday", unique = false, nullable = true)
+    @Temporal(value = TemporalType.DATE)
     private Date birthday;
 
     @Column(name = "user_info", nullable = true, unique = false, length = 256)

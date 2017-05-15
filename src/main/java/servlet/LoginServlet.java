@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
         ServletContext sc = getServletContext();
 
         if(regConfirm){
-            sc.getRequestDispatcher("/profile.html").forward(request, response);
+            sc.getRequestDispatcher("/profile.jsp").forward(request, response);
             System.out.println("user successfully registered");
             System.out.println("email: " + email);
             System.out.println("password: " + password);
