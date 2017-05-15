@@ -23,21 +23,14 @@ public class UserDao {
         }
     }
     
-    public boolean isRegistered(String email,String password){
-        try {
-            session.beginTransaction();
+    public User isRegistered(String email,String password){
 
-            List<User> usersList=session.createQuery("FROM User").list();
-            for(User u:usersList){
-                if((u.getEmail().equals(email))&&(u.getPassword().equals(password))){
-                    return true;
-                }
+        List<User> usersList=session.createQuery("FROM User").list();
+        for(User u:usersList){
+            if((u.getEmail().equals(email))&&(u.getPassword().equals(password))){
+                return u;
             }
-            session.getTransaction().commit();
-        }catch (Exception e){
-            session.getTransaction().rollback();
-            System.out.println(e.getMessage());
         }
-        return false;
+        return null;
     }
 }
