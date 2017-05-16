@@ -7,6 +7,7 @@ import java.util.List;
 
 /**
  * Created by misha on 06.05.17.
+ * operations with user
  */
 public class UserDao {
 
@@ -23,12 +24,11 @@ public class UserDao {
         }
     }
     
-    public User isRegistered(String email,String password){
-
-        List<User> usersList=session.createQuery("FROM User").list();
-        for(User u:usersList){
-            if((u.getEmail().equals(email))&&(u.getPassword().equals(password))){
-                return u;
+    public User isRegistered(String email, String password){
+        List<User> usersList = session.createQuery("FROM User").list();
+        for(User user : usersList){
+            if((user.getEmail().equals(email))&&(user.getPassword().equals(password))){
+                return user;
             }
         }
         return null;

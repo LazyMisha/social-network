@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -72,6 +73,10 @@ public class RegistrationPageServlet extends HttpServlet {
                 user.setPassword(pass);
                 user.setBirthday(date);
                 userDao.save(user);
+
+                HttpSession hsession = request.getSession(true);
+                hsession.setAttribute("id", user.getId());
+                hsession.setAttribute("nickname", user.getFirstName());
 
                 sc.getRequestDispatcher("/profile.jsp").forward(request, response);
                 System.out.println("user successfully registered");

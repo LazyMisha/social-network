@@ -19,7 +19,6 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-
     User user = null;
     UserDao userDao = new UserDao();
     ServletContext sc = null;
@@ -37,10 +36,10 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         
-        user=userDao.isRegistered(email, password);
-        sc=getServletContext();
-        if(user!=null){
+        user = userDao.isRegistered(email, password);
+        sc = getServletContext();
 
+        if(user != null){
             HttpSession hsession=request.getSession(true);
             hsession.setAttribute("id", user.getId());
             hsession.setAttribute("nickname", user.getFirstName());
