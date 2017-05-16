@@ -44,6 +44,7 @@ public class RegistrationPageServlet extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
+
         System.out.println(firstName);
         System.out.println(surName);
         System.out.println(email);
@@ -72,7 +73,7 @@ public class RegistrationPageServlet extends HttpServlet {
                 user.setBirthday(date);
                 userDao.save(user);
 
-                sc.getRequestDispatcher("/profile.html").forward(request, response);
+                sc.getRequestDispatcher("/profile.jsp").forward(request, response);
                 System.out.println("user successfully registered");
             }else{
                 sc.getRequestDispatcher("/registration.html").forward(request, response);

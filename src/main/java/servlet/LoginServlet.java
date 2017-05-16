@@ -2,6 +2,7 @@ package servlet;
 
 import dao.UserDao;
 import entity.User;
+
 import java.io.IOException;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -18,8 +19,10 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    User user=null;
+
+    User user = null;
     UserDao userDao = new UserDao();
+    ServletContext sc = null;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +38,7 @@ public class LoginServlet extends HttpServlet {
         String password = request.getParameter("password");
         
         user=userDao.isRegistered(email, password);
-        ServletContext sc=getServletContext();
+        sc=getServletContext();
         if(user!=null){
 
             HttpSession hsession=request.getSession(true);
@@ -45,5 +48,6 @@ public class LoginServlet extends HttpServlet {
             sc.getRequestDispatcher("/profile.jsp").forward(request, response);
         }else
             sc.getRequestDispatcher("/loginerror.html").forward(request, response);
+
     }
 }
