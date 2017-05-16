@@ -1,17 +1,26 @@
+<%-- 
+    Document   : profile
+    Created on : 12.05.2017, 17:41:22
+    Author     : socrates
+--%>
+
+<%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Profile</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         <h1>THIS IS YOUR PROFILE!</h1>
-        <h3>*Don't much, isn't it?)</h3>
+        <h3>*Not much, isn't it?)</h3>
+        <p>
+            <% 
+                String s="ups";
+                s=request.getSession().getAttribute("nickname").toString();
+                out.write(s);
+            %>
+        </p>
+        <a href="nextPage.jsp">next page</a><br/>
     </body>
 </html>
