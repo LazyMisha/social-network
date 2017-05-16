@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
+
     User user = null;
     UserDao userDao = new UserDao();
     ServletContext sc = null;
@@ -35,32 +36,18 @@ public class LoginServlet extends HttpServlet {
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
+        
+        user=userDao.isRegistered(email, password);
+        sc=getServletContext();
+        if(user!=null){
 
-        user = userDao.isRegistering(email, password);
-
-        sc = getServletContext();
-
-        if(user != null){
-            HttpSession httpSession = request.getSession(true);
-            httpSession.setAttribute("id", user.getId());
-            httpSession.setAttribute("nickname", user.getFirstName());
+            HttpSession hsession=request.getSession(true);
+            hsession.setAttribute("id", user.getId());
+            hsession.setAttribute("nickname", user.getFirstName());
+            
             sc.getRequestDispatcher("/profile.jsp").forward(request, response);
-        }else{
-            boolean regConfirm = userDao.isRegistered(email, password);
+        }else
+            sc.getRequestDispatcher("/loginerror.html").forward(request, response);
 
-            sc = getServletContext();
-
-            if(regConfirm){
-                sc.getRequestDispatcher("/profile.jsp").forward(request, response);
-                System.out.println("user successfully registered");
-                System.out.println("email: " + email);
-                System.out.println("password: " + password);
-            }else{
-                sc.getRequestDispatcher("/loginerror.html").forward(request, response);
-                System.out.println("user inputted not correct email or password");
-                System.out.println("inputted email: " + email);
-                System.out.println("inputted password: " + password);
-            }
-        }
     }
 }
