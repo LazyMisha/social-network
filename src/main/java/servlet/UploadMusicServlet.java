@@ -99,15 +99,17 @@ public class UploadMusicServlet extends HttpServlet {
                         request.setAttribute("genre", "Genre: " + genre);
                         request.setAttribute("singer", "Singer: " + singer);
                         request.setAttribute("composer", "Composer: " + composer);
+                        request.setAttribute("album", album);
                     }
                 }
             }
         } catch (Exception ex) {
             request.setAttribute("message",
-                    "There was an error: " + ex.getMessage());
+                    "There was an error!" + "<br/>" +
+            "Try again, and select mp3 format please!");
         }
         // redirects client to message page
-        getServletContext().getRequestDispatcher("/message.jsp").forward(
+        getServletContext().getRequestDispatcher("/uploadMusic.jsp").forward(
                 request, response);
     }
 }

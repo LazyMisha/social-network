@@ -17,6 +17,21 @@
         			<input type="submit" value="Upload" />
         		</form>
         	</center>
+        	<br/>
+        	<br/>
+        	<center>
+        	    <h2>${message}</h2>
+                <br/>
+                <br/>
+                <h2>${songName}</h2>
+                <h2>${genre}</h2>
+                <h2>${singer}</h2>
+                <h2>${composer}</h2>
+                <h2>${album}</h2>
+                <br/>
+                <br/>
+                <a href="profile.jsp">Profile<a/>
+        	</center>
     </body>
 
 </html>

@@ -28,6 +28,7 @@ public class GetTags {
     public static String genre = "";
     public static String singer = "";
     public static String composer = "";
+    public static String album = "";
 
     public void saveAngGetTagsFromMP3(File mp3File) throws Exception{
 
@@ -56,6 +57,7 @@ public class GetTags {
         genre = metadata.get("xmpDM:genre");
         singer = metadata.get("xmpDM:artist");
         composer = metadata.get("xmpDM:composer");
+        album = metadata.get("xmpDM:album");
 
         long fileSizeInBytes = mp3File.length();
         long fileSizeInKB = fileSizeInBytes / 1024;
