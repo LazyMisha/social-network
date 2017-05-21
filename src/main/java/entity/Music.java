@@ -35,6 +35,9 @@ public class Music {
     @Column(name = "size")
     private Long size;
 
+    @Column(name = "path")
+    private String path;
+
     public Music() {
     }
 
@@ -84,5 +87,13 @@ public class Music {
 
     public void setSize(Long size) {
         this.size = size;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 }

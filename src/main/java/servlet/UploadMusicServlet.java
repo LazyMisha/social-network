@@ -93,7 +93,7 @@ public class UploadMusicServlet extends HttpServlet {
                                 "Upload has been done successfully!");
 
                         //Parse mp3 tags
-                        getTags.saveAngGetTagsFromMP3(storeFile);
+                        getTags.saveAngGetTagsFromMP3(storeFile, filePath);
 
                         request.setAttribute("songName", "Song Name: " + songName);
                         request.setAttribute("genre", "Genre: " + genre);

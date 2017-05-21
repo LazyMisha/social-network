@@ -23,10 +23,6 @@ public class Address {
     @Column(name = "country", length = 30)
     private String country;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private User user_id;
-
     public Address() {
     }
 
@@ -54,11 +50,4 @@ public class Address {
         this.country = country;
     }
 
-    public User getUser_id() {
-        return user_id;
-    }
-
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
-    }
 }
