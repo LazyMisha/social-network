@@ -24,6 +24,11 @@ public class GetTags {
     MusicDao musicDao = new MusicDao();
     GetDate getDate = new GetDate();
 
+    public static String songName = "";
+    public static String genre = "";
+    public static String singer = "";
+    public static String composer = "";
+
     public void saveAngGetTagsFromMP3(File mp3File) throws Exception{
 
         InputStream input = new FileInputStream(mp3File);
@@ -46,6 +51,11 @@ public class GetTags {
         System.out.println("Composer : "+metadata.get("xmpDM:composer"));
         System.out.println("Genre : "+metadata.get("xmpDM:genre"));
         System.out.println("Album : "+metadata.get("xmpDM:album"));
+
+        songName = metadata.get("title");
+        genre = metadata.get("xmpDM:genre");
+        singer = metadata.get("xmpDM:artist");
+        composer = metadata.get("xmpDM:composer");
 
         long fileSizeInBytes = mp3File.length();
         long fileSizeInKB = fileSizeInBytes / 1024;

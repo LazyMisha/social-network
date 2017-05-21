@@ -17,6 +17,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 
+import static service.GetTags.*;
+
 /**
  * Created by misha on 17.05.17.
  * servlet for upload music to "web/upload" directory
@@ -92,6 +94,11 @@ public class UploadMusicServlet extends HttpServlet {
 
                         //Parse mp3 tags
                         getTags.saveAngGetTagsFromMP3(storeFile);
+
+                        request.setAttribute("songName", "Song Name: " + songName);
+                        request.setAttribute("genre", "Genre: " + genre);
+                        request.setAttribute("singer", "Singer: " + singer);
+                        request.setAttribute("composer", "Composer: " + composer);
                     }
                 }
             }

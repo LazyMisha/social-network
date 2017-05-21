@@ -10,6 +10,12 @@
 <body>
 	<center>
 		<h2>${message}</h2>
+        <br/>
+        <br/>
+        <h2>${songName}</h2>
+        <h2>${genre}</h2>
+        <h2>${singer}</h2>
+        <h2>${composer}</h2>
 	</center>
 	<br/>
 	<br/>
