@@ -4,8 +4,6 @@ import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * create music in database
@@ -17,27 +15,25 @@ import java.util.Set;
 public class Music {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "song_name", unique = false, nullable = true, length = 40)
+    @Column(name = "song_name", length = 40)
     private String song_name;
 
-    @Column(name = "date", unique = false, nullable = true)
+    @Column(name = "date")
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
-    @OneToMany
-    @JoinColumn(name = "singer_id", nullable = true)
-    private Set<Singer> singer_id = new HashSet<>();
+    @Column(name = "singer")
+    private String singer;
 
-    @ManyToOne
-    @JoinColumn(name = "genre_id", unique = false, nullable = true)
-    private Genre genre_id;
+    @Column(name = "genre")
+    private String genre;
 
-    @Column(name = "size", unique = false, nullable = true, length = 50)
-    private Integer size;
+    @Column(name = "size")
+    private Long size;
 
     public Music() {
     }
@@ -66,27 +62,27 @@ public class Music {
         this.date = date;
     }
 
-    public Integer getSize() {
+    public String getSinger() {
+        return singer;
+    }
+
+    public void setSinger(String singer) {
+        this.singer = singer;
+    }
+
+    public String getGenre() {
+        return genre;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public Long getSize() {
         return size;
     }
 
-    public void setSize(Integer size) {
+    public void setSize(Long size) {
         this.size = size;
-    }
-
-    public Set<Singer> getSinger_id() {
-        return singer_id;
-    }
-
-    public void setSinger_id(Set<Singer> singer_id) {
-        this.singer_id = singer_id;
-    }
-
-    public Genre getGenre_id() {
-        return genre_id;
-    }
-
-    public void setGenre_id(Genre genre_id) {
-        this.genre_id = genre_id;
     }
 }

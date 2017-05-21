@@ -14,15 +14,15 @@ public class User_songs {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = true)
+    @Column(name = "id", unique = true)
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = true)
+    @JoinColumn(name = "user_id")
     private User user_id;
 
     @ManyToOne
-    @JoinColumn(name = "music_id", nullable = true)
+    @JoinColumn(name = "music_id")
     private Music music_id;
 
     public User_songs() {

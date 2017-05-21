@@ -18,26 +18,26 @@ public class Message {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = true)
+    @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name = "message", unique = false, nullable = true, length = 300)
+    @Column(name = "message")
     private String message;
 
-    @Column(name = "date", unique = false, nullable = true)
+    @Column(name = "date")
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
     @ManyToMany
-    @JoinColumn(name = "user_id_from", nullable = true)
+    @JoinColumn(name = "user_id_from")
     private Set<User> user_id_from = new HashSet<>();
 
     @ManyToMany
-    @JoinColumn(name = "user_id_to", nullable = true)
+    @JoinColumn(name = "user_id_to")
     private Set<User> user_id_to = new HashSet<>();
 
 
-    @Column(name = "is_read", unique = false, nullable = true)
+    @Column(name = "is_read")
     private Boolean is_read;
 
     public Message() {

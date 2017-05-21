@@ -10,14 +10,11 @@
     <property name="show_sql">false</property>
     <property name="hbm2ddl.auto">update</property>
     <mapping class="entity.User"/>
-    <mapping class="entity.City"/>
-    <mapping class="entity.Country"/>
-    <mapping class="entity.Message"/>
+    <mapping class="entity.User_playlist"/>
+    <mapping class="entity.Address"/>
     <mapping class="entity.Music"/>
-    <mapping class="entity.Singer"/>
-    <mapping class="entity.Genre"/>
-    <mapping class="entity.Path"/>
-    <mapping class="entity.User_playlists"/>
     <mapping class="entity.User_songs"/>
+    <mapping class="entity.Path"/>
+    <mapping class="entity.Message"/>
   </session-factory>
 </hibernate-configuration>

@@ -15,14 +15,14 @@ public class Path {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    @Column(name = "id", unique = true, nullable = true)
+    @Column(name = "id", unique = true)
     private Long id;
 
-    @Column(name="path",unique = false, nullable = true)
+    @Column(name="path")
     private String path;
 
     @OneToOne
-    @JoinColumn(name = "music_id", nullable = true)
+    @JoinColumn(name = "music_id")
     private Music music_id;
 
     public Path() {

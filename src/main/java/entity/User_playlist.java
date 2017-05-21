@@ -7,27 +7,31 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * create genre in database
+ * create playlist in database
  */
 
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
-@Table(name="genre")
-public class Genre {
+@Table(name ="user_playlist")
+public class User_playlist {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = true)
     private Long id;
 
-    @Column(name = "genre", unique = false, nullable = true, length = 30)
-    private String genre;
+    @Column(name = "playlist_name")
+    private String playlist_name;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
 
     @OneToMany
-    @JoinColumn(name = "music_id", unique = false, nullable = true)
+    @JoinColumn(name = "music_id")
     private Set<Music> music_id = new HashSet<>();
 
-    public Genre() {
+    public User_playlist() {
     }
 
     public Long getId() {
@@ -38,12 +42,20 @@ public class Genre {
         this.id = id;
     }
 
-    public String getGenre() {
-        return genre;
+    public String getPlaylist_name() {
+        return playlist_name;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setPlaylist_name(String playlist_name) {
+        this.playlist_name = playlist_name;
+    }
+
+    public User getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
     }
 
     public Set<Music> getMusic_id() {

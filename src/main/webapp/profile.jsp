@@ -15,10 +15,9 @@
         <h1>THIS IS YOUR PROFILE!</h1>
         <h3>*Not much, isn't it?)</h3>
         <p>
-            <% 
-                String s="ups";
-                s=request.getSession().getAttribute("nickname").toString();
-                out.write(s);
+            <%
+                out.write(request.getSession().getAttribute("name").toString());
+                out.write(request.getSession().getAttribute("id").toString());
             %>
         </p>
         <a href="nextPage.jsp">next page</a><br/>

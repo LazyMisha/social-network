@@ -2,18 +2,13 @@ package servlet;
 
 import dao.UserDao;
 import entity.User;
+import service.GetDate;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Servlet for Registration Page (registration.html)
@@ -24,7 +19,7 @@ public class RegistrationPageServlet extends HttpServlet {
 
     User user = new User();
     UserDao userDao = new UserDao();
-    Date date = null;
+    GetDate getDate = new GetDate();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -55,33 +50,27 @@ public class RegistrationPageServlet extends HttpServlet {
 
         ServletContext sc = getServletContext();
 
-        SimpleDateFormat dt = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            date = dt.parse(birthDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
         if(pass.isEmpty()){
-            sc.getRequestDispatcher("/registration.html").forward(request, response);
+            response.sendRedirect("index.html");
             System.out.println("user did not inputted password!");
         }else{
             if(pass.equals(confirmPass)){
+
                 user.setFirstName(firstName);
                 user.setLastName(surName);
                 user.setEmail(email);
                 user.setPassword(pass);
-                user.setBirthday(date);
+                user.setDate(getDate.getToday());
                 userDao.save(user);
 
                 HttpSession hsession = request.getSession(true);
                 hsession.setAttribute("id", user.getId());
-                hsession.setAttribute("nickname", user.getFirstName());
+                hsession.setAttribute("name", user.getFirstName());
 
                 sc.getRequestDispatcher("/profile.jsp").forward(request, response);
                 System.out.println("user successfully registered");
             }else{
-                sc.getRequestDispatcher("/registration.html").forward(request, response);
+                response.sendRedirect("registration.html");
                 System.out.println("user inputted not correct password!");
             }
         }

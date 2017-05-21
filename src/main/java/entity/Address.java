@@ -4,29 +4,31 @@ import org.hibernate.annotations.OptimisticLockType;
 import javax.persistence.*;
 
 /**
- * create city in database
+ * create address in database
  */
 
 @Entity
 @org.hibernate.annotations.Entity(optimisticLock = OptimisticLockType.ALL, dynamicUpdate = true)
-@Table(name = "city")
-public class City {
+@Table(name = "address")
+public class Address {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "city", unique = false, nullable = true, length = 30)
+    @Column(name = "city", length = 30)
     private String city;
 
-    @ManyToOne
-    @JoinColumn(name = "country_id", unique = false, nullable = true)
-    private Country country_id;
+    @Column(name = "country", length = 30)
+    private String country;
 
-    public City() {
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private User user_id;
+
+    public Address() {
     }
-
 
     public Long getId() {
         return id;
@@ -44,11 +46,19 @@ public class City {
         this.city = city;
     }
 
-    public Country getCountry_id() {
-        return country_id;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCountry_id(Country country_id) {
-        this.country_id = country_id;
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public User getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(User user_id) {
+        this.user_id = user_id;
     }
 }

@@ -4,6 +4,7 @@ import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * create user in database
@@ -15,47 +16,51 @@ import java.util.Date;
 public class User {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", unique = true, nullable = false)
     private Long id;
 
-    @Column(name = "first_name", unique = false, nullable = true, length = 64)
+    @Column(name = "first_name", length = 64)
     private String firstName;
 
-    @Column(name = "last_name", unique = false, nullable = true, length = 64)
+    @Column(name = "last_name", length = 64)
     private String lastName;
 
-    @Column(name = "email", unique = false, nullable = true, length = 64)
+    @Column(name = "email", length = 64)
     private String email;
 
-    @Column(name = "password", nullable = true, length = 64)
+    @Column(name = "password", length = 64)
     private String password;
 
-    @Column(name = "date_of_birthday", unique = false, nullable = true)
+    @Column(name = "date_of_birthday")
     @Temporal(value = TemporalType.DATE)
     private Date birthday;
 
-    @Column(name = "user_info", nullable = true, unique = false, length = 256)
+    @Column(name = "user_info", length = 256)
     private String user_info;
 
-    @Column(name = "registration_date", unique = false, nullable = true)
+    @Column(name = "date")
     @Temporal(value = TemporalType.DATE)
-    private Date registration_date;
+    private Date date;
 
-    @ManyToOne
-    @JoinColumn(name = "city_id", unique = false, nullable = true)
-    private City city_id;
+    @OneToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
 
-    @Column(name = "is_deleted", unique = false, nullable = true)
+    @Column(name = "is_deleted")
     private Boolean is_deleted;
 
-    @Column(name = "path_to_photo", unique = false, nullable = true)
+    @Column(name = "path_to_photo")
     private String path_to_photo;
 
-    public User(){
+    @OneToMany
+    @JoinColumn(name = "user_playlist_id")
+    private Set<User_playlist> user_playlist_id;
+
+    public User() {
     }
 
-    public User(Long id){
+    public User(Long id) {
     }
 
     public Long getId() {
@@ -64,22 +69,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getFirstName() {
@@ -98,6 +87,22 @@ public class User {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Date getBirthday() {
         return birthday;
     }
@@ -114,22 +119,6 @@ public class User {
         this.user_info = user_info;
     }
 
-    public Date getRegistration_date() {
-        return registration_date;
-    }
-
-    public void setRegistration_date(Date registration_date) {
-        this.registration_date = registration_date;
-    }
-
-    public City getCity_id() {
-        return city_id;
-    }
-
-    public void setCity_id(City city_id) {
-        this.city_id = city_id;
-    }
-
     public Boolean getIs_deleted() {
         return is_deleted;
     }
@@ -144,5 +133,29 @@ public class User {
 
     public void setPath_to_photo(String path_to_photo) {
         this.path_to_photo = path_to_photo;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Set<User_playlist> getUser_playlist_id() {
+        return user_playlist_id;
+    }
+
+    public void setUser_playlist_id(Set<User_playlist> user_playlist_id) {
+        this.user_playlist_id = user_playlist_id;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

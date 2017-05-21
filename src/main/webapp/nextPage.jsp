@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Hello!</h1>
-        <p><%= request.getSession().getAttribute("nickname").toString() %></p>
-        <a href="LogoutServlet">logout</a>
+        <p><%= request.getSession().getAttribute("name").toString() %></p>
+        <a href="${pageContext.request.contextPath}/LogoutServlet">logout</a>
     </body>
 </html>

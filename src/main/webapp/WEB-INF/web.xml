@@ -7,6 +7,12 @@
 
     <servlet>
         <description/>
+        <display-name>uploadFile</display-name>
+        <servlet-name>uploadFile</servlet-name>
+        <servlet-class>servlet.UploadMusicServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>servlet</display-name>
         <servlet-name>servlet</servlet-name>
         <servlet-class>servlet.RegistrationPageServlet</servlet-class>
@@ -24,6 +30,10 @@
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>uploadFile</servlet-name>
+        <url-pattern>/uploadFile</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>servlet</servlet-name>
         <url-pattern>/servlet</url-pattern>
