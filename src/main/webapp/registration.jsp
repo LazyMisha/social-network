@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -136,6 +137,9 @@
 						<br><br>
 						<input type="submit" value="Зарегистрироваться">
 					</form>
+				</div>
+				<div>
+					<center><h3 color="red">${message}</h3></center><br/>
 				</div>
 			</main>
 

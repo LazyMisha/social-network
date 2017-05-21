@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 import java.io.IOException;
 
 /**
- * Servlet for Registration Page (registration.html)
+ * Servlet for Registration Page (registration.jsp)
  */
 
 @WebServlet(name="servlet", urlPatterns="/servlet")
@@ -51,7 +51,9 @@ public class RegistrationPageServlet extends HttpServlet {
         ServletContext sc = getServletContext();
 
         if(pass.isEmpty()){
-            response.sendRedirect("index.html");
+            request.setAttribute("message",
+                    "Password field is empty!" + "<br/>" +
+                            "Try again");
             System.out.println("user did not inputted password!");
         }else{
             if(pass.equals(confirmPass)){
@@ -63,16 +65,18 @@ public class RegistrationPageServlet extends HttpServlet {
                 user.setDate(getDate.getToday());
                 userDao.save(user);
 
-                HttpSession hsession = request.getSession(true);
-                hsession.setAttribute("id", user.getId());
-                hsession.setAttribute("name", user.getFirstName());
-
-                sc.getRequestDispatcher("/profile.jsp").forward(request, response);
+                request.setAttribute("message",
+                        "Welcome! You are registered successfully!" +
+                                "<p><a href='index.html'>Go to Main Page For Login</a></p>");
                 System.out.println("user successfully registered");
             }else{
-                response.sendRedirect("registration.html");
+                request.setAttribute("message",
+                        "Password and Confirm password must be the same!" + "<br/>" +
+                                "Try again!");
                 System.out.println("user inputted not correct password!");
             }
         }
+        getServletContext().getRequestDispatcher("/registration.jsp").forward(
+                request, response);
     }
 }
