@@ -4,7 +4,6 @@ import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -28,13 +27,13 @@ public class Message {
     @Temporal(value = TemporalType.DATE)
     private Date date;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "user_id_from")
-    private Set<User> user_id_from = new HashSet<>();
+    private User user_id_from;
 
-    @ManyToMany
+    @ManyToOne
     @JoinColumn(name = "user_id_to")
-    private Set<User> user_id_to = new HashSet<>();
+    private User user_id_to;
 
 
     @Column(name = "is_read")
@@ -67,19 +66,19 @@ public class Message {
         this.date = date;
     }
 
-    public Set<User> getUser_id_from() {
+    public User getUser_id_from() {
         return user_id_from;
     }
 
-    public void setUser_id_from(Set<User> user_id_from) {
+    public void setUser_id_from(User user_id_from) {
         this.user_id_from = user_id_from;
     }
 
-    public Set<User> getUser_id_to() {
+    public User getUser_id_to() {
         return user_id_to;
     }
 
-    public void setUser_id_to(Set<User> user_id_to) {
+    public void setUser_id_to(User user_id_to) {
         this.user_id_to = user_id_to;
     }
 

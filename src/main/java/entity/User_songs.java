@@ -2,6 +2,8 @@ package entity;
 import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * create songs in database
@@ -21,9 +23,9 @@ public class User_songs {
     @JoinColumn(name = "user_id")
     private User user_id;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "music_id")
-    private Music music_id;
+    private Set<Music> music_id = new HashSet<>();
 
     public User_songs() {
     }
@@ -44,11 +46,11 @@ public class User_songs {
         this.user_id = user_id;
     }
 
-    public Music getMusic_id() {
+    public Set<Music> getMusic_id() {
         return music_id;
     }
 
-    public void setMusic_id(Music music_id) {
+    public void setMusic_id(Set<Music> music_id) {
         this.music_id = music_id;
     }
 }
