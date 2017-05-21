@@ -1,5 +1,7 @@
 # social-network
 
+for normal working this app you have to registered your account after running
+
 1. Open CMD
 2. Change directory to the project
 3. Run tomcat server "mvn tomcat7:run"
