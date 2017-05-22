@@ -6,6 +6,8 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+import static util.HibernateUtil.shutdown;
+
 /**
  *
  * @author stepanyuk
@@ -32,5 +34,7 @@ public class LogoutServlet extends HttpServlet {
         HttpSession session = request.getSession(false);
         session.invalidate();
         sc.getRequestDispatcher("/index.html").forward(request, response);
+
+        shutdown();
     }
 }

@@ -3,7 +3,6 @@ package entity;
 import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * create music in database
@@ -21,10 +20,6 @@ public class Music {
 
     @Column(name = "song_name", length = 40)
     private String song_name;
-
-    @Column(name = "date")
-    @Temporal(value = TemporalType.DATE)
-    private Date date;
 
     @Column(name = "singer")
     private String singer;
@@ -55,14 +50,6 @@ public class Music {
 
     public void setSong_name(String song_name) {
         this.song_name = song_name;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public String getSinger() {

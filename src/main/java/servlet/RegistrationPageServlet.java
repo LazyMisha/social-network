@@ -2,13 +2,16 @@ package servlet;
 
 import dao.UserDao;
 import entity.User;
-import service.GetDate;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Servlet for Registration Page (registration.jsp)
@@ -19,7 +22,6 @@ public class RegistrationPageServlet extends HttpServlet {
 
     User user = new User();
     UserDao userDao = new UserDao();
-    GetDate getDate = new GetDate();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -58,11 +60,19 @@ public class RegistrationPageServlet extends HttpServlet {
         }else{
             if(pass.equals(confirmPass)){
 
+                Date date = null;
+                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+                try {
+                    date = formatter.parse(birthDate);
+                } catch (ParseException e) {
+                    System.out.println(e.getMessage());
+                }
+
                 user.setFirstName(firstName);
                 user.setLastName(surName);
                 user.setEmail(email);
                 user.setPassword(pass);
-                user.setDate(getDate.getToday());
+                user.setBirthday(date);
                 userDao.save(user);
 
                 request.setAttribute("message",

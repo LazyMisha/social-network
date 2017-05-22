@@ -22,7 +22,6 @@ public class GetTags {
 
     Music music = new Music();
     MusicDao musicDao = new MusicDao();
-    GetDate getDate = new GetDate();
 
     public static String songName = "";
     public static String genre = "";
@@ -70,7 +69,6 @@ public class GetTags {
         long fileSizeInMB = fileSizeInKB / 1024;
 
         music.setSong_name(metadata.get("title"));
-        music.setDate(getDate.getToday());
         music.setGenre(metadata.get("xmpDM:genre"));
         music.setSinger(metadata.get("xmpDM:artist"));
         music.setSize(fileSizeInMB);

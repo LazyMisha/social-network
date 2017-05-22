@@ -29,7 +29,7 @@ public class User_playlist {
 
     @OneToMany
     @JoinColumn(name = "music_id")
-    private Set<Music> music_id = new HashSet<>();
+    private Set<Music> music = new HashSet<>();
 
     public User_playlist() {
     }
@@ -58,11 +58,11 @@ public class User_playlist {
         this.user_id = user_id;
     }
 
-    public Set<Music> getMusic_id() {
-        return music_id;
+    public Set<Music> getMusic() {
+        return music;
     }
 
-    public void setMusic_id(Set<Music> music_id) {
-        this.music_id = music_id;
+    public void setMusic(Set<Music> music) {
+        this.music = music;
     }
 }

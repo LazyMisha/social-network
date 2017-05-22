@@ -3,8 +3,6 @@ package entity;
 import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
-import java.util.Date;
-import java.util.Set;
 
 /**
  * create message in database
@@ -23,10 +21,6 @@ public class Message {
     @Column(name = "message")
     private String message;
 
-    @Column(name = "date")
-    @Temporal(value = TemporalType.DATE)
-    private Date date;
-
     @ManyToOne
     @JoinColumn(name = "user_id_from")
     private User user_id_from;
@@ -34,7 +28,6 @@ public class Message {
     @ManyToOne
     @JoinColumn(name = "user_id_to")
     private User user_id_to;
-
 
     @Column(name = "is_read")
     private Boolean is_read;
@@ -56,14 +49,6 @@ public class Message {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
     }
 
     public User getUser_id_from() {

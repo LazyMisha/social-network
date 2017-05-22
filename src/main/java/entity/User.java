@@ -38,10 +38,6 @@ public class User {
     @Column(name = "user_info", length = 256)
     private String user_info;
 
-    @Column(name = "date")
-    @Temporal(value = TemporalType.DATE)
-    private Date date;
-
     @OneToOne
     @JoinColumn(name = "address_id")
     private Address address;
@@ -127,11 +123,4 @@ public class User {
         this.address = address;
     }
 
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
