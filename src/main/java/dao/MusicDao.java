@@ -17,9 +17,12 @@ public class MusicDao {
             session.beginTransaction();
             session.save(music);
             session.getTransaction().commit();
+            session.refresh(music);
         }catch (Exception e){
             session.getTransaction().rollback();
             System.out.println(e.getMessage());
+        }finally {
+            session.clear();
         }
     }
 }

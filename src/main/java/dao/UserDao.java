@@ -21,6 +21,8 @@ public class UserDao {
         }catch (Exception e){
             session.getTransaction().rollback();
             System.out.println(e.getMessage());
+        }finally {
+            session.clear();
         }
     }
     

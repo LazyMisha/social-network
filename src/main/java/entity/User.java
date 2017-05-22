@@ -4,7 +4,6 @@ import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * create user in database
@@ -47,15 +46,8 @@ public class User {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @Column(name = "is_deleted")
-    private Boolean is_deleted;
-
     @Column(name = "path_to_photo")
     private String path_to_photo;
-
-    @OneToMany
-    @JoinColumn(name = "user_playlist_id")
-    private Set<User_playlist> user_playlist_id;
 
     public User() {
     }
@@ -119,14 +111,6 @@ public class User {
         this.user_info = user_info;
     }
 
-    public Boolean getIs_deleted() {
-        return is_deleted;
-    }
-
-    public void setIs_deleted(Boolean is_deleted) {
-        this.is_deleted = is_deleted;
-    }
-
     public String getPath_to_photo() {
         return path_to_photo;
     }
@@ -141,14 +125,6 @@ public class User {
 
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public Set<User_playlist> getUser_playlist_id() {
-        return user_playlist_id;
-    }
-
-    public void setUser_playlist_id(Set<User_playlist> user_playlist_id) {
-        this.user_playlist_id = user_playlist_id;
     }
 
     public Date getDate() {

@@ -30,7 +30,12 @@ public class GetTags {
     public static String composer = "";
     public static String album = "";
 
-    public void saveAngGetTagsFromMP3(File mp3File, String filePath) throws Exception{
+    public void saveAngGetTagsFromMP3(File mp3File) throws Exception{
+
+
+        String filePath = mp3File.getPath();
+        int index = filePath.indexOf("upload/");
+        String secondPart = filePath.substring(index);
 
         InputStream input = new FileInputStream(mp3File);
         ContentHandler handler = new DefaultHandler();
@@ -69,7 +74,7 @@ public class GetTags {
         music.setGenre(metadata.get("xmpDM:genre"));
         music.setSinger(metadata.get("xmpDM:artist"));
         music.setSize(fileSizeInMB);
-        music.setPath(filePath);
+        music.setPath(secondPart);
 
         musicDao.save(music);
     }
