@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Music;
+import java.util.*;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -23,5 +24,19 @@ public class MusicDao {
         }finally {
             session.clear();
         }
+    }
+    public ArrayList<Music> searchMusic(String search){
+        
+        String searchPattern=".*"+search+".*";
+        
+        ArrayList<Music> musicArr=new ArrayList();
+        List<Music> musicList=session.createQuery("FROM Music").list();
+        
+        for(Music m:musicList){
+            if(m.getSong_name().matches(searchPattern)||m.getSinger().matches(searchPattern)){
+                musicArr.add(m);
+            }
+        }
+        return musicArr;
     }
 }

@@ -7,6 +7,12 @@
 
     <servlet>
         <description/>
+        <display-name>SearchMusicServlet</display-name>
+        <servlet-name>SearchMusicServlet</servlet-name>
+        <servlet-class>servlet.SearchMusicServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>uploadFile</display-name>
         <servlet-name>uploadFile</servlet-name>
         <servlet-class>servlet.UploadMusicServlet</servlet-class>
@@ -30,6 +36,10 @@
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>SearchMusicServlet</servlet-name>
+        <url-pattern>/SearchMusicServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>uploadFile</servlet-name>
         <url-pattern>/uploadFile</url-pattern>
