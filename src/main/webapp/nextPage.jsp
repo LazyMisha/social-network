@@ -14,6 +14,10 @@
     <body>
         <h1>Hello!</h1>
         <p><%= request.getSession().getAttribute("name").toString() %></p>
-        <a href="${pageContext.request.contextPath}/LogoutServlet">logout</a>
+        <a href="${pageContext.request.contextPath}/LogoutServlet">logout</a><br/>
+        <form action="SearchMusicServlet" method="GET">
+            <input type="text" name="search" value="">
+            <input type="submit" name="submit" value="SEARCH">
+        </form>
     </body>
 </html>

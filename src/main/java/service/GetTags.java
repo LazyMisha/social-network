@@ -33,7 +33,7 @@ public class GetTags {
 
 
         String filePath = mp3File.getPath();
-        int index = filePath.indexOf("upload/");
+        int index = filePath.indexOf("upload");
         String secondPart = filePath.substring(index);
 
         InputStream input = new FileInputStream(mp3File);
