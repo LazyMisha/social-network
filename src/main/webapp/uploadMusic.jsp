@@ -30,7 +30,7 @@
                 <h2>${album}</h2>
                 <br/>
                 <br/>
-                <a href="profile.jsp">Profile<a/>
+                <a href="home.jsp">Your Home Page<a/>
         	</center>
     </body>
 

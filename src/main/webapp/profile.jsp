@@ -12,6 +12,7 @@
         <title>Profile</title>
     </head>
     <body>
+    <center>
         <h1>THIS IS YOUR PROFILE!</h1>
         <h3>*Not much, isn't it?)</h3>
         <p>
@@ -20,6 +21,7 @@
                 out.write(request.getSession().getAttribute("id").toString());
             %>
         </p>
-        <a href="nextPage.jsp">next page</a><br/>
+        <a href="home.jsp">Your Home Page</a><br/>
+        <center/>
     </body>
 </html>

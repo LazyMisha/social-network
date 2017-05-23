@@ -45,6 +45,9 @@ public class User {
     @Column(name = "path_to_photo")
     private String path_to_photo;
 
+    @Column(name = "link")
+    private String link;
+
     public User() {
     }
 
@@ -123,4 +126,11 @@ public class User {
         this.address = address;
     }
 
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
 }
