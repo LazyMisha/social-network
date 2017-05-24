@@ -4,6 +4,7 @@
     Author     : socrates
 --%>
 
+<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
@@ -17,11 +18,13 @@
         <h3>*Not much, isn't it?)</h3>
         <p>
             <%
-                out.write(request.getSession().getAttribute("name").toString());
-                out.write(request.getSession().getAttribute("id").toString());
+                out.write("HELLO ");
+                User u=(User)request.getSession().getAttribute("user");
+                out.write(u.getFirstName()+"!!!");
             %>
         </p>
         <a href="home.jsp">Your Home Page</a><br/>
+        <a href="sendMessage.jsp">send message</a>
         <center/>
     </body>
 </html>

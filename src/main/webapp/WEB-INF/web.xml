@@ -4,7 +4,13 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-
+    
+    <servlet>
+        <description/>
+        <display-name>SendMessageServlet</display-name>
+        <servlet-name>SendMessageServlet</servlet-name>
+        <servlet-class>servlet.SendMessageServlet</servlet-class>
+    </servlet>
     <servlet>
         <description/>
         <display-name>SearchMusicServlet</display-name>
@@ -35,7 +41,11 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
-
+    
+    <servlet-mapping>
+        <servlet-name>SendMessageServlet</servlet-name>
+        <url-pattern>/SendMessageServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchMusicServlet</servlet-name>
         <url-pattern>/SearchMusicServlet</url-pattern>

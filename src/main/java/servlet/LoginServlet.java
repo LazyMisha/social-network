@@ -40,11 +40,10 @@ public class LoginServlet extends HttpServlet {
 
         if(user != null){
             HttpSession hsession=request.getSession(true);
-            hsession.setAttribute("id", user.getId());
-            hsession.setAttribute("name", user.getFirstName());
+            hsession.setAttribute("user", user);
 
             sc.getRequestDispatcher("/profile.jsp").forward(request, response);
         }else
-            sc.getRequestDispatcher("/loginerror.html").forward(request, response);
+            sc.getRequestDispatcher("/index.html").forward(request, response);
     }
 }
