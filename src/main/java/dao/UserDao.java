@@ -4,6 +4,7 @@ import entity.User;
 import org.hibernate.Session;
 import util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Query;
 
 /**
  * Created by misha on 06.05.17.
@@ -34,5 +35,15 @@ public class UserDao {
             }
         }
         return null;
+    }
+        
+    public List<User> getFriends(){
+        return session.createQuery("FROM User").list();
+    }
+    
+    public User getUser(Long id){
+        Query query=session.createQuery("FROM User WHERE id = ?").setParameter(0,id);
+        User user=(User)query.uniqueResult();
+        return user;
     }
 }
