@@ -50,8 +50,6 @@ public class RegistrationPageServlet extends HttpServlet {
         System.out.println(confirmPass);
         System.out.println(birthDate);
 
-        ServletContext sc = getServletContext();
-
         if(pass.isEmpty()){
             request.setAttribute("message",
                     "Password field is empty!" + "<br/>" +

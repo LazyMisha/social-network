@@ -7,6 +7,12 @@
 
     <servlet>
         <description/>
+        <display-name>editUser</display-name>
+        <servlet-name>editUser</servlet-name>
+        <servlet-class>servlet.EditUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>SearchMusicServlet</display-name>
         <servlet-name>SearchMusicServlet</servlet-name>
         <servlet-class>servlet.SearchMusicServlet</servlet-class>
@@ -36,6 +42,12 @@
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
 
+
+
+    <servlet-mapping>
+        <servlet-name>editUser</servlet-name>
+        <url-pattern>/editUser</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchMusicServlet</servlet-name>
         <url-pattern>/SearchMusicServlet</url-pattern>

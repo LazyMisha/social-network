@@ -22,6 +22,8 @@
             %>
         </p>
         <a href="home.jsp">Your Home Page</a><br/>
+        <br/>
+        <a href="editProfile.jsp">Edit Your Profile</a><br/>
         <center/>
     </body>
 </html>

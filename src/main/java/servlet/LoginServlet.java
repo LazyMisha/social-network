@@ -16,6 +16,8 @@ import javax.servlet.http.*;
 @WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
+    public static Long currentUserId;
+
     User user = null;
     UserDao userDao = new UserDao();
     ServletContext sc = null;
@@ -39,10 +41,12 @@ public class LoginServlet extends HttpServlet {
         sc = getServletContext();
 
         if(user != null){
+
             HttpSession hsession=request.getSession(true);
             hsession.setAttribute("id", user.getId());
             hsession.setAttribute("name", user.getFirstName());
 
+            currentUserId = user.getId();
             sc.getRequestDispatcher("/profile.jsp").forward(request, response);
         }else
             sc.getRequestDispatcher("/loginerror.html").forward(request, response);

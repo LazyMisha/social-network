@@ -38,15 +38,17 @@ public class User {
     @Column(name = "user_info", length = 256)
     private String user_info;
 
-    @OneToOne
-    @JoinColumn(name = "address_id")
-    private Address address;
-
     @Column(name = "path_to_photo")
     private String path_to_photo;
 
     @Column(name = "link")
     private String link;
+
+    @Column(name = "City")
+    private String city;
+
+    @Column(name = "country")
+    private String country;
 
     public User() {
     }
@@ -118,19 +120,27 @@ public class User {
         this.path_to_photo = path_to_photo;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public String getLink() {
         return link;
     }
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }

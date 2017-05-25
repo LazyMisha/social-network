@@ -11,7 +11,6 @@
     <property name="hbm2ddl.auto">update</property>
     <mapping class="entity.User"/>
     <mapping class="entity.User_playlist"/>
-    <mapping class="entity.Address"/>
     <mapping class="entity.Music"/>
     <mapping class="entity.User_songs"/>
     <mapping class="entity.Message"/>
