@@ -35,10 +35,6 @@ public class RegistrationPageServlet extends HttpServlet {
 
         String firstName = request.getParameter("name");
         String surName = request.getParameter("surname");
-        String birthDay = request.getParameter("birth-day");
-        String birthMonth = request.getParameter("birth-month");
-        String birthYear = request.getParameter("birth-year");
-        String birthDate = birthDay + "-" + birthMonth + "-" + birthYear;
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
@@ -48,7 +44,6 @@ public class RegistrationPageServlet extends HttpServlet {
         System.out.println(email);
         System.out.println(pass);
         System.out.println(confirmPass);
-        System.out.println(birthDate);
 
         if(pass.isEmpty()){
             request.setAttribute("message",
@@ -58,19 +53,10 @@ public class RegistrationPageServlet extends HttpServlet {
         }else{
             if(pass.equals(confirmPass)){
 
-                Date date = null;
-                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                try {
-                    date = formatter.parse(birthDate);
-                } catch (ParseException e) {
-                    System.out.println(e.getMessage());
-                }
-
                 user.setFirstName(firstName);
                 user.setLastName(surName);
                 user.setEmail(email);
                 user.setPassword(pass);
-                user.setBirthday(date);
                 userDao.save(user);
 
                 request.setAttribute("message",

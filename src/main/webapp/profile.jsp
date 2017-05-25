@@ -15,12 +15,8 @@
     <center>
         <h1>THIS IS YOUR PROFILE!</h1>
         <h3>*Not much, isn't it?)</h3>
-        <p>
-            <%
-                out.write(request.getSession().getAttribute("name").toString());
-                out.write(request.getSession().getAttribute("id").toString());
-            %>
-        </p>
+        <p>${name}
+        <p>${id}
         <a href="home.jsp">Your Home Page</a><br/>
         <br/>
         <a href="editProfile.jsp">Edit Your Profile</a><br/>

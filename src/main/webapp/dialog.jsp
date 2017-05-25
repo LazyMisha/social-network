@@ -16,7 +16,8 @@
         <title>Dialog</title>
     </head>
     <body>
-        <% 
+		<center>
+        <%
             User friend = (User)request.getAttribute("friend");
             User user = (User)request.getSession().getAttribute("user");
         %>
@@ -28,7 +29,7 @@
                     for(Message m:messeges){
                         out.write(m.getUser_id_from().getFirstName()+":"+"<br/>"+
                                 "-"+m.getMessage()+"<br/><br/>");
-                        
+
                     }
                 }else
                     out.write("There is no messages yet...");
@@ -40,5 +41,6 @@
             <input type="submit" value="Send">
         </form>
         <a href="profile.jsp">your profile</a><br/>
+		<center/>
     </body>
 </html>

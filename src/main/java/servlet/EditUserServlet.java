@@ -48,88 +48,88 @@ public class EditUserServlet extends HttpServlet {
         String oldCity = user.getCity();
         String oldCountry = user.getCountry();
 
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            String birthDay = request.getParameter("birth-day");
-            String birthMonth = request.getParameter("birth-month");
-            String birthYear = request.getParameter("birth-year");
-            String birthDate = birthDay + "-" + birthMonth + "-" + birthYear;
-            String email = request.getParameter("email");
-            String pass = request.getParameter("password");
-            String userInfo = request.getParameter("userInfo");
-            String city = request.getParameter("city");
-            String country = request.getParameter("country");
+        String firstName = request.getParameter("firstName");
+        String lastName = request.getParameter("lastName");
+        String birthDay = request.getParameter("birth-day");
+        String birthMonth = request.getParameter("birth-month");
+        String birthYear = request.getParameter("birth-year");
+        String birthDate = birthDay + "-" + birthMonth + "-" + birthYear;
+        String email = request.getParameter("email");
+        String pass = request.getParameter("password");
+        String userInfo = request.getParameter("userInfo");
+        String city = request.getParameter("city");
+        String country = request.getParameter("country");
 
-            System.out.println(firstName);
-            System.out.println(lastName);
-            System.out.println(email);
-            System.out.println(pass);
-            System.out.println(birthDate);
-            System.out.println(userInfo);
-            System.out.println(city);
-            System.out.println(country);
+        System.out.println(firstName);
+        System.out.println(lastName);
+        System.out.println(email);
+        System.out.println(pass);
+        System.out.println(birthDate);
+        System.out.println(userInfo);
+        System.out.println(city);
+        System.out.println(country);
 
-            if(firstName.isEmpty()){
-                user.setFirstName(oldFirstName);
-            }else{
-                user.setFirstName(firstName);
+        if(firstName.isEmpty()){
+            user.setFirstName(oldFirstName);
+        }else{
+            user.setFirstName(firstName);
+        }
+
+        if(lastName.isEmpty()){
+            user.setLastName(oldLastName);
+        }else{
+            user.setLastName(lastName);
+        }
+
+        if(email.isEmpty()){
+            user.setEmail(oldEmail);
+        }else {
+            user.setEmail(email);
+        }
+
+        if(birthDate.isEmpty()){
+            user.setBirthday(oldBirthDay);
+        }else{
+            Date date = null;
+            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                date = formatter.parse(birthDate);
+            } catch (ParseException e) {
+                System.out.println(e.getMessage());
             }
+            user.setBirthday(date);
+        }
 
-            if(lastName.isEmpty()){
-                user.setLastName(oldLastName);
-            }else{
-                user.setLastName(lastName);
-            }
+        if(userInfo.isEmpty()){
+            user.setUser_info(oldUserInfo);
+        }else{
+            user.setUser_info(userInfo);
+        }
 
-            if(email.isEmpty()){
-                user.setEmail(oldEmail);
-            }else {
-                user.setEmail(email);
-            }
+        if(pass.isEmpty()){
+            user.setPassword(oldPassword);
+        }else {
+            user.setPassword(pass);
+        }
 
-            if(birthDate.isEmpty()){
-                user.setBirthday(oldBirthDay);
-            }else{
-                Date date = null;
-                DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-                try {
-                    date = formatter.parse(birthDate);
-                } catch (ParseException e) {
-                    System.out.println(e.getMessage());
-                }
-                user.setBirthday(date);
-            }
+        if(city.isEmpty()){
+            user.setCity(oldCity);
+        }else{
+            user.setCity(city);
+        }
 
-            if(userInfo.isEmpty()){
-                user.setUser_info(oldUserInfo);
-            }else{
-                user.setUser_info(userInfo);
-            }
+        if(country.isEmpty()){
+            user.setCity(oldCountry);
+        }else {
+            user.setCountry(country);
+        }
 
-            if(pass.isEmpty()){
-                user.setPassword(oldPassword);
-            }else {
-                user.setPassword(pass);
-            }
+        userDao.update(user);
 
-            if(city.isEmpty()){
-                user.setCity(oldCity);
-            }else{
-                user.setCity(city);
-            }
-
-            if(country.isEmpty()){
-                user.setCity(oldCountry);
-            }else {
-                user.setCountry(country);
-            }
-
-            userDao.update(user);
-
-            request.setAttribute("message",
-                    "Your profile is updated");
+        request.setAttribute("message",
+                "Your profile is updated");
 
         getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
-                request, response);
+            request, response);
     }
 }

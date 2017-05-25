@@ -15,16 +15,20 @@
         <title>Send message</title>
     </head>
     <body>
+		<center>
         <h1>Talk with your friends!</h1>
         <%
             UserDao ud=new UserDao();
-            List<User> friends=ud.getFriends();
+
+            List<User> friends = ud.getFriends();
+
             for(User user : friends){
-                out.print("<form action=\"SendMessageServlet\" method=\"POST\">"+
+                out.print("<form action=\"SendMessageServlet\" method=\"POST\">" +
                     "<button type=\"submit\" name=\"friend_id\" value=\""+
                     user.getId()+"\">"+user.getFirstName()+"</button>"+
                             "<form/><br/><br/>");
             }
         %>
+		</center>
     </body>
 </html>
