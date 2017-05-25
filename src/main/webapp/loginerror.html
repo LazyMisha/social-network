@@ -1,24 +1,52 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
+<!DOCTYPE HTML>
 <html>
-    <head>
-        <title>Login error</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-    <center>
-        <h1 color="red">You've entered wrong Email or Password:(</h1>
-        <br/>
-        <br/>
-        <br/>
-        <h3><a href="index.html">Try again</a><br/><h3>
-            <br/>
-        <h3><a href="registration.jsp">Register new Profile</a><br/><h3>
-    </center>
-    </body>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<title>Yet Another Music Social Network | DataArt IT School Project</title>
+	</head>
+	<body>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+   		<script src="js/bootstrap.min.js"></script>
+		
+		<div class="container-fluid">
+
+			<header class="row">
+				<div class="col-xs-12">
+					<h1>WELCOME!</h1>
+				</div>
+			</header>
+
+			<main class="row">
+		
+				<div class="col-xs-12">
+				
+				<div class="alert alert-danger alert-dismissable fade in loginerror">
+				<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+				<strong>Error!</strong> You have entered wrong login and/or password!
+			  </div>
+					<div class="form-signin-wrapper">
+					<form action="LoginServlet" method="post" class="form-signin">       
+						<h2 class="form-signin-h2">YAMSN</h2>
+						<h4 class="form-signin-h4">Yet Another Music Social Network</h4>
+						 <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
+						 <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+						 <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 20px;">Login</button>
+						 <h5 class="form-signin-h">Not registered? <a href="registration.jsp">Create an account</a></h5>	  
+					</form>
+					</div>
+				</div>
+			</main>
+
+			<footer class="row">
+				<div class="col-xs-12">
+					<p class="footer">Yet Another Music Social Network | 2017</p>
+				</div>
+			</footer>
+
+		</div>
+	</body>
 </html>

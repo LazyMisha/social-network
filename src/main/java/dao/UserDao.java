@@ -5,6 +5,7 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 import java.util.List;
+import org.hibernate.Query;
 
 /**
  * Created by misha on 06.05.17.
@@ -26,7 +27,7 @@ public class UserDao {
             session.clear();
         }
     }
-    
+
     public User isRegistered(String email, String password){
         List<User> usersList = session.createQuery("FROM User").list();
         for(User user : usersList){
@@ -36,19 +37,15 @@ public class UserDao {
         }
         return null;
     }
-    // working!!!
-    public void updateUserInfo(Long id, User user){
-        User userUpd = (User)session.get(User.class, id);
-        try{
-            session.beginTransaction();
-            userUpd.setUser_info(user.getUser_info());
-            session.update(userUpd);
-            session.getTransaction().commit();
-        }catch (Exception e){
-            System.out.println(e.getMessage());
-        }finally {
-            session.clear();
-        }
+
+    public List<User> getFriends(){
+        return session.createQuery("FROM User").list();
+    }
+
+    public User getUser(Long id){
+        Query query=session.createQuery("FROM User WHERE id = ?").setParameter(0,id);
+        User user=(User)query.uniqueResult();
+        return user;
     }
 
     public void update(User user){

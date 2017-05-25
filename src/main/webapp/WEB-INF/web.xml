@@ -4,7 +4,13 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-
+    
+    <servlet>
+        <description/>
+        <display-name>SendMessageServlet</display-name>
+        <servlet-name>SendMessageServlet</servlet-name>
+        <servlet-class>servlet.SendMessageServlet</servlet-class>
+    </servlet>
     <servlet>
         <description/>
         <display-name>editUser</display-name>
@@ -41,12 +47,19 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
+<<<<<<< HEAD
 
 
 
     <servlet-mapping>
         <servlet-name>editUser</servlet-name>
         <url-pattern>/editUser</url-pattern>
+=======
+    
+    <servlet-mapping>
+        <servlet-name>SendMessageServlet</servlet-name>
+        <url-pattern>/SendMessageServlet</url-pattern>
+>>>>>>> 6e9e29c3c7e780643cc30754a5ad78517afa25eb
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchMusicServlet</servlet-name>

@@ -6,7 +6,7 @@
 		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
 		<link rel="stylesheet" href="css/bootstrap.min.css">
 		<link rel="stylesheet" href="css/style.css">
-		<title>Social Network</title>
+		<title>Yet Another Music Social Network | DataArt IT School Project</title>
 	</head>
 	<body>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
@@ -15,36 +15,30 @@
 		<div class="container-fluid">
 
 			<header class="row">
-				<div class="span12">
-					<h1>Welcome!</h1>
+				<div class="col-xs-12">
+					<h1>WELCOME!</h1>
 				</div>
 			</header>
 
 			<main class="row">
-				<div class="span3 sidebar-left">
-					<ul>
-						<li>Добавить</li>
-						<li>левую</li>
-						<li>консоль</li>
-					</ul>
-				</div>
-				<div class="span9">
-					<h3>Форма входа</h3>
-					<form action="LoginServlet" method="post">
-						<label>Email: <input id="email-field" type="text" name="email" value=""></label>
-						<!-- <label>Login: <input id="ligin-field" type="text" name="login" value=""></label> -->
-						<br><br>
-						<label>Password: <input id="password-field" type="password" name="password" value=""></label>
-						<br><br>
-						<input type="submit" value="Войти">
-						<input type="button" value="Зарегистрироваться" onclick='location.href="registration.jsp"'>
+		
+				<div class="col-xs-12">
+					<div class="form-signin-wrapper">
+					<form action="LoginServlet" method="post" class="form-signin">       
+						<h2 class="form-signin-h2">YAMSN</h2>
+						<h4 class="form-signin-h4">Yet Another Music Social Network</h4>
+						 <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
+						 <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
+						 <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 20px;">Login</button>
+						 <h5 class="form-signin-h">Not registered? <a href="registration.jsp">Create an account</a></h5>	  
 					</form>
+					</div>
 				</div>
 			</main>
 
 			<footer class="row">
-				<div class="span12">
-					<p>Social Network for musical humans 2017</p>
+				<div class="col-xs-12">
+					<p class="footer">Yet Another Music Social Network | 2017</p>
 				</div>
 			</footer>
 

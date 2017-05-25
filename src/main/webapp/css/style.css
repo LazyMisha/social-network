@@ -1,42 +1,78 @@
-html {
-  height: 100%; /* Позиционирование footer */
-}
-
-body {
-  position: relative; /* Позиционирование footer */
-  min-height: 100%; /* Позиционирование footer */
-}
-
-main {
-  padding-bottom: 30px; /* Позиционирование footer */
-}
-
-footer {
-  position: absolute; /* Позиционирование footer */
-  bottom: 0; /* Позиционирование footer */
-  width: 100%; /* Позиционирование footer */
-  height: 30px; /* Позиционирование footer */
-}
-
 header {
-	background: #471275;
-	border: 2px solid #2c0d47;
+  bottom: 0; 
+  height: 70px; 
+  background: #7e7e7e;
 	color: #fff;
 	text-align: center;
 }
 
-.sidebar-left {
-	color: #1C0430;
-	text-align: left;
-}
-
-.sidebar-left ul {
-	list-style-type: none;
-}
-
 footer {
-	background: #471275;
-	border: 2px solid #2c0d47;
+  bottom: 0; 
+  height: 40px; 
+  background: #7e7e7e;
 	color: #fff;
-	text-align: right;
+	text-align: center;
+}
+
+.footer {
+	margin-top: 10px;
+}
+
+/* Login-Register page styles start */
+
+.form-signin-wrapper {
+	margin-top: 60px;
+    margin-bottom: 100px;
+}
+
+.form-signin {
+  text-align: center;
+  max-width: 380px;
+  padding: 15px 35px 35px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.form-signin-h2 {
+	margin-top: 20px;
+}
+
+.form-signin-h {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.form-signin .form-control {
+  position: relative;
+  font-size: 16px;
+  height: auto;
+  padding: 10px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="text"] {
+  margin-bottom: -1px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.form-signin input[type="password"] {
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+.message {
+  text-align: center;
+  margin-top: 10px;
+}
+/* Login-Reg page styles end */
+.loginerror {
+  text-align: center;
+  margin-top: 10px;
+  margin: 0 auto;
+  width: 50%;
+  height: 50px;
 }

@@ -4,17 +4,23 @@
     Author     : socrates
 --%>
 
-<%@page contentType="text/html" pageEncoding="windows-1251"%>
+<%@page import="entity.User"%>
+<%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=windows-1251">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>Next page</title>
     </head>
     <body>
     <center>
         <h1>Hello!</h1>
-        <p><%= request.getSession().getAttribute("name").toString() %></p>
+        <p>
+            <%
+                User u=(User)request.getSession().getAttribute("user");
+                out.write(u.getFirstName());
+            %>
+        </p>
         <a href="${pageContext.request.contextPath}/LogoutServlet">logout</a><br/>
         <form action="SearchMusicServlet" method="post">
             <input type="text" name="search" value="">
