@@ -1,7 +1,7 @@
 <%-- 
     Document   : SendMessage
     Created on : 20.05.2017, 16:23:41
-    Author     : socrates
+    Author     : stepanyuk
 --%>
 
 <%@page import="java.util.List"%>

@@ -7,6 +7,10 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+/**
+ * @author Stepanyuk
+ */
+
 @WebServlet(name = "SendMessageServlet", urlPatterns = {"/SendMessageServlet"})
 public class SendMessageServlet extends HttpServlet {
             
@@ -14,6 +18,8 @@ public class SendMessageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+        
         Long friendID=Long.valueOf(request.getParameter("friend_id"));
 
         User friend= new UserDao().getUser(friendID);

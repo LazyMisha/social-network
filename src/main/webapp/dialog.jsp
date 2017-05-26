@@ -1,7 +1,7 @@
 <%-- 
     Document   : message
     Created on : 20.05.2017, 19:10:27
-    Author     : socrates
+    Author     : stepanyuk
 --%>
 
 <%@page import="entity.User"%>
