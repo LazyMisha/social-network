@@ -8,10 +8,13 @@ import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
+/**
+ * @author Stepanyuk
+ */
+
 @WebServlet(name = "SerchMusicServlet", urlPatterns = {"/SerchMusicServlet"})
 public class SearchMusicServlet extends HttpServlet {
 
-    MusicDao md=new MusicDao();
     ArrayList<Music> musicArr;
     
     @Override
@@ -23,7 +26,10 @@ public class SearchMusicServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        musicArr=md.searchMusic(request.getParameter("search"));
+        
+        request.setCharacterEncoding("UTF-8");
+        
+        musicArr=new MusicDao().searchMusic(request.getParameter("search"));
         String result="";
 
         if(!musicArr.isEmpty()){
@@ -41,7 +47,7 @@ public class SearchMusicServlet extends HttpServlet {
             request.setAttribute("song", result);
 
         }else{
-            request.setAttribute("song","<h1>Can't find such song!<h1>");
+            request.setAttribute("song","Can't find such song!");
         }
 
         getServletContext().getRequestDispatcher("/home.jsp").forward(

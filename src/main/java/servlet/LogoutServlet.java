@@ -9,9 +9,7 @@ import javax.servlet.http.*;
 import static util.HibernateUtil.shutdown;
 
 /**
- *
  * @author stepanyuk
- * servlet for logout user
  */
 
 @WebServlet(name = "LogoutServlet", urlPatterns = "/LogoutServlet")
@@ -27,12 +25,10 @@ public class LogoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        System.out.println("user is logout");
-
-        ServletContext sc = getServletContext();
-
         HttpSession session = request.getSession(false);
         session.invalidate();
+        
+        ServletContext sc = getServletContext();
         sc.getRequestDispatcher("/index.html").forward(request, response);
 
         shutdown();

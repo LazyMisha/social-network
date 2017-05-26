@@ -7,6 +7,10 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import util.HibernateUtil;
 
+/**
+ * @author Stepanyuk
+ */
+
 public class MessageDao {
     private Session session = HibernateUtil.getSessionFactory().openSession();
     

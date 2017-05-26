@@ -33,6 +33,8 @@ public class RegistrationPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+
         String firstName = request.getParameter("name");
         String surName = request.getParameter("surname");
         String email = request.getParameter("email");
