@@ -38,16 +38,14 @@ public class LoginServlet extends HttpServlet {
         user = new UserDao().isRegistered(email, password);
 
         if(user != null){
-
             HttpSession hsession=request.getSession(true);
             hsession.setAttribute("user", user);
 
             request.setAttribute("name", user.getFirstName());
-            request.setAttribute("id", user.getId());
 
             currentUserId = user.getId();
-            getServletContext().getRequestDispatcher("/profile.jsp").forward(
-                    request, response);
+
+            response.sendRedirect(request.getContextPath() + "/profile");
         }else
             getServletContext().getRequestDispatcher("/loginerror.html").forward(request, response);
     }

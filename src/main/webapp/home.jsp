@@ -28,7 +28,7 @@
         </form>
         <br/>
         <br/>
-        <a href="profile.jsp">Your Profile</a><br/>
+        <a href="${pageContext.request.contextPath}/profile">Your profile</a>
 		<br/>
         <a href="uploadMusic.jsp">Upload new Music</a><br/>
         <br/>

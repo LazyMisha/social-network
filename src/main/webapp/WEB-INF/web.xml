@@ -8,6 +8,12 @@
 
     <servlet>
         <description/>
+        <display-name>profile</display-name>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>servlet.ProfileServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>editUser</display-name>
         <servlet-name>editUser</servlet-name>
         <servlet-class>servlet.EditUserServlet</servlet-class>
@@ -49,6 +55,10 @@
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
 
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>editUser</servlet-name>
         <url-pattern>/editUser</url-pattern>

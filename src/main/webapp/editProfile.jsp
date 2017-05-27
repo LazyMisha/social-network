@@ -119,7 +119,7 @@
         <br/><br/>
         ${message}
         <br/><br/>
-       <a href="profile.jsp">Your Profile</a><br/>
+       <a href="${pageContext.request.contextPath}/profile">Your profile</a>
     <center/>
     <footer class="row">
     	<div class="span12">

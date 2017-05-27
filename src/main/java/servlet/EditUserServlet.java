@@ -121,7 +121,7 @@ public class EditUserServlet extends HttpServlet {
         }
 
         if(country.isEmpty()){
-            user.setCity(oldCountry);
+            user.setCountry(oldCountry);
         }else {
             user.setCountry(country);
         }

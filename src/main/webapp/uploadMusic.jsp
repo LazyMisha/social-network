@@ -31,6 +31,9 @@
                 <br/>
                 <br/>
                 <a href="home.jsp">Your Home Page<a/>
+                <br/>
+                <br/>
+                <a href="${pageContext.request.contextPath}/profile">Your profile</a>
         	</center>
     </body>
 

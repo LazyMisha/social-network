@@ -40,7 +40,7 @@
             <input type="hidden" name="friend_id" value="<%= request.getParameter("friend_id")%>"><br><br>
             <input type="submit" value="Send">
         </form>
-        <a href="profile.jsp">your profile</a><br/>
+        <a href="${pageContext.request.contextPath}/profile">Your profile</a>
 		<center/>
     </body>
 </html>

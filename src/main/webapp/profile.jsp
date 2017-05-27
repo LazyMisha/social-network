@@ -14,11 +14,27 @@
     <body>
     <center>
         <h1>THIS IS YOUR PROFILE!</h1>
-        <h3>*Not much, isn't it?)</h3>
-        <p>${name}
-        <p>${id}
+        				<br/><br/>
+                <h3>Your information:</h3>
+        				<br/><br/>
+                <label>Your name: ${name}</label>
+                        <br/><br/>
+                <label>Your last name: ${lastName}</label>
+                        <br/><br/>
+                <label>Your email: ${email}</label>
+                        <br/><br/>
+        		<label>Your birthday: ${birthday}</label>
+                        <br/><br/>
+        		<label>Your country: ${country}</label>
+                        <br/><br/>
+        		<label>Your city: ${city}</label>
+                        <br/><br/>
+        		<label>Your info: ${userInfo}</label>
+                        <br/><br/>
+        		<label>Your link: ${userLink}</label>
+                        <br/><br/>
         <a href="home.jsp">Your Home Page</a><br/>
-        <br/>
+        		<br/><br/>
         <a href="editProfile.jsp">Edit Your Profile</a><br/>
         <center/>
     </body>
