@@ -47,6 +47,8 @@ public class UploadMusicServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setCharacterEncoding("UTF-8");
+
         if (!ServletFileUpload.isMultipartContent(request)) {
             PrintWriter writer = response.getWriter();
             writer.println("Error: Form must has enctype = multipart/form-data.");

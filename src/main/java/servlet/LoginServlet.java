@@ -41,8 +41,6 @@ public class LoginServlet extends HttpServlet {
             HttpSession hsession=request.getSession(true);
             hsession.setAttribute("user", user);
 
-            request.setAttribute("name", user.getFirstName());
-
             currentUserId = user.getId();
 
             response.sendRedirect(request.getContextPath() + "/profile");
