@@ -97,11 +97,35 @@ public class UploadMusicServlet extends HttpServlet {
                         //Parse mp3 tags
                         getTags.saveAngGetTagsFromMP3(storeFile);
 
-                        request.setAttribute("songName", "Song Name: " + songName);
-                        request.setAttribute("genre", "Genre: " + genre);
-                        request.setAttribute("singer", "Singer: " + singer);
-                        request.setAttribute("composer", "Composer: " + composer);
-                        request.setAttribute("album", album);
+                        if(songName == null){
+                            request.setAttribute("songName", "Song Name: not information");
+                        }else {
+                            request.setAttribute("songName", "Song Name: " + songName);
+                        }
+
+                        if(genre == null){
+                            request.setAttribute("genre", "Genre: not information");
+                        }else {
+                            request.setAttribute("genre", "Genre: " + genre);
+                        }
+
+                        if(singer == null){
+                            request.setAttribute("singer", "Singer: not information");
+                        }else {
+                            request.setAttribute("singer", "Singer: " + singer);
+                        }
+
+                        if(composer == null){
+                            request.setAttribute("composer", "Composer: not information");
+                        }else {
+                            request.setAttribute("composer", "Composer: " + composer);
+                        }
+
+                        if(album == null){
+                            request.setAttribute("album", "Album: not information");
+                        }else {
+                            request.setAttribute("album", "Album: " + album);
+                        }
                     }
                 }
             }
