@@ -23,11 +23,14 @@
         	    <h2>${message}</h2>
                 <br/>
                 <br/>
-                <h2>${songName}</h2>
-                <h2>${genre}</h2>
-                <h2>${singer}</h2>
-                <h2>${composer}</h2>
-                <h2>${album}</h2>
+                	<form action="editMusic" method="post" class="">
+						 <label>Song Name: <input type="text" name="songName" value="${songName}"/><br/><label/>
+						 <label>Genre: <input type="text" name="genre" value="${genre}"/><br/><label/>
+						 <label>Singer: <input type="text" name="singer" value="${singer}"/><br/><label/>
+						 <label>Composer: <input type="text" name="composer" value="${composer}"/><br/><label/>
+						 <label>Album: <input type="text" name="album" value="${album}"/><br/><label/>
+						 <button type="submit">Save</button>
+					</form>
                 <br/>
                 <br/>
                 <a href="home.jsp">Your Home Page<a/>

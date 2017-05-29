@@ -1,7 +1,5 @@
 package service;
 
-import dao.MusicDao;
-import entity.Music;
 import org.apache.tika.metadata.Metadata;
 import org.apache.tika.parser.ParseContext;
 import org.apache.tika.parser.Parser;
@@ -15,26 +13,24 @@ import java.io.InputStream;
 
 /**
  * Created by misha on 21.05.17.
- * get tags from mp3 file and save it to DB
+ * get tags from mp3 file
  */
 
 public class GetTags {
-
-    Music music = new Music();
-    MusicDao musicDao = new MusicDao();
 
     public static String songName = "";
     public static String genre = "";
     public static String singer = "";
     public static String composer = "";
     public static String album = "";
+    public static long fileSizeInMB = 0;
+    public static String secondPart = "";
 
-    public void saveAngGetTagsFromMP3(File mp3File) throws Exception{
-
+    public void getTagsFromMP3(File mp3File) throws Exception{
 
         String filePath = mp3File.getPath();
         int index = filePath.indexOf("upload");
-        String secondPart = filePath.substring(index);
+        secondPart = filePath.substring(index);
 
         InputStream input = new FileInputStream(mp3File);
         ContentHandler handler = new DefaultHandler();
@@ -66,14 +62,6 @@ public class GetTags {
 
         long fileSizeInBytes = mp3File.length();
         long fileSizeInKB = fileSizeInBytes / 1024;
-        long fileSizeInMB = fileSizeInKB / 1024;
-
-        music.setSong_name(metadata.get("title"));
-        music.setGenre(metadata.get("xmpDM:genre"));
-        music.setSinger(metadata.get("xmpDM:artist"));
-        music.setSize(fileSizeInMB);
-        music.setPath(secondPart);
-
-        musicDao.save(music);
+        fileSizeInMB = fileSizeInKB / 1024;
     }
 }

@@ -95,36 +95,36 @@ public class UploadMusicServlet extends HttpServlet {
                                 "Upload has been done successfully!");
 
                         //Parse mp3 tags
-                        getTags.saveAngGetTagsFromMP3(storeFile);
+                        getTags.getTagsFromMP3(storeFile);
 
                         if(songName == null){
-                            request.setAttribute("songName", "Song Name: not information");
+                            request.setAttribute("songName", "not information");
                         }else {
-                            request.setAttribute("songName", "Song Name: " + songName);
+                            request.setAttribute("songName", songName);
                         }
 
                         if(genre == null){
-                            request.setAttribute("genre", "Genre: not information");
+                            request.setAttribute("genre", "not information");
                         }else {
-                            request.setAttribute("genre", "Genre: " + genre);
+                            request.setAttribute("genre", genre);
                         }
 
                         if(singer == null){
-                            request.setAttribute("singer", "Singer: not information");
+                            request.setAttribute("singer", "not information");
                         }else {
-                            request.setAttribute("singer", "Singer: " + singer);
+                            request.setAttribute("singer", singer);
                         }
 
                         if(composer == null){
-                            request.setAttribute("composer", "Composer: not information");
+                            request.setAttribute("composer", "not information");
                         }else {
-                            request.setAttribute("composer", "Composer: " + composer);
+                            request.setAttribute("composer", composer);
                         }
 
                         if(album == null){
-                            request.setAttribute("album", "Album: not information");
+                            request.setAttribute("album", "not information");
                         }else {
-                            request.setAttribute("album", "Album: " + album);
+                            request.setAttribute("album", album);
                         }
                     }
                 }
@@ -134,7 +134,7 @@ public class UploadMusicServlet extends HttpServlet {
                     "There was an error!" + "<br/>" +
             "Try again, and select mp3 format please!");
         }
-        // redirects client to message page
+
         getServletContext().getRequestDispatcher("/uploadMusic.jsp").forward(
                 request, response);
     }
