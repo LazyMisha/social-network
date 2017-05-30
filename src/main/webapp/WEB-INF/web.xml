@@ -6,6 +6,13 @@
     </welcome-file-list>
 
 
+
+    <servlet>
+        <description/>
+        <display-name>uploadPhoto</display-name>
+        <servlet-name>uploadPhoto</servlet-name>
+        <servlet-class>servlet.UploadPhotoServlet</servlet-class>
+    </servlet>
     <servlet>
         <description/>
         <display-name>editMusic</display-name>
@@ -62,6 +69,11 @@
     </servlet>
 
 
+
+    <servlet-mapping>
+        <servlet-name>uploadPhoto</servlet-name>
+        <url-pattern>/uploadPhoto</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>editMusic</servlet-name>
         <url-pattern>/editMusic</url-pattern>

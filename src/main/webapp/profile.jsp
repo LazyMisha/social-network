@@ -14,6 +14,7 @@
     <body>
     <center>
         <h1>THIS IS YOUR PROFILE!</h1>
+        <p><img src="${pathToPhoto}" alt="profile photo" width="17%"></p>
         				<br/><br/>
                 <h3>Your information:</h3>
         				<br/><br/>

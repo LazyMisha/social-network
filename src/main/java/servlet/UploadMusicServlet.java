@@ -76,7 +76,6 @@ public class UploadMusicServlet extends HttpServlet {
         }
 
         try {
-            // parses the request's content to extract file data
             @SuppressWarnings("unchecked")
             List<FileItem> formItems = upload.parseRequest(request);
 

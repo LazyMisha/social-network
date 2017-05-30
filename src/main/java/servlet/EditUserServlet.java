@@ -76,7 +76,7 @@ public class EditUserServlet extends HttpServlet {
             user.setBirthday(date);
         }
 
-        if(userInfo.isEmpty())
+        if(!userInfo.isEmpty())
             user.setUser_info(userInfo);
 
         if(!pass.isEmpty()){
@@ -87,10 +87,10 @@ public class EditUserServlet extends HttpServlet {
                 user.setPassword(securedPassword);
         }
 
-        if(city.isEmpty())
+        if(!city.isEmpty())
             user.setCity(city);
 
-        if(country.isEmpty())
+        if(!country.isEmpty())
             user.setCountry(country);
 
         userDao.update(user);
