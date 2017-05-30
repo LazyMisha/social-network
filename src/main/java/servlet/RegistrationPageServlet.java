@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 import java.io.IOException;
+import util.SecurePassword;
 
 /**
  * Servlet for Registration Page (registration.jsp)
@@ -17,6 +18,7 @@ public class RegistrationPageServlet extends HttpServlet {
 
     User user = new User();
     UserDao userDao = new UserDao();
+    SecurePassword secPass=new SecurePassword();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -36,24 +38,21 @@ public class RegistrationPageServlet extends HttpServlet {
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
 
-        System.out.println(firstName);
-        System.out.println(surName);
-        System.out.println(email);
-        System.out.println(pass);
-        System.out.println(confirmPass);
-
-        if(pass.isEmpty()){
+        if(pass.isEmpty()||pass.length()<6){
             request.setAttribute("message",
-                    "Password field is empty!" + "<br/>" +
+                    "Sorry, but your password isn't long enough." + "<br/>" +
                             "Try again");
-            System.out.println("user did not inputted password!");
         }else{
             if(pass.equals(confirmPass)){
 
+                String salt=secPass.getSalt();
+                String securedPassword=secPass.getSecurePassword(pass, salt);
+                
+                user.setSalt(salt);
+                user.setPassword(securedPassword);
                 user.setFirstName(firstName);
                 user.setLastName(surName);
                 user.setEmail(email);
-                user.setPassword(pass);
                 userDao.save(user);
 
                 request.setAttribute("message",

@@ -34,7 +34,7 @@
 						<h4 class="form-signin-h4">Please fill in your data</h4>
 						 <input type="text" class="form-control" name="name" placeholder="Your name" required=""/>
 						 <input type="text" class="form-control" name="surname" placeholder="Your surname" required=""/>
-						 <input type="text" class="form-control" name="email" placeholder="Email Address" required="" />
+						 <input type="email" class="form-control" name="email" placeholder="Email Address" required="" />
 						 <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
 						 <input type="password" class="form-control" name="confirm-password" placeholder="Confirm password" required=""/>
 						 <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 20px;">Register</button>

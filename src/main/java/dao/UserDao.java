@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
+import util.SecurePassword;
 
 /**
  * Created by misha on 06.05.17.
@@ -14,7 +15,7 @@ import org.hibernate.Query;
 public class UserDao {
 
     private Session session = HibernateUtil.getSessionFactory().openSession();
-
+    
     public void save(User user){
         try {
             session.beginTransaction();
@@ -31,8 +32,10 @@ public class UserDao {
     public User isRegistered(String email, String password){
         List<User> usersList = session.createQuery("FROM User").list();
         for(User user : usersList){
-            if((user.getEmail().equals(email))&&(user.getPassword().equals(password))){
-                return user;
+            if(user.getEmail().equals(email)){
+                SecurePassword sp=new SecurePassword();
+                if(sp.getSecurePassword(password, user.getSalt()).equals(user.getPassword()))
+                    return user;
             }
         }
         return null;

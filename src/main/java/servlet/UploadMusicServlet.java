@@ -98,31 +98,31 @@ public class UploadMusicServlet extends HttpServlet {
                         getTags.getTagsFromMP3(storeFile);
 
                         if(songName == null){
-                            request.setAttribute("songName", "not information");
+                            request.setAttribute("songName", "no information");
                         }else {
                             request.setAttribute("songName", songName);
                         }
 
                         if(genre == null){
-                            request.setAttribute("genre", "not information");
+                            request.setAttribute("genre", "no information");
                         }else {
                             request.setAttribute("genre", genre);
                         }
 
                         if(singer == null){
-                            request.setAttribute("singer", "not information");
+                            request.setAttribute("singer", "no information");
                         }else {
                             request.setAttribute("singer", singer);
                         }
 
                         if(composer == null){
-                            request.setAttribute("composer", "not information");
+                            request.setAttribute("composer", "no information");
                         }else {
                             request.setAttribute("composer", composer);
                         }
 
                         if(album == null){
-                            request.setAttribute("album", "not information");
+                            request.setAttribute("album", "no information");
                         }else {
                             request.setAttribute("album", album);
                         }
