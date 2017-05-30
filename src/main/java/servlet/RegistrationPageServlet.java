@@ -38,12 +38,6 @@ public class RegistrationPageServlet extends HttpServlet {
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
 
-        System.out.println(firstName);
-        System.out.println(surName);
-        System.out.println(email);
-        System.out.println(pass);
-        System.out.println(confirmPass);
-
         if(pass.isEmpty()||pass.length()<6){
             request.setAttribute("message",
                     "Sorry, but your password isn't long enough." + "<br/>" +

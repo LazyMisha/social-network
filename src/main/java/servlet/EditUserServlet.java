@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static servlet.LoginServlet.currentUserId;
+import util.SecurePassword;
 
 /**
  * Created by misha on 23.05.17.
@@ -26,6 +27,8 @@ public class EditUserServlet extends HttpServlet {
     User user = new User();
 
     UserDao userDao = new UserDao();
+    
+    SecurePassword secPass=new SecurePassword();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,15 +44,6 @@ public class EditUserServlet extends HttpServlet {
         
         user = userDao.getById(currentUserId);
 
-        String oldFirstName = user.getFirstName();
-        String oldLastName = user.getLastName();
-        String oldEmail = user.getEmail();
-        String oldUserInfo = user.getUser_info();
-        String oldPassword = user.getPassword();
-        Date oldBirthDay = user.getBirthday();
-        String oldCity = user.getCity();
-        String oldCountry = user.getCountry();
-
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String birthDay = request.getParameter("birth-day");
@@ -62,36 +56,16 @@ public class EditUserServlet extends HttpServlet {
         String city = request.getParameter("city");
         String country = request.getParameter("country");
 
-        System.out.println(firstName);
-        System.out.println(lastName);
-        System.out.println(email);
-        System.out.println(pass);
-        System.out.println(birthDate);
-        System.out.println(userInfo);
-        System.out.println(city);
-        System.out.println(country);
-
-        if(firstName.isEmpty()){
-            user.setFirstName(oldFirstName);
-        }else{
+        if(!firstName.isEmpty())
             user.setFirstName(firstName);
-        }
 
-        if(lastName.isEmpty()){
-            user.setLastName(oldLastName);
-        }else{
+        if(!lastName.isEmpty())
             user.setLastName(lastName);
-        }
 
-        if(email.isEmpty()){
-            user.setEmail(oldEmail);
-        }else {
+        if(!email.isEmpty())
             user.setEmail(email);
-        }
 
-        if(birthDate.isEmpty()){
-            user.setBirthday(oldBirthDay);
-        }else{
+        if(!birthDate.isEmpty()){
             Date date = null;
             DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
             try {
@@ -102,29 +76,22 @@ public class EditUserServlet extends HttpServlet {
             user.setBirthday(date);
         }
 
-        if(userInfo.isEmpty()){
-            user.setUser_info(oldUserInfo);
-        }else{
+        if(userInfo.isEmpty())
             user.setUser_info(userInfo);
+
+        if(!pass.isEmpty()){
+                String salt=secPass.getSalt();
+                String securedPassword=secPass.getSecurePassword(pass, salt);
+                
+                user.setSalt(salt);
+                user.setPassword(securedPassword);
         }
 
-        if(pass.isEmpty()){
-            user.setPassword(oldPassword);
-        }else {
-            user.setPassword(pass);
-        }
-
-        if(city.isEmpty()){
-            user.setCity(oldCity);
-        }else{
+        if(city.isEmpty())
             user.setCity(city);
-        }
 
-        if(country.isEmpty()){
-            user.setCountry(oldCountry);
-        }else {
+        if(country.isEmpty())
             user.setCountry(country);
-        }
 
         userDao.update(user);
 
