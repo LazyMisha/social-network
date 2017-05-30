@@ -46,7 +46,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(firstName == null || firstName.isEmpty()){
             request.setAttribute("name",
-                    "not information");
+                    "no information");
         }else {
             request.setAttribute("name",
                     firstName);
@@ -54,7 +54,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(lastName == null || lastName.isEmpty()){
             request.setAttribute("lastName",
-                    "not information");
+                    "no information");
         }else{
             request.setAttribute("lastName",
                     lastName);
@@ -62,7 +62,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(email == null || email.isEmpty()){
             request.setAttribute("email",
-                    "not information");
+                    "no information");
         }else{
             request.setAttribute("email",
                     email);
@@ -70,7 +70,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(birthDay == null){
             request.setAttribute("birthday",
-                    "not information");
+                    "no information");
         }else{
             request.setAttribute("birthday",
                     birthDay);
@@ -78,7 +78,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(country == null || country.isEmpty()){
             request.setAttribute("country",
-                    "not information");
+                    "no information");
         }else {
             request.setAttribute("country",
                     country);
@@ -86,7 +86,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(city == null || city.isEmpty()){
             request.setAttribute("city",
-                    "not information");
+                    "no information");
         }else{
             request.setAttribute("city",
                     city);
@@ -94,7 +94,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(userInfo == null || userInfo.isEmpty()){
             request.setAttribute("userInfo",
-                    "not information");
+                    "no information");
         }else {
             request.setAttribute("userInfo",
                     userInfo);
@@ -102,7 +102,7 @@ public class ProfileServlet  extends HttpServlet{
 
         if(userLink == null || userLink.isEmpty()){
             request.setAttribute("userLink",
-                    "not information");
+                    "no information");
         }else {
             request.setAttribute("userLink",
                     userLink);

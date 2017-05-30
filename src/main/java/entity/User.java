@@ -30,6 +30,9 @@ public class User {
 
     @Column(name = "password", length = 64)
     private String password;
+    
+    @Column(name = "salt", length = 32)
+    private String salt;
 
     @Column(name = "date_of_birthday")
     @Temporal(value = TemporalType.DATE)
@@ -94,6 +97,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+    
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public Date getBirthday() {
