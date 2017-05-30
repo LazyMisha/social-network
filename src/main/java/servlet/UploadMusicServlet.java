@@ -98,51 +98,31 @@ public class UploadMusicServlet extends HttpServlet {
                         getTags.getTagsFromMP3(storeFile);
 
                         if(songName == null){
-<<<<<<< HEAD
-                            request.setAttribute("songName", "not information");
-=======
-                            request.setAttribute("songName", "Song Name: no information");
->>>>>>> Added password hashing function
+                            request.setAttribute("songName", "no information");
                         }else {
                             request.setAttribute("songName", songName);
                         }
 
                         if(genre == null){
-<<<<<<< HEAD
-                            request.setAttribute("genre", "not information");
-=======
-                            request.setAttribute("genre", "Genre: no information");
->>>>>>> Added password hashing function
+                            request.setAttribute("genre", "no information");
                         }else {
                             request.setAttribute("genre", genre);
                         }
 
                         if(singer == null){
-<<<<<<< HEAD
-                            request.setAttribute("singer", "not information");
-=======
-                            request.setAttribute("singer", "Singer: no information");
->>>>>>> Added password hashing function
+                            request.setAttribute("singer", "no information");
                         }else {
                             request.setAttribute("singer", singer);
                         }
 
                         if(composer == null){
-<<<<<<< HEAD
-                            request.setAttribute("composer", "not information");
-=======
-                            request.setAttribute("composer", "Composer: no information");
->>>>>>> Added password hashing function
+                            request.setAttribute("composer", "no information");
                         }else {
                             request.setAttribute("composer", composer);
                         }
 
                         if(album == null){
-<<<<<<< HEAD
-                            request.setAttribute("album", "not information");
-=======
-                            request.setAttribute("album", "Album: no information");
->>>>>>> Added password hashing function
+                            request.setAttribute("album", "no information");
                         }else {
                             request.setAttribute("album", album);
                         }
