@@ -13,11 +13,28 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
    		<script src="js/bootstrap.min.js"></script>
 		
+		<script>$('.carousel').carousel();</script>
+		<!-- CAROUSEL -->
+		<div class="carousel slide carousel-fade" data-ride="carousel">
+			<!-- DIV with slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+				</div>
+				<div class="item">
+				</div>
+				<div class="item">
+				</div>
+				<div class="item">
+				</div>
+			</div>
+		</div>
+		<!-- CAROUSEL END -->
+		
 		<div class="container-fluid">
 
 			<header class="row">
 				<div class="col-xs-12">
-					<h1>WELCOME!</h1>
+					<h1>Welcome!</h1>
 				</div>
 			</header>
 
@@ -48,7 +65,7 @@
 
 			<footer class="row">
 				<div class="col-xs-12">
-					<p class="footer">Yet Another Music Social Network | 2017</p>
+					<p class="footer">Yet Another Music Social Network © 2017</p>
 				</div>
 			</footer>
 

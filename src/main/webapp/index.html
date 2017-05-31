@@ -12,22 +12,40 @@
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
    		<script src="js/bootstrap.min.js"></script>
 		
+		<script>$('.carousel').carousel();</script>
+		<!-- CAROUSEL -->
+		<div class="carousel slide carousel-fade" data-ride="carousel">
+			<!-- DIV with slides -->
+			<div class="carousel-inner" role="listbox">
+				<div class="item active">
+				</div>
+				<div class="item">
+				</div>
+				<div class="item">
+				</div>
+				<div class="item">
+				</div>
+			</div>
+		</div>
+		<!-- CAROUSEL END -->
+
 		<div class="container-fluid">
 
 			<header class="row">
 				<div class="col-xs-12">
-					<h1>WELCOME!</h1>
+					<h1>Welcome!</h1>
 				</div>
 			</header>
 
 			<main class="row">
-		
+					
 				<div class="col-xs-12">
-					<div class="form-signin-wrapper">
+				
+				<div class="form-signin-wrapper">
 					<form action="LoginServlet" method="post" class="form-signin">       
 						<h2 class="form-signin-h2">YAMSN</h2>
 						<h4 class="form-signin-h4">Yet Another Music Social Network</h4>
-						 <input type="text" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
+						 <input type="email" class="form-control" name="email" placeholder="Email Address" required="" autofocus="" />
 						 <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
 						 <button class="btn btn-lg btn-primary btn-block" type="submit" style="margin-top: 20px;">Login</button>
 						 <h5 class="form-signin-h">Not registered? <a href="registration.jsp">Create an account</a></h5>	  
@@ -38,7 +56,7 @@
 
 			<footer class="row">
 				<div class="col-xs-12">
-					<p class="footer">Yet Another Music Social Network | 2017</p>
+					<p class="footer">Yet Another Music Social Network © 2017</p>
 				</div>
 			</footer>
 
