@@ -9,12 +9,8 @@
     <center>
     <h2>Update your profile info<h2/>
     <br/><br/>
-        <form action="uploadPhoto" method="post" enctype="multipart/form-data">
-        <br/><br/>
-        <label>Upload your profile photo: <input type="file" name="photo"/><label/>
-        <br/><br/>
-        <input type="submit" name="submit" value="Save Photo">
-        <form/>
+    <p><a href="uploadPhoto.jsp">Upload Your Photo</a></p>
+    <br/><br/>
         <br/><br/>
         <form action="editUser" method="post">
         <label>Your name: <input type="text" name = "firstName" value=""></label>

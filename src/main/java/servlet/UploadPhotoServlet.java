@@ -1,5 +1,7 @@
 package servlet;
 
+import dao.UserDao;
+import entity.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -14,6 +16,8 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import static servlet.LoginServlet.currentUserId;
+
 /**
  * Created by misha on 30.05.17.
  */
@@ -22,6 +26,8 @@ import java.util.List;
 public class UploadPhotoServlet extends HttpServlet {
 
     UploadPhoto uploadPhoto = new UploadPhoto();
+
+    User user = new User();
 
     private static final String UPLOAD_DIRECTORY = "photo";
 
@@ -40,6 +46,16 @@ public class UploadPhotoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+
+        user = new UserDao().getById(currentUserId);
+
+        String photo = user.getPath_to_photo();
+
+        if(photo == null){
+            request.setAttribute("pathToPhoto", "photo/default.jpg");
+        }else {
+            request.setAttribute("pathToPhoto", photo);
+        }
 
         // configures upload settings
         DiskFileItemFactory factory = new DiskFileItemFactory();
@@ -75,10 +91,11 @@ public class UploadPhotoServlet extends HttpServlet {
 
                         // saves the file on disk
                         item.write(storeFile);
-                        request.setAttribute("message",
-                                "Photo has been uploaded successfully!");
 
                         uploadPhoto.savePhoto(storeFile);
+
+                        request.setAttribute("message",
+                                "Photo has been uploaded successfully!");
 
                     }
                 }
@@ -89,7 +106,7 @@ public class UploadPhotoServlet extends HttpServlet {
                             "Try again, and select image format please!");
         }
 
-        getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
+        getServletContext().getRequestDispatcher("/uploadPhoto.jsp").forward(
                 request, response);
     }
 }
