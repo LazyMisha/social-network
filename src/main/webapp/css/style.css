@@ -98,19 +98,11 @@ body {
 }
 /* CAROUSEL END */
 
-header { 
-  background: #7e7e7e;
+header, footer {
+  background: #222;
 	color: #fff;
 	text-align: center;
-	opacity: 0.9;
-	font-family: 'Condiment', cursive;
-}
-
-footer {
-  background: #7e7e7e;
-	color: #fff;
-	text-align: center;
-	opacity: 0.9;
+	opacity: 0.7;
 	font-family: 'Condiment', cursive;
 }
 
