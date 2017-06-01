@@ -95,6 +95,13 @@ public class EditUserServlet extends HttpServlet {
 
         userDao.update(user);
 
+        request.setAttribute("oldFirstName", user.getFirstName());
+        request.setAttribute("oldLastName", user.getLastName());
+        request.setAttribute("oldEmail", user.getEmail());
+        request.setAttribute("oldUserInfo", user.getUser_info());
+        request.setAttribute("oldCountry", user.getCountry());
+        request.setAttribute("oldCity", user.getCity());
+
         request.setAttribute("message",
                 "Your profile is updated");
 

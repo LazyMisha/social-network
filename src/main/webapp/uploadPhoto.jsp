@@ -24,7 +24,7 @@
 	<br/>
 	<a href="${pageContext.request.contextPath}/profile">Your profile</a>
 	<br/>
-	<a href="editProfile.jsp">Edit your profile</a>
+	<a href="${pageContext.request.contextPath}/editUserOldInfoServlet">Edit your profile</a>
     <footer class="row">
          <div class="span12">
               <p>Social Network fo music 2017</p>

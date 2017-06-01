@@ -7,6 +7,13 @@
 
 
 
+
+    <servlet>
+        <description/>
+        <display-name>editUserOldInfoServlet</display-name>
+        <servlet-name>editUserOldInfoServlet</servlet-name>
+        <servlet-class>servlet.EditUserOldInfoServlet</servlet-class>
+    </servlet>
     <servlet>
         <description/>
         <display-name>uploadPhoto</display-name>
@@ -70,6 +77,11 @@
 
 
 
+
+    <servlet-mapping>
+        <servlet-name>editUserOldInfoServlet</servlet-name>
+        <url-pattern>/editUserOldInfoServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>uploadPhoto</servlet-name>
         <url-pattern>/uploadPhoto</url-pattern>
