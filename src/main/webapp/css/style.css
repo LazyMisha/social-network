@@ -1,10 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Condiment');
 
-/* CAROUSEL START */
 html {
     position: relative;
     min-height: 100%;
 }
+
+body {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+/* CAROUSEL START */
 .carousel-fade .carousel-inner .item {
     opacity: 0;
     transition-property: opacity;
@@ -92,28 +98,16 @@ html {
 }
 /* CAROUSEL END */
 
-header {
-  bottom: 0; 
-  height: 70px; 
-  background: #7e7e7e;
+header, footer {
+  background: #222;
 	color: #fff;
 	text-align: center;
-	opacity: 0.9;
-	font-family: 'Condiment', cursive;
-}
-
-footer {
-  bottom: 0; 
-  height: 40px; 
-  background: #7e7e7e;
-	color: #fff;
-	text-align: center;
-	opacity: 0.9;
+	opacity: 0.7;
 	font-family: 'Condiment', cursive;
 }
 
 .footer {
-	margin-top: 10px;
+	margin-top: 15px;
 	font-size: 17px;
 }
 
