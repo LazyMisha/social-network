@@ -36,7 +36,7 @@
                         <br/><br/>
         <a href="home.jsp">Your Home Page</a><br/>
         		<br/><br/>
-        <a href="editProfile.jsp">Edit Your Profile</a><br/>
+        <a href="${pageContext.request.contextPath}/editUserOldInfoServlet">Edit your profile</a>
         <center/>
     </body>
 </html>

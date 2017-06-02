@@ -13,11 +13,11 @@
     <br/><br/>
         <br/><br/>
         <form action="editUser" method="post">
-        <label>Your name: <input type="text" name = "firstName" value=""></label>
+        <label>Your name: <input type="text" name = "firstName" value="${oldFirstName}"></label>
         <br/><br/>
-        <label>Last Name: <input type="text" name="lastName" value=""></label>
+        <label>Last Name: <input type="text" name="lastName" value="${oldLastName}"></label>
         <br/><br/>
-        <label>Email: <input type="email" name="email" value=""></label>
+        <label>Email: <input type="email" name="email" value="${oldEmail}"></label>
         <br/><br/>
         <label>Password: <input type="password" name="password" value=""></label>
         <br/><br/>
@@ -111,11 +111,11 @@
                     <option value="2010">2010</option>
             </select></label>
             <br/><br/>
-        <label>User info: <input type="text" name="userInfo" value=""></label>
+        <label>User info: <input type="text" name="userInfo" value="${oldUserInfo}"></label>
         <br/><br/>
-        <label>Country: <input type="text" name="country" value=""></label>
+        <label>Country: <input type="text" name="country" value="${oldCountry}"></label>
         <br/><br/>
-        <label>City: <input type="text" name="city" value=""></label>
+        <label>City: <input type="text" name="city" value="${oldCity}"></label>
         <br/><br/>
         <input type="submit" name="submit" value="Save">
         <form/>
