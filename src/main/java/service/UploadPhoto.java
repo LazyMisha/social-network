@@ -4,9 +4,9 @@ package service;
 import dao.UserDao;
 import entity.User;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
-
-import static servlet.LoginServlet.currentUserId;
 
 /**
  * Created by misha on 30.05.17.
@@ -19,13 +19,13 @@ public class UploadPhoto {
 
     public static String secondPartPhoto = "";
 
-    public void savePhoto(File photo){
+    public void savePhoto(File photo, HttpServletRequest request){
 
         String filePath = photo.getPath();
         int index = filePath.indexOf("photo");
         secondPartPhoto = filePath.substring(index);
 
-        user = userDao.getById(currentUserId);
+        user = (User)request.getSession().getAttribute("user");
 
         if(secondPartPhoto != null)
             user.setPath_to_photo(secondPartPhoto);

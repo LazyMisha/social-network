@@ -1,6 +1,5 @@
 package servlet;
 
-import dao.UserDao;
 import entity.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -15,8 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-
-import static servlet.LoginServlet.currentUserId;
 
 /**
  * Created by misha on 30.05.17.
@@ -47,7 +44,7 @@ public class UploadPhotoServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        user = new UserDao().getById(currentUserId);
+        user = (User)request.getSession().getAttribute("user");
 
         String photo = user.getPath_to_photo();
 
@@ -92,7 +89,7 @@ public class UploadPhotoServlet extends HttpServlet {
                         // saves the file on disk
                         item.write(storeFile);
 
-                        uploadPhoto.savePhoto(storeFile);
+                        uploadPhoto.savePhoto(storeFile, request);
 
                         request.setAttribute("message",
                                 "Photo has been uploaded successfully!");

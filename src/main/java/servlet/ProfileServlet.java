@@ -1,6 +1,5 @@
 package servlet;
 
-import dao.UserDao;
 import entity.User;
 
 import javax.servlet.ServletException;
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.Date;
-
-import static servlet.LoginServlet.currentUserId;
 
 /**
  * Created by misha on 27.05.17.
@@ -33,7 +30,7 @@ public class ProfileServlet  extends HttpServlet{
 
         request.setCharacterEncoding("UTF-8");
 
-        user = new UserDao().getById(currentUserId);
+        user = (User)request.getSession().getAttribute("user");
 
         String firstName = user.getFirstName();
         String lastName = user.getLastName();

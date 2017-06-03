@@ -15,10 +15,6 @@ import javax.servlet.http.*;
 @WebServlet(name = "LoginServlet", urlPatterns = "/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
-    public static Long currentUserId;
-
-    User user;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -35,16 +31,14 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
 
-        user = new UserDao().isRegistered(email, password);
+        User user = new UserDao().isRegistered(email, password);
 
         if(user != null){
             HttpSession hsession=request.getSession();
             hsession.setAttribute("user", user);
+            hsession.setMaxInactiveInterval(30*60);
 
-            currentUserId = user.getId();
-
-            //response.sendRedirect(request.getContextPath() + "/profile");
-            getServletContext().getRequestDispatcher("/home.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/home.jsp");
         }else
             getServletContext().getRequestDispatcher("/loginerror.html").forward(request, response);
     }

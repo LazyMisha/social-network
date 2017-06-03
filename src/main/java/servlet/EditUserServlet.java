@@ -14,7 +14,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import static servlet.LoginServlet.currentUserId;
 import util.SecurePassword;
 
 /**
@@ -41,8 +40,8 @@ public class EditUserServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        
-        user = userDao.getById(currentUserId);
+
+        user = (User)request.getSession().getAttribute("user");
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
