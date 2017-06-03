@@ -50,7 +50,7 @@ public class SearchMusicServlet extends HttpServlet {
             request.setAttribute("song","Can't find such song!");
         }
 
-        getServletContext().getRequestDispatcher("/home.jsp").forward(
+        getServletContext().getRequestDispatcher("/searchResults.jsp").forward(
                 request, response);
     }
 }

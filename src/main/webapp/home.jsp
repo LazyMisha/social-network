@@ -33,8 +33,6 @@
         <a href="uploadMusic.jsp">Upload new Music</a><br/>
         <br/>
 		<a href="sendMessage.jsp">Just Chatting</a><br/>
-        <h1>Search results:</h1>
-        ${song}
      <center/>
     </body>
 </html>
