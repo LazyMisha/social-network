@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 import static service.GetTags.*;
 
@@ -84,9 +85,11 @@ public class UploadMusicServlet extends HttpServlet {
                 for (FileItem item : formItems) {
                     // processes only fields that are not form fields
                     if (!item.isFormField()) {
-                        String fileName = new File(item.getName()).getName();
+                        String fileName = UUID.randomUUID().toString() + ".mp3";
                         String filePath = uploadPath + File.separator + fileName;
                         File storeFile = new File(filePath);
+
+                        System.out.println(storeFile.getName());
 
                         // saves the file on disk
                         item.write(storeFile);
