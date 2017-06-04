@@ -39,6 +39,8 @@ public class LoginServlet extends HttpServlet {
             hsession.setMaxInactiveInterval(30*60);
 
             response.sendRedirect(request.getContextPath() + "/home.jsp");
+
+            System.out.println("User " + user.getFirstName() + " is logged");
         }else
             getServletContext().getRequestDispatcher("/loginerror.html").forward(request, response);
     }

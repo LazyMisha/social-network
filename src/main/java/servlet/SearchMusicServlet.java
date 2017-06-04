@@ -28,6 +28,7 @@ public class SearchMusicServlet extends HttpServlet {
             throws ServletException, IOException {
         
         request.setCharacterEncoding("UTF-8");
+        response.setContentType("charset=UTF-8");
         
         musicArr=new MusicDao().searchMusic(request.getParameter("search"));
         String result="";

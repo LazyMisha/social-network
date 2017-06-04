@@ -31,6 +31,8 @@ public class LogoutServlet extends HttpServlet {
         ServletContext sc = getServletContext();
         sc.getRequestDispatcher("/index.html").forward(request, response);
 
+        System.out.println("User is logout");
+
         shutdown();
     }
 }

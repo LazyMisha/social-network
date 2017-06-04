@@ -57,6 +57,7 @@ public class EditMusicServlet extends HttpServlet {
 
             request.setAttribute("message",
                     "Information has been successfully saved!");
+            System.out.println("Music " + music.getSong_name() + " is uploaded");
 
         }catch (Exception e){
 

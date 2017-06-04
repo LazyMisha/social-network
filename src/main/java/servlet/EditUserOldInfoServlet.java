@@ -16,8 +16,6 @@ import java.io.IOException;
 @WebServlet(name="editUserOldInfoServlet", urlPatterns="/editUserOldInfoServlet")
 public class EditUserOldInfoServlet extends HttpServlet {
 
-    User user;
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -30,7 +28,7 @@ public class EditUserOldInfoServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        user = (User)request.getSession().getAttribute("user");
+        User user = (User)request.getSession().getAttribute("user");
 
         request.setAttribute("oldFirstName", user.getFirstName());
         request.setAttribute("oldLastName", user.getLastName());

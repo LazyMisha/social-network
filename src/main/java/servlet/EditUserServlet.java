@@ -23,8 +23,6 @@ import util.SecurePassword;
 @WebServlet(name="editUser", urlPatterns="/editUser")
 public class EditUserServlet extends HttpServlet {
 
-    User user = new User();
-
     UserDao userDao = new UserDao();
     
     SecurePassword secPass=new SecurePassword();
@@ -41,7 +39,7 @@ public class EditUserServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        user = (User)request.getSession().getAttribute("user");
+        User user = (User)request.getSession().getAttribute("user");
 
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
@@ -103,6 +101,8 @@ public class EditUserServlet extends HttpServlet {
 
         request.setAttribute("message",
                 "Your profile is updated");
+
+        System.out.println("User " + user.getFirstName() + " is updated");
 
         getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
             request, response);

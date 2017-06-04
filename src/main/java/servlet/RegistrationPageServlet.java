@@ -37,6 +37,7 @@ public class RegistrationPageServlet extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
+        String url = ((HttpServletRequest)request).getRequestURL().toString().replaceAll("servlet", "profile");
 
         if(pass.isEmpty()||pass.length()<6){
             request.setAttribute("message",
@@ -54,11 +55,13 @@ public class RegistrationPageServlet extends HttpServlet {
                 user.setLastName(surName);
                 user.setEmail(email);
                 userDao.save(user);
+                user.setLink(url + "?" + user.getId());
+                userDao.update(user);
 
                 request.setAttribute("message",
                         "Welcome! You are registered successfully!" +
                                 "<p><a href='index.html'>Go to Main Page For Login</a></p>");
-                System.out.println("user successfully registered");
+                System.out.println("User " + user.getFirstName() + " successfully registered");
             }else{
                 request.setAttribute("message",
                         "Password and Confirm password must be the same!" + "<br/>" +

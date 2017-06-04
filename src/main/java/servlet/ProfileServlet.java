@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.UserDao;
 import entity.User;
 
 import javax.servlet.ServletException;
@@ -21,16 +22,20 @@ public class ProfileServlet  extends HttpServlet{
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request,response);
-    }
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        String url = ((HttpServletRequest)request).getRequestURL().toString();
+        String queryString = ((HttpServletRequest)request).getQueryString();
+        System.out.println(url + queryString);
+
+        if (queryString != null) {
+            user = new UserDao().getById(Long.parseLong(queryString));
+            System.out.println("This is " + user.getFirstName() + " profile");
+        }else {
+            user = (User)request.getSession().getAttribute("user");
+            System.out.println("This is " + user.getFirstName() + " profile");
+        }
 
         request.setCharacterEncoding("UTF-8");
-
-        user = (User)request.getSession().getAttribute("user");
 
         String firstName = user.getFirstName();
         String lastName = user.getLastName();

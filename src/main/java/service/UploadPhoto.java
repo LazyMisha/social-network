@@ -5,7 +5,6 @@ import dao.UserDao;
 import entity.User;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.io.File;
 
 /**
@@ -31,6 +30,8 @@ public class UploadPhoto {
             user.setPath_to_photo(secondPartPhoto);
 
         userDao.update(user);
+
+        System.out.println("User " + user.getFirstName() + " uploaded photo");
     }
 
 }

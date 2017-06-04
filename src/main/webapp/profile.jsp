@@ -60,7 +60,7 @@ $(document).ready(function(){
         <li><a href="${pageContext.request.contextPath}/LogoutServlet"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
       </ul>
 	  <!-- Search -->
-	  <form action="SearchMusicServlet" method="post" class="navbar-form navbar-right" role="search">
+	  <form action="SearchMusicServlet" method="get" class="navbar-form navbar-right" role="search">
         <div class="form-group input-group">
           <input type="text" name="search" class="form-control" placeholder="Search for music">
           <span class="input-group-btn">
