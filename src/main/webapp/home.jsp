@@ -1,38 +1,179 @@
-<%-- 
-    Document   : home
-    Created on : 13.05.2017, 11:36:49
-    Author     : socrates
---%>
-
 <%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <title>Next page</title>
-    </head>
-    <body>
-    <center>
-        <h1>Hello!</h1>
-        <p>
-            <%
-                User u=(User)request.getSession().getAttribute("user");
-                out.write(u.getFirstName());
-            %>
-        </p>
-        <a href="${pageContext.request.contextPath}/LogoutServlet">logout</a><br/>
-        <form action="SearchMusicServlet" method="post">
-            <input type="text" name="search" value="">
-            <input type="submit" name="submit" value="SEARCH">
-        </form>
-        <br/>
-        <br/>
-        <a href="${pageContext.request.contextPath}/profile">Your profile</a>
-		<br/>
-        <a href="uploadMusic.jsp">Upload new Music</a><br/>
-        <br/>
-		<a href="sendMessage.jsp">Just Chatting</a><br/>
-     <center/>
-    </body>
+<html lang="en">
+<head>
+  <title>Yet Another Music Social Network</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/newstyle.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="#">YAMSN</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+        <li><a href="home.jsp">Home</a></li>
+        <li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account
+			<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="${pageContext.request.contextPath}/profile">Your Profile</a></li>
+				<li><a href="${pageContext.request.contextPath}/editUserOldInfoServlet">Edit your Profile</a></li>
+				<li><a href="uploadPhoto.jsp">Update your Userpic</a></li>
+			</ul>
+		</li>
+        <li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-music"></span> Music
+			<span class="caret"></span></a>
+			<ul class="dropdown-menu">
+				<li><a href="#">Your Music</a></li>
+				<li><a href="uploadMusic.jsp">Upload new</a></li>
+				<li><a href="#">Manage Playlists</a></li>
+			</ul>
+		</li>
+        <li><a href="sendMessage.jsp"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="${pageContext.request.contextPath}/LogoutServlet"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+      </ul>
+	  <!-- Search -->
+	  <form action="SearchMusicServlet" method="get" class="navbar-form navbar-right" role="search">
+        <div class="form-group input-group">
+          <input type="text" name="search" class="form-control" placeholder="Search for music">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="glyphicon glyphicon-search"></span>
+            </button>
+          </span>        
+        </div>
+      </form>
+	  <!-- Search end -->
+    </div>
+  </div>
+</nav>
+  
+<div class="container-fluid text-center" style="margin-top:50px">    
+  <div class="row content">
+    <div class="col-sm-3 sidenav-left">
+			<div class="profile-sidebar">
+				<!-- SIDEBAR Userpic -->
+				<div class="profile-userpic">
+					<a href="uploadPhoto.jsp"><img src="<%User photo=(User)request.getSession().getAttribute("user");out.write(photo.getPath_to_photo());%>" class="img-responsive" alt=""></a>
+				</div>
+				<!-- SIDEBAR Userpic End -->
+				<!-- SIDEBAR User title-->
+				<div class="profile-usertitle">
+					<div class="profile-usertitle-name bg-primary">
+						<%User name=(User)request.getSession().getAttribute("user");out.write(name.getFirstName());%>  
+						<%User surname=(User)request.getSession().getAttribute("user");out.write(surname.getLastName());%>
+					</div>
+					<div class="profile-usertitle-place">
+						<%User city=(User)request.getSession().getAttribute("user");out.write(city.getCity());%>, 
+						<%User country=(User)request.getSession().getAttribute("user");out.write(country.getCountry());%>
+					</div>
+				</div>
+				<!-- SIDEBAR User title End -->
+				<!-- SIDEBAR Menu -->
+				<div class="profile-usermenu">
+					<ul class="nav">
+						<li class="active">
+							<a href="home.jsp">
+							<i class="glyphicon glyphicon-home"></i>
+							Home </a>
+						</li>
+						<li>
+							<a href="${pageContext.request.contextPath}/profile">
+							<i class="glyphicon glyphicon-user"></i>
+							My Account </a>
+						</li>
+						<li>
+							<a href="#">
+							<i class="glyphicon glyphicon-music"></i>
+							Music </a>
+						</li>
+						<li>
+							<a href="sendMessage.jsp">
+							<i class="glyphicon glyphicon-envelope"></i>
+							Messages </a>
+						</li>
+					</ul>
+				</div>
+				<!-- SIDEBAR Menu End -->
+			</div>
+    </div>
+	
+    <div class="col-sm-7 text-left maincontent"> 
+	<!-- Main content goes here -->
+      <h2>Welcome, <strong><%User name2=(User)request.getSession().getAttribute("user");out.write(name2.getFirstName());%> <%User surname2=(User)request.getSession().getAttribute("user");out.write(surname2.getLastName());%></strong>!</h2>
+			<div class="songname">Papa Roach - My Medication</div>
+			<div class="musictrack"><audio controls><source src="upload/Papa Roach - My Medication.mp3"></audio></div>
+			<div class="songname">Shakira - Amarillo</div>
+			<div class="musictrack"><audio controls><source src="upload/Shakira - Amarillo.mp3"></audio></div>
+			<div>
+			</div>
+	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+	  <!-- Main content end -->
+    </div>
+	
+	<div class="col-sm-2 sidenav-right">
+		<!-- Right widget panel -->
+		
+			<!-- FIRST widget -->
+	    <div class="widget">
+            <div class="widget-heading clearfix bg-primary">
+                <div>Music quota</div>
+            </div>
+            <div class="widget-body clearfix">
+                <div class="pull-left">
+                   <span class="glyphicon glyphicon-headphones"></span>
+                </div>
+                <div class="pull-right number">0 of 100Mb</div>
+            </div>
+		</div>
+		
+		<!-- Right widget panel end -->
+    </div>
+
+
+  </div>
+</div>
+
+<footer>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-6">
+				<div class="footerlinks">
+					<a href="">Privacy Policy</a> | <a href="">Terms of Use</a>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="copyright">
+					Copyright © Yet Another Music Social Network
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+
+</body>
 </html>

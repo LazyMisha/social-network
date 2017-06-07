@@ -1,9 +1,3 @@
-<%-- 
-    Document   : profile
-    Created on : 12.05.2017, 17:41:22
-    Author     : socrates
---%>
-
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +37,7 @@ $(document).ready(function(){
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/profile">Your Profile</a></li>
 				<li><a href="${pageContext.request.contextPath}/editUserOldInfoServlet">Edit your Profile</a></li>
+				<li><a href="uploadPhoto.jsp">Update your Userpic</a></li>
 			</ul>
 		</li>
         <li class="dropdown">
@@ -81,7 +76,7 @@ $(document).ready(function(){
 			<div class="profile-sidebar">
 				<!-- SIDEBAR Userpic -->
 				<div class="profile-userpic">
-					<img src="${pathToPhoto}" class="img-responsive" alt="">
+					<a href="uploadPhoto.jsp"><img src="${pathToPhoto}" class="img-responsive" alt="Upload new userpic"></a>
 				</div>
 				<!-- SIDEBAR Userpic End -->
 				<!-- SIDEBAR User title-->
@@ -125,7 +120,7 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Welcome,<strong> ${name} ${lastName}</strong>!</h2>
+      <h2>View and change your profile!</h2>
       
 				<div class="panel panel-info">
 					<div class="panel-heading">
@@ -169,11 +164,17 @@ $(document).ready(function(){
 						</tbody>
 						</table>
 					</div>
-						<div class="panel-footer">
+						<!-- <div class="panel-footer">
 							<div align="right">
                             <a href="${pageContext.request.contextPath}/editUserOldInfoServlet" data-original-title="Edit Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
 							</div>
-						</div>
+						</div> -->
+						<div class="panel-footer">
+                        <a href="uploadPhoto.jsp" data-original-title="Change Userpic" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-picture"></i></a>
+                        <span class="pull-right">
+                            <a href="${pageContext.request.contextPath}/editUserOldInfoServlet" data-original-title="Edit Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+                        </span>
+                    </div>
 				</div>
 	  <!-- Main content end -->
     </div>
@@ -202,6 +203,7 @@ $(document).ready(function(){
 </div>
 
 <footer>
+	<div class="container-fluid">
 		<div class="row">
 			<div class="col-sm-6">
 				<div class="footerlinks">
@@ -214,6 +216,7 @@ $(document).ready(function(){
 				</div>
 			</div>
 		</div>
+	</div>
 </footer>
 
 </body>
