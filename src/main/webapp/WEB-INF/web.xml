@@ -4,10 +4,6 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
-
-
-
-
     <servlet>
         <description/>
         <display-name>editUserOldInfoServlet</display-name>
@@ -40,12 +36,6 @@
     </servlet>
     <servlet>
         <description/>
-        <display-name>SendMessageServlet</display-name>
-        <servlet-name>SendMessageServlet</servlet-name>
-        <servlet-class>servlet.SendMessageServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <description/>
         <display-name>SearchMusicServlet</display-name>
         <servlet-name>SearchMusicServlet</servlet-name>
         <servlet-class>servlet.SearchMusicServlet</servlet-class>
@@ -74,10 +64,6 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
-
-
-
-
     <servlet-mapping>
         <servlet-name>editUserOldInfoServlet</servlet-name>
         <url-pattern>/editUserOldInfoServlet</url-pattern>
@@ -97,10 +83,6 @@
     <servlet-mapping>
         <servlet-name>editUser</servlet-name>
         <url-pattern>/editUser</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>SendMessageServlet</servlet-name>
-        <url-pattern>/SendMessageServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchMusicServlet</servlet-name>
