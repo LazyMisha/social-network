@@ -1,5 +1,25 @@
 @import url('https://fonts.googleapis.com/css?family=Condiment');
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 50px;
+  background-color: #f1f1f1;
+}
+
+footer {
+    background-color: #222;
+    color: #fff;
+    border-color: #080808;
+	padding: 15px 30px 15px 30px;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 50px;
+}
+
 .navbar {
      margin-bottom: 0;
      border-radius: 0;
@@ -8,11 +28,11 @@
 .row.content {
 	height: 100%;
 	min-height: 500px;
-	background-color: #f1f1f1;
 }
 
 .maincontent {
 	background-color: #fff;
+	min-height: 300px;
 }
 
 .sidenav-left {
@@ -29,14 +49,7 @@
 	padding-right: 20px;
 	font-size: 28px;
 }
-    
-footer {
-    background-color: #222;
-    color: #fff;
-    border-color: #080808;
-	padding: 15px 30px 15px 30px;
-}
-    
+ 
 @media screen and (max-width: 767px) {
 .sidenav {
      height: auto;
@@ -57,6 +70,12 @@ footer {
   margin: 0 auto;
   width: 25%;
   height: 25%;
+}
+
+.profile-userpic-content img {
+  float: left;
+  width: 10%;
+  height: 10%;
 }
 
 .profile-usertitle {
@@ -170,3 +189,57 @@ footer {
     border-top: 0;
 }
 /* Table for profile info END*/
+
+/* Image/music upload form styles */
+.form-control, .thumbnail {
+    border-radius: 2px;
+}
+.btn-info {
+    background-color: #5b9bd1;
+}
+.fileUpload {
+    position: relative;
+    overflow: hidden;
+}
+.fileUpload #logo-id {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 23px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+.img-preview {
+    max-width: 20%;
+	float: none;
+	margin: 0 auto;
+}
+.help-block {
+	font-size: 12px;
+}
+.upload-submit {
+	padding-left: 45%;
+	margin-bottom: 10px;
+}
+.upload-message {
+	font-size: 21px;
+	font-weight: bold;
+	text-align: center;
+	font-style: italic;
+	background-color: #fcf8e3;
+}
+.musicupload {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    font-size: 23px;
+    cursor: pointer;
+    opacity: 0;
+    filter: alpha(opacity=0);
+}
+/* Upload form styles END */
