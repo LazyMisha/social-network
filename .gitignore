@@ -21,3 +21,5 @@ nb-configuration.xml
 #uploaded music
 /src/main/webapp/upload/
 
+#uploaded photos
+/src/main/webapp/photo/
