@@ -30,6 +30,14 @@ public class EditUserOldInfoServlet extends HttpServlet {
 
         User user = (User)request.getSession().getAttribute("user");
 
+        String photo = user.getPath_to_photo();
+
+        if(photo == null){
+            request.setAttribute("photo", "photo/default.jpg");
+        }else {
+            request.setAttribute("photo", photo);
+        }
+
         request.setAttribute("oldFirstName", user.getFirstName());
         request.setAttribute("oldLastName", user.getLastName());
         request.setAttribute("oldEmail", user.getEmail());

@@ -4,6 +4,28 @@
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
+
+
+
+
+    <servlet>
+        <description/>
+        <display-name>uploadMusicPage</display-name>
+        <servlet-name>uploadMusicPage</servlet-name>
+        <servlet-class>servlet.UploadMusicPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
+        <display-name>photoPage</display-name>
+        <servlet-name>photoPage</servlet-name>
+        <servlet-class>servlet.photoPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
+        <display-name>homePage</display-name>
+        <servlet-name>homePage</servlet-name>
+        <servlet-class>servlet.HomePageServlet</servlet-class>
+    </servlet>
     <servlet>
         <description/>
         <display-name>editUserOldInfoServlet</display-name>
@@ -64,6 +86,22 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
+
+
+
+
+    <servlet-mapping>
+        <servlet-name>uploadMusicPage</servlet-name>
+        <url-pattern>/uploadMusicPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>photoPage</servlet-name>
+        <url-pattern>/photoPage</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homePage</servlet-name>
+        <url-pattern>/homePage</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>editUserOldInfoServlet</servlet-name>
         <url-pattern>/editUserOldInfoServlet</url-pattern>

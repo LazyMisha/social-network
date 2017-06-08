@@ -1,6 +1,5 @@
 package servlet;
 
-import entity.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
@@ -24,8 +23,6 @@ public class UploadPhotoServlet extends HttpServlet {
 
     UploadPhoto uploadPhoto = new UploadPhoto();
 
-    User user = new User();
-
     private static final String UPLOAD_DIRECTORY = "photo";
 
     private static final int MEMORY_THRESHOLD = 1024 * 1024 * 3; 	// 3MB
@@ -43,16 +40,6 @@ public class UploadPhotoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-
-        user = (User)request.getSession().getAttribute("user");
-
-        String photo = user.getPath_to_photo();
-
-        if(photo == null){
-            request.setAttribute("pathToPhoto", "photo/default.jpg");
-        }else {
-            request.setAttribute("pathToPhoto", photo);
-        }
 
         // configures upload settings
         DiskFileItemFactory factory = new DiskFileItemFactory();

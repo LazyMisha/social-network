@@ -60,6 +60,7 @@ public class UserDao {
             session.getTransaction().rollback();
             System.out.println(e.getMessage());
         }finally {
+            session.refresh(user);
             session.clear();
         }
     }

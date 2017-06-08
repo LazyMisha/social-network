@@ -41,6 +41,50 @@ public class EditUserServlet extends HttpServlet {
 
         User user = (User)request.getSession().getAttribute("user");
 
+        String firstNameMain = user.getFirstName();
+        String lastNameMain = user.getLastName();
+        String cityMain = user.getCity();
+        String countryMain = user.getCountry();
+        String photoMain = user.getPath_to_photo();
+
+        if(photoMain == null){
+            request.setAttribute("photo", "photo/default.jpg");
+        }else {
+            request.setAttribute("photo", photoMain);
+        }
+
+        if(firstNameMain == null || firstNameMain.isEmpty()){
+            request.setAttribute("name",
+                    "no information");
+        }else {
+            request.setAttribute("name",
+                    firstNameMain);
+        }
+
+        if(lastNameMain == null || lastNameMain.isEmpty()){
+            request.setAttribute("lastName",
+                    "no information");
+        }else{
+            request.setAttribute("lastName",
+                    lastNameMain);
+        }
+
+        if(countryMain == null || countryMain.isEmpty()){
+            request.setAttribute("country",
+                    "no information");
+        }else {
+            request.setAttribute("country",
+                    countryMain);
+        }
+
+        if(cityMain == null || cityMain.isEmpty()){
+            request.setAttribute("city",
+                    "no information");
+        }else{
+            request.setAttribute("city",
+                    cityMain);
+        }
+
         String firstName = request.getParameter("firstName");
         String lastName = request.getParameter("lastName");
         String birthDay = request.getParameter("birth-day");

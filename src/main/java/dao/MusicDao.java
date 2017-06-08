@@ -3,6 +3,7 @@ package dao;
 import entity.Music;
 import java.util.*;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 /**
@@ -39,4 +40,5 @@ public class MusicDao {
         }
         return musicArr;
     }
+
 }

@@ -19,13 +19,13 @@ public class User_songs {
     @Column(name = "id", unique = true)
     private Long id;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "user_id")
-    private User user_id;
+    private User user;
 
-    @OneToMany
+    @OneToOne
     @JoinColumn(name = "music_id")
-    private Set<Music> music_id = new HashSet<>();
+    private Music music;
 
     public User_songs() {
     }
@@ -38,19 +38,19 @@ public class User_songs {
         this.id = id;
     }
 
-    public User getUser_id() {
-        return user_id;
+    public User getUser() {
+        return user;
     }
 
-    public void setUser_id(User user_id) {
-        this.user_id = user_id;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public Set<Music> getMusic_id() {
-        return music_id;
+    public Music getMusic() {
+        return music;
     }
 
-    public void setMusic_id(Set<Music> music_id) {
-        this.music_id = music_id;
+    public void setMusic(Music music) {
+        this.music = music;
     }
 }

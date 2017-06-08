@@ -31,14 +31,14 @@ $(document).ready(function(){
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="home.jsp">Home</a></li>
+        <li><a href="${pageContext.request.contextPath}/homePage">Home</a></li>
         <li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account
 			<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/profile">Your Profile</a></li>
 				<li><a href="${pageContext.request.contextPath}/editUserOldInfoServlet">Edit your Profile</a></li>
-				<li><a href="uploadPhoto.jsp">Update your Userpic</a></li>
+				<li><a href="${pageContext.request.contextPath}/photoPage">Update your Userpic</a></li>
 			</ul>
 		</li>
         <li class="dropdown">
@@ -46,7 +46,7 @@ $(document).ready(function(){
 			<span class="caret"></span></a>
 			<ul class="dropdown-menu">
 				<li><a href="#">Your Music</a></li>
-				<li><a href="uploadMusic.jsp">Upload new</a></li>
+				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
 				<li><a href="#">Manage Playlists</a></li>
 			</ul>
 		</li>
@@ -77,18 +77,18 @@ $(document).ready(function(){
 			<div class="profile-sidebar">
 				<!-- SIDEBAR Userpic -->
 				<div class="profile-userpic">
-					<a href="uploadPhoto.jsp"><img src="<%User photo=(User)request.getSession().getAttribute("user");out.write(photo.getPath_to_photo());%>" class="img-responsive" alt=""></a>
+					<a href="${pageContext.request.contextPath}/photoPage"><img src="${photo}" class="img-responsive" alt=""></a>
 				</div>
 				<!-- SIDEBAR Userpic End -->
 				<!-- SIDEBAR User title-->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name bg-primary">
-						<%User name=(User)request.getSession().getAttribute("user");out.write(name.getFirstName());%>  
-						<%User surname=(User)request.getSession().getAttribute("user");out.write(surname.getLastName());%>
+						${name}
+						${lastName}
 					</div>
 					<div class="profile-usertitle-place">
-						<%User city=(User)request.getSession().getAttribute("user");out.write(city.getCity());%>, 
-						<%User country=(User)request.getSession().getAttribute("user");out.write(country.getCountry());%>
+						${city}
+						${country}
 					</div>
 				</div>
 				<!-- SIDEBAR User title End -->
@@ -96,7 +96,7 @@ $(document).ready(function(){
 				<div class="profile-usermenu">
 					<ul class="nav">
 						<li class="active">
-							<a href="home.jsp">
+							<a href="${pageContext.request.contextPath}/homePage">
 							<i class="glyphicon glyphicon-home"></i>
 							Home </a>
 						</li>

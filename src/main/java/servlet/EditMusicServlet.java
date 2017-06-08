@@ -1,7 +1,10 @@
 package servlet;
 
 import dao.MusicDao;
+import dao.UserSongsDao;
 import entity.Music;
+import entity.User;
+import entity.User_songs;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,6 +24,8 @@ public class EditMusicServlet extends HttpServlet {
 
     Music music = new Music();
     MusicDao musicDao = new MusicDao();
+    User_songs userSongs = new User_songs();
+    UserSongsDao userSongsDao = new UserSongsDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,6 +38,52 @@ public class EditMusicServlet extends HttpServlet {
             throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
+
+        User user = (User)request.getSession().getAttribute("user");
+
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        String city = user.getCity();
+        String country = user.getCountry();
+        String photo = user.getPath_to_photo();
+
+        if(photo == null){
+            request.setAttribute("photo", "photo/default.jpg");
+        }else {
+            request.setAttribute("photo", photo);
+        }
+
+        if(firstName == null || firstName.isEmpty()){
+            request.setAttribute("name",
+                    "no information");
+        }else {
+            request.setAttribute("name",
+                    firstName);
+        }
+
+        if(lastName == null || lastName.isEmpty()){
+            request.setAttribute("lastName",
+                    "no information");
+        }else{
+            request.setAttribute("lastName",
+                    lastName);
+        }
+
+        if(country == null || country.isEmpty()){
+            request.setAttribute("country",
+                    "no information");
+        }else {
+            request.setAttribute("country",
+                    country);
+        }
+
+        if(city == null || city.isEmpty()){
+            request.setAttribute("city",
+                    "no information");
+        }else{
+            request.setAttribute("city",
+                    city);
+        }
 
         try {
             songName = request.getParameter("songName");
@@ -54,6 +105,10 @@ public class EditMusicServlet extends HttpServlet {
             music.setSize(fileSizeInMB);
 
             musicDao.save(music);
+
+            userSongs.setMusic(music);
+            userSongs.setUser(user);
+            userSongsDao.save(userSongs);
 
             request.setAttribute("message",
                     "Information has been successfully saved!");

@@ -39,13 +39,13 @@ public class ProfileServlet  extends HttpServlet{
 
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
-        String email = user.getEmail();
         String city = user.getCity();
-        Date birthDay = user.getBirthday();
         String country = user.getCountry();
+        String photo = user.getPath_to_photo();
+        String email = user.getEmail();
         String userInfo = user.getUser_info();
         String userLink = user.getLink();
-        String photo = user.getPath_to_photo();
+        Date birthDay = user.getBirthday();
 
         if(photo == null){
             request.setAttribute("pathToPhoto", "photo/default.jpg");
