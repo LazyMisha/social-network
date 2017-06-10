@@ -27,11 +27,10 @@ $(document).ready(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">YAMSN</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/homePage">YAMSN</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="${pageContext.request.contextPath}/homePage">Home</a></li>
         <li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account
 			<span class="caret"></span></a>
@@ -50,6 +49,7 @@ $(document).ready(function(){
 				<li><a href="#">Manage Playlists</a></li>
 			</ul>
 		</li>
+		<li><a href="users.jsp"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
         <li><a href="sendMessage.jsp"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -83,12 +83,10 @@ $(document).ready(function(){
 				<!-- SIDEBAR User title-->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name bg-primary">
-						${name}
-						${lastName}
+						${name} ${lastName}
 					</div>
 					<div class="profile-usertitle-place">
-						${city}
-						${country}
+						${city}, ${country}
 					</div>
 				</div>
 				<!-- SIDEBAR User title End -->
@@ -111,6 +109,11 @@ $(document).ready(function(){
 							Music </a>
 						</li>
 						<li>
+							<a href="users.jsp">
+							<i class="glyphicon glyphicon-globe"></i>
+							Users </a>
+						</li>
+						<li>
 							<a href="sendMessage.jsp">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
@@ -123,7 +126,7 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Welcome, <strong><%User name2=(User)request.getSession().getAttribute("user");out.write(name2.getFirstName());%> <%User surname2=(User)request.getSession().getAttribute("user");out.write(surname2.getLastName());%></strong>!</h2>
+      <h2>Welcome, <strong>${name} ${lastName}</strong>!</h2>
 			<div class="songname">Papa Roach - My Medication</div>
 			<div class="musictrack"><audio controls><source src="upload/Papa Roach - My Medication.mp3"></audio></div>
 			<div class="songname">Shakira - Amarillo</div>

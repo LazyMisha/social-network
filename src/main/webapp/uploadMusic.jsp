@@ -28,11 +28,10 @@ $(document).ready(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#">YAMSN</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/homePage">YAMSN</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li><a href="${pageContext.request.contextPath}/homePage">Home</a></li>
         <li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-user"></span> My Account
 			<span class="caret"></span></a>
@@ -51,6 +50,7 @@ $(document).ready(function(){
 				<li><a href="#">Manage Playlists</a></li>
 			</ul>
 		</li>
+		<li><a href="users.jsp"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
         <li><a href="sendMessage.jsp"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -84,12 +84,10 @@ $(document).ready(function(){
 				<!-- SIDEBAR User title-->
 				<div class="profile-usertitle">
 					<div class="profile-usertitle-name bg-primary">
-						${name}
-						${lastName}
+						${name} ${lastName}
 					</div>
 					<div class="profile-usertitle-place">
-						${city}
-						${country}
+						${city}, ${country}
 					</div>
 				</div>
 				<!-- SIDEBAR User title End -->
@@ -112,6 +110,11 @@ $(document).ready(function(){
 							Music </a>
 						</li>
 						<li>
+							<a href="users.jsp">
+							<i class="glyphicon glyphicon-globe"></i>
+							Users </a>
+						</li>
+						<li>
 							<a href="sendMessage.jsp">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
@@ -124,7 +127,7 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Update new Music</h2>
+      <h2>Upload new Music</h2>
 	  <form action="uploadFile" method="post" enctype="multipart/form-data">
 	  <div class="form-group">
               <div class="input-group">

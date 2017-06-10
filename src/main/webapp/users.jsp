@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="css/newstyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/imageupload.js"></script>
+  <script src="js/pagesearch.js"></script>
 </head>
 <body>
 
@@ -28,7 +28,7 @@ $(document).ready(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-            <a class="navbar-brand" href="${pageContext.request.contextPath}/homePage">YAMSN</a>
+      <a class="navbar-brand" href="${pageContext.request.contextPath}/homePage">YAMSN</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -99,7 +99,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-home"></i>
 							Home </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="${pageContext.request.contextPath}/profile">
 							<i class="glyphicon glyphicon-user"></i>
 							My Account </a>
@@ -109,7 +109,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-music"></i>
 							Music </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="users.jsp">
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
@@ -127,28 +127,120 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Update your Userpic</h2>
-	  <form action="uploadPhoto" method="post" enctype="multipart/form-data">
-	  <div class="form-group">
-			<div>
-                <img class="thumbnail img-preview" src="${photo}" title="Userpic Preview">
-             </div>
-              <div class="input-group">
-                <input id="UploadUserpic" class="form-control" placeholder="Choose New Userpic" disabled="disabled">
-                <div class="input-group-btn">
-                  <div class="fileUpload btn btn-info">
-                    <span><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Browse</span>
-                    <input id="logo-id" name="photo" type="file" class="attachment_upload">
-                  </div>
-                </div>
-              </div>
-			  <div class="help-block">* Please choose <mark>jpg</mark>, <mark>png</mark> or <mark>gif</mark> file.</div>
-			  <div class="upload-submit"><input type="submit" name="submit" class="btn btn-primary" value="Upload"></div>
-			  <div class="upload-message">${message}</div>
+      <h2>Meet other Users!</h2>
+	  
+	<!-- ROW 1 with 3 columns (1 for each friend) -->
+	<div class="searchable-container">
+	<div class="row container-fluid gutterless">
+	
+		<div class="col-sm-12" style="margin-bottom:20px;">
+            <input type="search" class="form-control" id="input-search" placeholder="Search for User..." >
+        </div>
+	
+	<!-- Column 1 for Friend 1 -->
+	    <div class="items col-md-4">
+		<div class="media">
+            <a class="pull-left" href="userProfile.jsp">
+                <img class="media-object dp img-circle" src="photo/default.jpg">
+            </a>
+            <div class="media-body">
+                <h5><a href="userProfile.jsp">Vasya Black</a></h5>
+				<h6>City, Country</h6>
+                <hr class="hruserpage">
+                <div>
+					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
+                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
+				</div>
             </div>
-		</form>
-			
+        </div>
+		</div>
 
+		<!-- Column 2 for Friend 2 -->
+		<div class="items col-md-4">
+		<div class="media">
+            <a class="pull-left" href="userProfile.jsp">
+                <img class="media-object dp img-circle" src="photo/default.jpg">
+            </a>
+            <div class="media-body">
+                <h5><a href="userProfile.jsp">Fedya Green</a></h5>
+				<h6>City, Country</h6>
+                <hr class="hruserpage">
+                <div>
+					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
+                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm	 btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
+				</div>
+            </div>
+        </div>
+		</div>
+
+		<!-- Column 3 for Friend 3 -->
+		<div class="items col-md-4">
+		<div class="media">
+            <a class="pull-left" href="userProfile.jsp">
+                <img class="media-object dp img-circle" src="photo/default.jpg">
+            </a>
+            <div class="media-body">
+                <h5><a href="userProfile.jsp">Petya Yellow</a></h5>
+				<h6>City, Country</h6>
+                <hr class="hruserpage">
+                <div>
+					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
+                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
+				</div>
+            </div>
+        </div>
+		</div>
+	<!-- ROW 1 END -->
+	
+	<!-- ROW 2 with 3 columns (1 for each friend) -->
+	<div class="row container-fluid gutterless">
+	
+	<!-- Column 1 for Friend 1 -->
+	    <div class="items col-md-4">
+		<div class="media">
+            <a class="pull-left" href="userProfile.jsp">
+                <img class="media-object dp img-circle" src="photo/default.jpg">
+            </a>
+            <div class="media-body">
+                <h5><a href="userProfile.jsp">Grisha Kopernik</a></h5>
+				<h6>City, Country</h6>
+                <hr class="hruserpage">
+                <div>
+					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
+                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
+				</div>
+            </div>
+        </div>
+		</div>
+
+		<!-- Column 2 for Friend 2 -->
+		<div class="items col-md-4">
+		<div class="media">
+            <a class="pull-left" href="userProfile.jsp">
+                <img class="media-object dp img-circle" src="photo/default.jpg">
+            </a>
+            <div class="media-body">
+                <h5><a href="userProfile.jsp">Sveta Krasivaya</a></h5>
+				<h6>City, Country</h6>
+				<hr class="hruserpage">
+                <div>
+					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
+                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
+				</div>
+            </div>
+        </div>
+		</div>
+
+		<!-- Column 3 for Friend 3 -->
+		<div class="items col-md-4">
+			<!-- empty column -->
+		</div>
+		
+	</div>
+	<!-- ROW 2 END -->
+	</div>
+	</div>
+	
 	  <!-- Main content end -->
     </div>
 	

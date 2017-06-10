@@ -10,7 +10,6 @@
   <link rel="stylesheet" href="css/newstyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/imageupload.js"></script>
 </head>
 <body>
 
@@ -78,7 +77,7 @@ $(document).ready(function(){
 			<div class="profile-sidebar">
 				<!-- SIDEBAR Userpic -->
 				<div class="profile-userpic">
-					<a href="${pageContext.request.contextPath}/photoPage"><img src="${photo}" class="img-responsive" alt=""></a>
+					<a href="${pageContext.request.contextPath}/photoPage"><img src="${pathToPhoto}" class="img-responsive" alt="Upload new userpic"></a>
 				</div>
 				<!-- SIDEBAR Userpic End -->
 				<!-- SIDEBAR User title-->
@@ -99,7 +98,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-home"></i>
 							Home </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="${pageContext.request.contextPath}/profile">
 							<i class="glyphicon glyphicon-user"></i>
 							My Account </a>
@@ -109,7 +108,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-music"></i>
 							Music </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="users.jsp">
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
@@ -127,28 +126,65 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Update your Userpic</h2>
-	  <form action="uploadPhoto" method="post" enctype="multipart/form-data">
-	  <div class="form-group">
-			<div>
-                <img class="thumbnail img-preview" src="${photo}" title="Userpic Preview">
-             </div>
-              <div class="input-group">
-                <input id="UploadUserpic" class="form-control" placeholder="Choose New Userpic" disabled="disabled">
-                <div class="input-group-btn">
-                  <div class="fileUpload btn btn-info">
-                    <span><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Browse</span>
-                    <input id="logo-id" name="photo" type="file" class="attachment_upload">
-                  </div>
-                </div>
-              </div>
-			  <div class="help-block">* Please choose <mark>jpg</mark>, <mark>png</mark> or <mark>gif</mark> file.</div>
-			  <div class="upload-submit"><input type="submit" name="submit" class="btn btn-primary" value="Upload"></div>
-			  <div class="upload-message">${message}</div>
-            </div>
-		</form>
-			
-
+            
+				<div class="panel panel-info" style="margin-top:20px;">
+					<div class="panel-heading">
+						<h3 class="panel-title" style="text-align:center;"><a href="{USER'S LINK}">{USER'S NAME} {USER'S SURNAME}</a></h3>
+					</div>
+					<div class="panel-body">
+						<table class="table table-user-information">
+						<tbody>
+						  <tr>
+							<td align="center" colspan="2">
+							<div><img src="photo/default.jpg" class="friendspic"></div>
+							<div><a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i>  Send a Message</a>
+                            <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i>  Explore Music</a>
+							</div>
+							</td>
+						  </tr>
+						  
+						  <tr>
+							<td>Name:</td>
+							<td>{USER'S NAME}</td>
+						  </tr>
+						  <tr>
+							<td>Surname:</td>
+							<td>{USER'S SURNAME}</td>
+						  </tr>
+						  <tr>
+							<td>Date of Birth:</td>
+							<td>{USER'S BIRTHDAY}</td>
+						  </tr>
+							<tr>
+							<td>Country:</td>
+							<td>{USER'S COUNTRY}</td>
+						    </tr>
+							<tr>
+							<td>City:</td>
+							<td>{USER'S CITY}</td>
+						    </tr>
+						    <tr>
+							<td>Email:</td>
+							<td><a href="mailto:{USER'S EMAIL}">{USER'S EMAIL}</a></td>
+							</tr>
+							<tr>
+							<td>Additional info:</td>
+							<td>{USER'S USER INFO} {USER'S USER INFO} </td>
+							</tr>
+							<tr>
+							<td>Permalink for your profile-page:</td>
+							<td><a href="{USER'S LINK}">{USER'S LINK}</a></td>
+							</tr>
+						</tbody>
+						</table>
+					</div>
+						<!-- <div class="panel-footer">
+							<div align="right">
+                            <a href="${pageContext.request.contextPath}/editUserOldInfoServlet" data-original-title="Edit Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
+							</div>
+						</div> -->
+						<div class="panel-footer"></div>
+				</div>
 	  <!-- Main content end -->
     </div>
 	
