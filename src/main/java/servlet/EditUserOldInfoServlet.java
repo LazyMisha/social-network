@@ -37,12 +37,16 @@ public class EditUserOldInfoServlet extends HttpServlet {
         String lastName = user.getLastName();
         String city = user.getCity();
         String country = user.getCountry();
-        String musicSize = userDao.getMusicsSize(user);
-
-        if(musicSize == null){
+        try {
+            String musicSize = userDao.getMusicsSize(user);
+            if(musicSize == null || musicSize.isEmpty()){
+                request.setAttribute("count", "0");
+            }else {
+                request.setAttribute("count", musicSize);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
             request.setAttribute("count", "0");
-        }else {
-            request.setAttribute("count", musicSize);
         }
 
         if(photo == null){

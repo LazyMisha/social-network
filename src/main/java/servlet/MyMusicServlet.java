@@ -44,12 +44,16 @@ public class MyMusicServlet extends HttpServlet {
         String city = user.getCity();
         String country = user.getCountry();
         String photo = user.getPath_to_photo();
-        String musicSize = userDao.getMusicsSize(user);
-
-        if(musicSize == null){
+        try {
+            String musicSize = userDao.getMusicsSize(user);
+            if(musicSize == null || musicSize.isEmpty()){
+                request.setAttribute("count", "0");
+            }else {
+                request.setAttribute("count", musicSize);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
             request.setAttribute("count", "0");
-        }else {
-            request.setAttribute("count", musicSize);
         }
 
         if(photo == null){

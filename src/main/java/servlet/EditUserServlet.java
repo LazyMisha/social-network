@@ -46,12 +46,16 @@ public class EditUserServlet extends HttpServlet {
         String cityMain = user.getCity();
         String countryMain = user.getCountry();
         String photoMain = user.getPath_to_photo();
-        String musicSize = userDao.getMusicsSize(user);
-
-        if(musicSize == null){
+        try {
+            String musicSize = userDao.getMusicsSize(user);
+            if(musicSize == null || musicSize.isEmpty()){
+                request.setAttribute("count", "0");
+            }else {
+                request.setAttribute("count", musicSize);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
             request.setAttribute("count", "0");
-        }else {
-            request.setAttribute("count", musicSize);
         }
 
         if(photoMain == null){
