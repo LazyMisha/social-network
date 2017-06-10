@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.UserDao;
 import entity.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -52,12 +53,20 @@ public class UploadMusicServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         User user = (User) request.getSession().getAttribute("user");
+        UserDao userDao = new UserDao();
 
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
         String city = user.getCity();
         String country = user.getCountry();
         String photo = user.getPath_to_photo();
+        String musicSize = userDao.getMusicsSize(user);
+
+        if(musicSize == null){
+            request.setAttribute("count", "0");
+        }else {
+            request.setAttribute("count", musicSize);
+        }
 
         if(photo == null){
             request.setAttribute("photo", "photo/default.jpg");

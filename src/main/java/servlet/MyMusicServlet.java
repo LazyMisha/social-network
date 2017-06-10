@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.UserDao;
 import dao.UserSongsDao;
 import entity.Music;
 import entity.User;
@@ -36,7 +37,60 @@ public class MyMusicServlet extends HttpServlet {
         response.setContentType("charset=UTF-8");
 
         User user = (User) request.getSession().getAttribute("user");
-        ArrayList<Music> music = new UserSongsDao().getByUserId(user.getId());
+        UserDao userDao = new UserDao();
+
+        String firstName = user.getFirstName();
+        String lastName = user.getLastName();
+        String city = user.getCity();
+        String country = user.getCountry();
+        String photo = user.getPath_to_photo();
+        String musicSize = userDao.getMusicsSize(user);
+
+        if(musicSize == null){
+            request.setAttribute("count", "0");
+        }else {
+            request.setAttribute("count", musicSize);
+        }
+
+        if(photo == null){
+            request.setAttribute("photo", "photo/default.jpg");
+        }else {
+            request.setAttribute("photo", photo);
+        }
+
+        if(firstName == null || firstName.isEmpty()){
+            request.setAttribute("name",
+                    "no information");
+        }else {
+            request.setAttribute("name",
+                    firstName);
+        }
+
+        if(lastName == null || lastName.isEmpty()){
+            request.setAttribute("lastName",
+                    "no information");
+        }else{
+            request.setAttribute("lastName",
+                    lastName);
+        }
+
+        if(country == null || country.isEmpty()){
+            request.setAttribute("country",
+                    "no information");
+        }else {
+            request.setAttribute("country",
+                    country);
+        }
+
+        if(city == null || city.isEmpty()){
+            request.setAttribute("city",
+                    "no information");
+        }else{
+            request.setAttribute("city",
+                    city);
+        }
+
+        ArrayList<Music> music = new UserSongsDao().getByUserId(user);
 
         if(!music.isEmpty()) {
             for (int i = 0; i < music.size(); i++) {
@@ -44,7 +98,7 @@ public class MyMusicServlet extends HttpServlet {
                 int index = path.indexOf("upload");
                 path = path.substring(index);
 
-                songs = "<p>" + music.get(i).getSinger() + " - " + music.get(i).getSong_name() +
+                songs += "<p>" + music.get(i).getSinger() + " - " + music.get(i).getSong_name() +
                         "</p>" + "<audio controls><source src=\"" + path +
                         "\" type=\"audio/mpeg\"></audio><br/><br/>";
             }

@@ -44,13 +44,13 @@ $(document).ready(function(){
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-music"></span> Music
 			<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">Your Music</a></li>
+				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
 				<li><a href="#">Manage Playlists</a></li>
 			</ul>
 		</li>
-		<li><a href="users.jsp"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
-        <li><a href="sendMessage.jsp"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
+        <li><a href="${pageContext.request.contextPath}/sendMessage"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="${pageContext.request.contextPath}/LogoutServlet"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -104,17 +104,17 @@ $(document).ready(function(){
 							My Account </a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="${pageContext.request.contextPath}/myMusic">
 							<i class="glyphicon glyphicon-music"></i>
-							Music </a>
+							My Music </a>
 						</li>
 						<li class="active">
-							<a href="users.jsp">
+							<a href="${pageContext.request.contextPath}/anotherUsers">
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
 						</li>
 						<li>
-							<a href="sendMessage.jsp">
+							<a href="${pageContext.request.contextPath}/sendMessage">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
 						</li>
@@ -200,7 +200,7 @@ $(document).ready(function(){
                 <div class="pull-left">
                    <span class="glyphicon glyphicon-headphones"></span>
                 </div>
-                <div class="pull-right number">0 of 100Mb</div>
+                <div class="pull-right number">${count} of 100Mb</div>
             </div>
 		</div>
 		

@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.UserDao;
 import entity.User;
 
 import javax.servlet.ServletException;
@@ -29,8 +30,20 @@ public class EditUserOldInfoServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
 
         User user = (User)request.getSession().getAttribute("user");
+        UserDao userDao = new UserDao();
 
         String photo = user.getPath_to_photo();
+        String name = user.getFirstName();
+        String lastName = user.getLastName();
+        String city = user.getCity();
+        String country = user.getCountry();
+        String musicSize = userDao.getMusicsSize(user);
+
+        if(musicSize == null){
+            request.setAttribute("count", "0");
+        }else {
+            request.setAttribute("count", musicSize);
+        }
 
         if(photo == null){
             request.setAttribute("photo", "photo/default.jpg");
@@ -38,12 +51,34 @@ public class EditUserOldInfoServlet extends HttpServlet {
             request.setAttribute("photo", photo);
         }
 
+        if(city == null){
+            request.setAttribute("city", "no information");
+        }else {
+            request.setAttribute("city", city);
+        }
+
+        if(name == null){
+            request.setAttribute("firstName", "no information");
+        }else {
+            request.setAttribute("firstName", name);
+        }
+
+        if(lastName == null){
+            request.setAttribute("lastName", "no information");
+        }else {
+            request.setAttribute("lastName", lastName);
+        }
+
+        if(country == null){
+            request.setAttribute("country", "no information");
+        }else {
+            request.setAttribute("country", country);
+        }
+
         request.setAttribute("oldFirstName", user.getFirstName());
         request.setAttribute("oldLastName", user.getLastName());
         request.setAttribute("oldEmail", user.getEmail());
         request.setAttribute("oldUserInfo", user.getUser_info());
-        request.setAttribute("oldCountry", user.getCountry());
-        request.setAttribute("oldCity", user.getCity());
 
         getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
                 request, response);

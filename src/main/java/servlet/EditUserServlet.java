@@ -46,6 +46,13 @@ public class EditUserServlet extends HttpServlet {
         String cityMain = user.getCity();
         String countryMain = user.getCountry();
         String photoMain = user.getPath_to_photo();
+        String musicSize = userDao.getMusicsSize(user);
+
+        if(musicSize == null){
+            request.setAttribute("count", "0");
+        }else {
+            request.setAttribute("count", musicSize);
+        }
 
         if(photoMain == null){
             request.setAttribute("photo", "photo/default.jpg");

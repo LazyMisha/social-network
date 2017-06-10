@@ -1,6 +1,7 @@
 package dao;
 
 import entity.Music;
+import entity.User;
 import entity.User_songs;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,6 +9,7 @@ import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -20,7 +22,7 @@ public class UserSongsDao {
     MusicDao musicDao = new MusicDao();
     UserDao userDao = new UserDao();
 
-    String SQL_QUERY_TO_GET_MUSIC = "select * from music where id in (select music_id from user_songs where user_id = ?)";
+    String QUERY_TO_GET_MUSIC = "from Music where id in (select music from User_songs where user = ?)";
 
     public void save(User_songs user_songs){
         try {
@@ -35,22 +37,12 @@ public class UserSongsDao {
         }
     }
 
-    public ArrayList<Music> getByUserId(Long userId){
+    public ArrayList<Music> getByUserId(User user){
         ArrayList<Music> songs = new ArrayList<>();
-        try{
-            session.beginTransaction();
-            Query getMusic = session.createSQLQuery(SQL_QUERY_TO_GET_MUSIC).setParameter(1, userId);
-            List<Music> list = getMusic.list();
-            for(Music music : list){
-                    songs.add(music);
-                }
-            session.getTransaction().commit();
-        }catch (Exception e){
-            session.getTransaction().rollback();
-            System.out.println(e.getMessage());
-        }
+        List<Music> list = session.createQuery(QUERY_TO_GET_MUSIC).setParameter(0, user).list();
+        for(Music music : list){
+                songs.add(music);
+            }
         return songs;
     }
-
-
 }

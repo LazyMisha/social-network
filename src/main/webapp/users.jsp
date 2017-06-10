@@ -1,4 +1,6 @@
 <%@page import="entity.User"%>
+<%@ page import="dao.UserDao" %>
+<%@ page import="java.util.List" %>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -45,13 +47,13 @@ $(document).ready(function(){
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-music"></span> Music
 			<span class="caret"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="#">Your Music</a></li>
+				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
 				<li><a href="#">Manage Playlists</a></li>
 			</ul>
 		</li>
-		<li><a href="users.jsp"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
-        <li><a href="sendMessage.jsp"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
+		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
+        <li><a href="${pageContext.request.contextPath}/sendMessage"><span class="glyphicon glyphicon-envelope"></span> Messages</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="${pageContext.request.contextPath}/LogoutServlet"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
@@ -105,17 +107,17 @@ $(document).ready(function(){
 							My Account </a>
 						</li>
 						<li>
-							<a href="#">
+							<a href="${pageContext.request.contextPath}/myMusic">
 							<i class="glyphicon glyphicon-music"></i>
-							Music </a>
+							My Music </a>
 						</li>
 						<li class="active">
-							<a href="users.jsp">
+							<a href="${pageContext.request.contextPath}/anotherUsers">
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
 						</li>
 						<li>
-							<a href="sendMessage.jsp">
+							<a href="${pageContext.request.contextPath}/sendMessage">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
 						</li>
@@ -138,100 +140,41 @@ $(document).ready(function(){
         </div>
 	
 	<!-- Column 1 for Friend 1 -->
-	    <div class="items col-md-4">
-		<div class="media">
-            <a class="pull-left" href="userProfile.jsp">
-                <img class="media-object dp img-circle" src="photo/default.jpg">
-            </a>
-            <div class="media-body">
-                <h5><a href="userProfile.jsp">Vasya Black</a></h5>
-				<h6>City, Country</h6>
-                <hr class="hruserpage">
-                <div>
-					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
-                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
-				</div>
-            </div>
-        </div>
-		</div>
+		<%
+			UserDao userDao = new UserDao();
+			List<User> friends = userDao.getFriends();
+			for (User users : friends){
+			    String photo = users.getPath_to_photo();
+			    String city = users.getCity();
+			    String country = users.getCountry();
+			    if(photo == null){
+			        photo = "photo/default.jpg";
+				}
+				if(city == null){
+			        city = "no city";
+				}
+				if(country == null){
+					country = "no country";
+				}
+				out.print("<div class=\"items col-md-4\">" +
+				"<div class=\"media\">" +
+				"<a class=\"pull-left\" href=\"userProfile.jsp\">" +
+				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\">" +
+				"</a>" +
+				"<div class=\"media-body\">" +
+				"<h5><a href=\"userProfile.jsp\">" + users.getFirstName() + "</a></h5>" +
+				"<h6>" + city + ", " + country + "</h6>" +
+				"<hr class=\"hruserpage\">" +
+				"<div>" +
+				"<a href=\"sendMessage.jsp\" data-original-title=\"Send a message to this user\" data-toggle=\"tooltip\" type=\"button\" class=\"btn btn-sm btn-primary\"><i class=\"glyphicon glyphicon-send\"></i></a>" +
+				"<a href=\"#\" data-original-title=\"Explore user's music\" data-toggle=\"tooltip\" type=\"button\" class=\"btn btn-sm btn-warning\"><i class=\"glyphicon glyphicon-headphones\"></i></a>" +
+				"</div>" +
+				"</div>" +
+				"</div>" +
+				"</div>");
+			}
+		%>
 
-		<!-- Column 2 for Friend 2 -->
-		<div class="items col-md-4">
-		<div class="media">
-            <a class="pull-left" href="userProfile.jsp">
-                <img class="media-object dp img-circle" src="photo/default.jpg">
-            </a>
-            <div class="media-body">
-                <h5><a href="userProfile.jsp">Fedya Green</a></h5>
-				<h6>City, Country</h6>
-                <hr class="hruserpage">
-                <div>
-					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
-                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm	 btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
-				</div>
-            </div>
-        </div>
-		</div>
-
-		<!-- Column 3 for Friend 3 -->
-		<div class="items col-md-4">
-		<div class="media">
-            <a class="pull-left" href="userProfile.jsp">
-                <img class="media-object dp img-circle" src="photo/default.jpg">
-            </a>
-            <div class="media-body">
-                <h5><a href="userProfile.jsp">Petya Yellow</a></h5>
-				<h6>City, Country</h6>
-                <hr class="hruserpage">
-                <div>
-					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
-                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
-				</div>
-            </div>
-        </div>
-		</div>
-	<!-- ROW 1 END -->
-	
-	<!-- ROW 2 with 3 columns (1 for each friend) -->
-	<div class="row container-fluid gutterless">
-	
-	<!-- Column 1 for Friend 1 -->
-	    <div class="items col-md-4">
-		<div class="media">
-            <a class="pull-left" href="userProfile.jsp">
-                <img class="media-object dp img-circle" src="photo/default.jpg">
-            </a>
-            <div class="media-body">
-                <h5><a href="userProfile.jsp">Grisha Kopernik</a></h5>
-				<h6>City, Country</h6>
-                <hr class="hruserpage">
-                <div>
-					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
-                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
-				</div>
-            </div>
-        </div>
-		</div>
-
-		<!-- Column 2 for Friend 2 -->
-		<div class="items col-md-4">
-		<div class="media">
-            <a class="pull-left" href="userProfile.jsp">
-                <img class="media-object dp img-circle" src="photo/default.jpg">
-            </a>
-            <div class="media-body">
-                <h5><a href="userProfile.jsp">Sveta Krasivaya</a></h5>
-				<h6>City, Country</h6>
-				<hr class="hruserpage">
-                <div>
-					<a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i></a>
-                    <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i></a>
-				</div>
-            </div>
-        </div>
-		</div>
-
-		<!-- Column 3 for Friend 3 -->
 		<div class="items col-md-4">
 			<!-- empty column -->
 		</div>
@@ -256,7 +199,7 @@ $(document).ready(function(){
                 <div class="pull-left">
                    <span class="glyphicon glyphicon-headphones"></span>
                 </div>
-                <div class="pull-right number">0 of 100Mb</div>
+                <div class="pull-right number">${count} of 100Mb</div>
             </div>
 		</div>
 		

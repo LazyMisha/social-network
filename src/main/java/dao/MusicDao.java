@@ -27,14 +27,11 @@ public class MusicDao {
         }
     }
     public ArrayList<Music> searchMusic(String search){
-        
-        String searchPattern=".*"+search+".*";
-        
-        ArrayList<Music> musicArr=new ArrayList();
-        List<Music> musicList=session.createQuery("FROM Music").list();
-        
+        String searchPattern = ".*"+search+".*";
+        ArrayList<Music> musicArr = new ArrayList();
+        List<Music> musicList = session.createQuery("FROM Music").list();
         for(Music m:musicList){
-            if(m.getSong_name().matches(searchPattern)||m.getSinger().matches(searchPattern)){
+            if(m.getSong_name().matches(searchPattern) || m.getSinger().matches(searchPattern)){
                 musicArr.add(m);
             }
         }

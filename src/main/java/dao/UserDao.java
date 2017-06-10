@@ -14,6 +14,8 @@ import util.SecurePassword;
  */
 public class UserDao {
 
+    String QUERY_MUSIC_SIZE = "select sum(size) from Music where id in (select music from User_songs where user = ?)";
+
     private Session session = HibernateUtil.getSessionFactory().openSession();
     
     public void save(User user){
@@ -56,11 +58,11 @@ public class UserDao {
             session.beginTransaction();
             session.update(user);
             session.getTransaction().commit();
+            session.refresh(user);
         }catch (Exception e){
             session.getTransaction().rollback();
             System.out.println(e.getMessage());
         }finally {
-            session.refresh(user);
             session.clear();
         }
     }
@@ -80,5 +82,10 @@ public class UserDao {
             session.clear();
         }
         return (User) user;
+    }
+
+    public String getMusicsSize(User user){
+        Query query = session.createQuery(QUERY_MUSIC_SIZE).setParameter(0, user);
+        return query.uniqueResult().toString();
     }
 }

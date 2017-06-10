@@ -10,6 +10,18 @@
 
     <servlet>
         <description/>
+        <display-name>anotherUsers</display-name>
+        <servlet-name>anotherUsers</servlet-name>
+        <servlet-class>servlet.AnotherUsersServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
+        <display-name>sendMessage</display-name>
+        <servlet-name>sendMessage</servlet-name>
+        <servlet-class>servlet.SendMessageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
         <display-name>uploadMusicPage</display-name>
         <servlet-name>uploadMusicPage</servlet-name>
         <servlet-class>servlet.UploadMusicPageServlet</servlet-class>
@@ -90,6 +102,14 @@
 
 
 
+    <servlet-mapping>
+        <servlet-name>anotherUsers</servlet-name>
+        <url-pattern>/anotherUsers</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendMessage</servlet-name>
+        <url-pattern>/sendMessage</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>uploadMusicPage</servlet-name>
         <url-pattern>/uploadMusicPage</url-pattern>

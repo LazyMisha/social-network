@@ -18,6 +18,7 @@ import java.util.Date;
 public class ProfileServlet  extends HttpServlet{
 
     User user;
+    UserDao userDao = new UserDao();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -46,6 +47,13 @@ public class ProfileServlet  extends HttpServlet{
         String userInfo = user.getUser_info();
         String userLink = user.getLink();
         Date birthDay = user.getBirthday();
+        String musicSize = userDao.getMusicsSize(user);
+
+        if(musicSize == null){
+            request.setAttribute("count", "0");
+        }else {
+            request.setAttribute("count", musicSize);
+        }
 
         if(photo == null){
             request.setAttribute("pathToPhoto", "photo/default.jpg");
