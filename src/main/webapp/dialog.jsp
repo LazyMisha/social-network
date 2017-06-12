@@ -20,7 +20,7 @@
                 User user = (User)request.getSession().getAttribute("user");
                 
                 Long friendID=Long.valueOf(request.getParameter("friend_id"));
-                User friend=new UserDao().getUser(friendID);
+                User friend=new UserDao().getById(friendID);
                 request.getSession().setAttribute("friendID", friendID);
             %>
             <h1>Your dialog with <%= friend.getFirstName() %>:</h1>

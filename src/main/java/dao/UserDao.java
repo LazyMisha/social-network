@@ -47,12 +47,6 @@ public class UserDao {
         return session.createQuery("FROM User").list();
     }
 
-    public User getUser(Long id){
-        Query query=session.createQuery("FROM User WHERE id = ?").setParameter(0,id);
-        User user=(User)query.uniqueResult();
-        return user;
-    }
-
     public void update(User user){
         try {
             session.beginTransaction();
@@ -87,5 +81,22 @@ public class UserDao {
     public String getMusicsSize(User user){
         Query query = session.createQuery(QUERY_MUSIC_SIZE).setParameter(0, user);
         return query.uniqueResult().toString();
+    }
+    
+    public String getPasswordHash(String email){
+        List<User> usersList = session.createQuery("FROM User").list();
+        for(User user : usersList){
+            if(user.getEmail().equals(email)){
+                String passwordHash=user.getPassword();
+                return passwordHash;
+            }
+        }
+        return null;
+    }
+    
+    public User getUserByEmail(String email){
+        Query query=session.createQuery("FROM User WHERE email = ?").setParameter(0,email);
+        User user=(User)query.uniqueResult();
+        return user;
     }
 }
