@@ -130,16 +130,17 @@ $(document).ready(function(){
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
       <h2>Meet other Users!</h2>
-	  
-	<!-- ROW 1 with 3 columns (1 for each friend) -->
+	 
+	<!-- Searchable container START -->
 	<div class="searchable-container">
+	<!-- ROW with columns (1 for each friend) -->
 	<div class="row container-fluid gutterless">
 	
 		<div class="col-sm-12" style="margin-bottom:20px;">
             <input type="search" class="form-control" id="input-search" placeholder="Search for User..." >
         </div>
 	
-	<!-- Column 1 for Friend 1 -->
+	<!-- Column X for Friend X -->
 		<%
 			UserDao userDao = new UserDao();
 			List<User> friends = userDao.getFriends();
@@ -174,18 +175,15 @@ $(document).ready(function(){
 				"</div>");
 			}
 		%>
-
-		<div class="items col-md-4">
-			<!-- empty column -->
-		</div>
 		
 	</div>
-	<!-- ROW 2 END -->
-	</div>
-	</div>
+	<!-- ROW END -->
 	
-	  <!-- Main content end -->
+	</div>
+	<!-- Searchable container END -->
+	
     </div>
+	<!-- Main content end -->
 	
 	<div class="col-sm-2 sidenav-right">
 		<!-- Right widget panel -->

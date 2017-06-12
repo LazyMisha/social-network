@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="css/newstyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/pagesearch.js"></script>
 </head>
 <body>
 
@@ -130,8 +131,13 @@ $(document).ready(function(){
 	<!-- Main content goes here -->
       <h2>Send messages to other Users!</h2>
 	  
-	  <!-- Should be LIKE HERE! -->
-
+	  <!-- Searchable container -->
+	  <div class="searchable-container">
+		<div style="margin-bottom:20px;">
+            <input type="search" class="form-control" id="input-search" placeholder="Search for a dialog with User..." >
+        </div>
+		
+		<!-- Dialogs list -->
 		<%
 			UserDao ud=new UserDao();
 			List<User> friends = ud.getFriends();
@@ -141,7 +147,7 @@ $(document).ready(function(){
 			        photo = "photo/default.jpg";
 				}
 			    out.print("<div class=\"row\">" +
-				"<div class=\"col-md-10\">" +
+				"<div class=\"col-md-10 items\">" +
 				"<div class=\"media\">" +
 				"<a class=\"pull-left\" href=\"#\">" +
 				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\" style=\"width:75px;height:75px;\">" +
@@ -159,8 +165,10 @@ $(document).ready(function(){
 				"</div>");
 			}
 		%>
-
-		<!-- Should be LIKE HERE! -->
+		<!-- Dialogs list END-->
+		
+		</div>
+		<!-- Searchable container END-->
 
 
 	  <!-- Main content end -->
