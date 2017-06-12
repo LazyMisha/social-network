@@ -5,9 +5,6 @@
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
 
-
-
-
     <servlet>
         <description/>
         <display-name>anotherUsers</display-name>
@@ -98,9 +95,18 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>servlet.LogoutServlet</servlet-class>
     </servlet>
-
-
-
+    <servlet>
+        <description/>
+        <display-name>SendHashServlet</display-name>
+        <servlet-name>SendHashServlet</servlet-name>
+        <servlet-class>servlet.SendHashServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <description/>
+        <display-name>RecoverPasswordServlet</display-name>
+        <servlet-name>RecoverPasswordServlet</servlet-name>
+        <servlet-class>servlet.RecoverPasswordServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>anotherUsers</servlet-name>
@@ -161,5 +167,13 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/LogoutServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendHashServlet</servlet-name>
+        <url-pattern>/SendHashServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RecoverPasswordServlet</servlet-name>
+        <url-pattern>/RecoverPasswordServlet</url-pattern>
     </servlet-mapping>
 </web-app>

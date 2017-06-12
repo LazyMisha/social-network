@@ -50,8 +50,8 @@ public class WebSocketServer {
         Long userID=(Long)session.getUserProperties().get("userID");
         Long friendID=(Long)session.getUserProperties().get("friendID");
                         
-        User user= new UserDao().getUser(userID);
-        User friend= new UserDao().getUser(friendID);
+        User user= new UserDao().getById(userID);
+        User friend= new UserDao().getById(friendID);
         
         System.out.println("--------messageToDB: "+message);
         Message m=new Message();
