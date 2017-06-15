@@ -6,6 +6,7 @@ import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
+import org.hibernate.Transaction;
 import util.SecurePassword;
 
 /**
@@ -13,90 +14,128 @@ import util.SecurePassword;
  * operations with user
  */
 public class UserDao {
-
-    String QUERY_MUSIC_SIZE = "select sum(size) from Music where id in (select music from User_songs where user = ?)";
-
-    private Session session = HibernateUtil.getSessionFactory().openSession();
     
-    public void save(User user){
+    public void save(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
+        
         try {
-            session.beginTransaction();
+            transaction = session.beginTransaction();
             session.save(user);
-            session.getTransaction().commit();
-        }catch (Exception e){
-            session.getTransaction().rollback();
-            System.out.println(e.getMessage());
-        }finally {
-            session.clear();
+            transaction.commit();
+            session.refresh(user);
+        } catch (Exception e) {
+            if(transaction != null)
+                transaction.rollback();
+            System.err.println(e.getMessage());
+        } finally {
+            session.close();
         }
     }
 
-    public User isRegistered(String email, String password){
-        List<User> usersList = session.createQuery("FROM User").list();
-        for(User user : usersList){
-            if(user.getEmail().equals(email)){
-                SecurePassword sp=new SecurePassword();
-                if(sp.getSecurePassword(password, user.getSalt()).equals(user.getPassword()))
+    public User isRegistered(String email, String password) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            List<User> usersList = session.createQuery("FROM entity.User WHERE email=" + "'" + email + "'").list();
+            for (User user : usersList) {
+                SecurePassword sp = new SecurePassword();
+                if (sp.getSecurePassword(password, user.getSalt()).equals(user.getPassword()))
                     return user;
             }
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            session.close();
         }
         return null;
     }
 
-    public List<User> getFriends(){
-        return session.createQuery("FROM User").list();
+    public List<User> getFriends() {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            List<User> getFriends = session.createQuery("FROM entity.User").list();
+            return getFriends;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            session.close();
+        }
+        return null;
     }
 
     public void update(User user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = null;
         try {
-            session.beginTransaction();
+            transaction = session.beginTransaction();
             session.update(user);
-            session.getTransaction().commit();
+            transaction.commit();
             session.refresh(user);
         }catch (Exception e){
-            session.getTransaction().rollback();
-            System.out.println(e.getMessage());
+            if( transaction != null)
+                transaction.rollback();
+            System.err.println(e.getMessage());
         }finally {
-            session.clear();
+            session.close();
         }
     }
 
-    public User getById(long id){
-        Object user = null;
+    public User getById(long id) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
         try {
-            session.beginTransaction();
-            user = session.createCriteria(User.class)
+            User user = (User) session.createCriteria(User.class)
                     .add(Restrictions.eq("id", id))
                     .uniqueResult();
-            session.getTransaction().commit();
-        }catch (Exception e){
-            session.getTransaction().rollback();
-            System.out.println(e.getMessage());
-        }finally {
-            session.clear();
+            return user;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            session.close();
         }
-        return (User) user;
+        return null;
     }
 
-    public String getMusicsSize(User user){
-        Query query = session.createQuery(QUERY_MUSIC_SIZE).setParameter(0, user);
-        return query.uniqueResult().toString();
-    }
-    
-    public String getPasswordHash(String email){
-        List<User> usersList = session.createQuery("FROM User").list();
-        for(User user : usersList){
-            if(user.getEmail().equals(email)){
-                String passwordHash=user.getPassword();
-                return passwordHash;
-            }
+    public String getMusicsSize(User user) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String QUERY_MUSIC_SIZE = "select sum(size) from Music where id in (select music from User_songs where user = ?)";
+            Query query = session.createQuery(QUERY_MUSIC_SIZE).setParameter(0, user);
+            String getMusicsSize = query.uniqueResult().toString();
+            return getMusicsSize;
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        } finally {
+            session.close();
         }
         return null;
     }
     
-    public User getUserByEmail(String email){
-        Query query=session.createQuery("FROM User WHERE email = ?").setParameter(0,email);
-        User user=(User)query.uniqueResult();
-        return user;
+    public String getPasswordHash(String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            String hql = "SELECT U.password FROM entity.User U WHERE email=" + "'" + email + "'";
+            String passwordHash = (String) session.createQuery(hql).uniqueResult();
+            return passwordHash;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        } finally {
+            session.close();
+        }
+        return null;
+    }
+    
+    public User getUserByEmail(String email) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery("FROM entity.User WHERE email = ?").setParameter(0, email);
+            User user = (User) query.uniqueResult();
+            return user;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            session.close();
+        }
+        return null;
     }
 }
