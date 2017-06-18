@@ -54,6 +54,8 @@ public class UploadMusicServlet extends HttpServlet {
 
         User user = (User) request.getSession().getAttribute("user");
         UserDao userDao = new UserDao();
+        String musicSize;
+        int songSize = 0;
 
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
@@ -61,7 +63,8 @@ public class UploadMusicServlet extends HttpServlet {
         String country = user.getCountry();
         String photo = user.getPath_to_photo();
         try {
-            String musicSize = userDao.getMusicsSize(user);
+            musicSize = userDao.getMusicsSize(user);
+            songSize = Integer.parseInt(musicSize);
             if(musicSize == null || musicSize.isEmpty()){
                 request.setAttribute("count", "0");
             }else {
@@ -110,91 +113,97 @@ public class UploadMusicServlet extends HttpServlet {
                     city);
         }
 
-        if (!ServletFileUpload.isMultipartContent(request)) {
-            PrintWriter writer = response.getWriter();
-            writer.println("Error: Form must has enctype = multipart/form-data.");
-            writer.flush();
-            return;
-        }
+        if(songSize >= 100){
+            request.setAttribute("message",
+                    "You can not upload this song!" + "<br/>" +
+                            "Your music space is full!");
+        }else {
+            if (!ServletFileUpload.isMultipartContent(request)) {
+                PrintWriter writer = response.getWriter();
+                writer.println("Error: Form must has enctype = multipart/form-data.");
+                writer.flush();
+                return;
+            }
 
-        // configures upload settings
-        DiskFileItemFactory factory = new DiskFileItemFactory();
-        factory.setSizeThreshold(MEMORY_THRESHOLD);
-        factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
+            // configures upload settings
+            DiskFileItemFactory factory = new DiskFileItemFactory();
+            factory.setSizeThreshold(MEMORY_THRESHOLD);
+            factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 
-        ServletFileUpload upload = new ServletFileUpload(factory);
+            ServletFileUpload upload = new ServletFileUpload(factory);
 
-        upload.setFileSizeMax(MAX_FILE_SIZE);
-        upload.setSizeMax(MAX_REQUEST_SIZE);
+            upload.setFileSizeMax(MAX_FILE_SIZE);
+            upload.setSizeMax(MAX_REQUEST_SIZE);
 
-        String uploadPath = getServletContext().getRealPath("")
-                + File.separator + UPLOAD_DIRECTORY;
+            String uploadPath = getServletContext().getRealPath("")
+                    + File.separator + UPLOAD_DIRECTORY;
 
-        // creates the directory if it does not exist
-        File uploadDir = new File(uploadPath);
-        if (!uploadDir.exists()) {
-            uploadDir.mkdir();
-        }
+            // creates the directory if it does not exist
+            File uploadDir = new File(uploadPath);
+            if (!uploadDir.exists()) {
+                uploadDir.mkdir();
+            }
 
-        try {
-            @SuppressWarnings("unchecked")
-            List<FileItem> formItems = upload.parseRequest(request);
+            try {
+                @SuppressWarnings("unchecked")
+                List<FileItem> formItems = upload.parseRequest(request);
 
-            if (formItems != null && formItems.size() > 0) {
-                // iterates over form's fields
-                for (FileItem item : formItems) {
-                    // processes only fields that are not form fields
-                    if (!item.isFormField()) {
-                        String fileName = UUID.randomUUID().toString() + ".mp3";
-                        String filePath = uploadPath + File.separator + fileName;
-                        File storeFile = new File(filePath);
+                if (formItems != null && formItems.size() > 0) {
+                    // iterates over form's fields
+                    for (FileItem item : formItems) {
+                        // processes only fields that are not form fields
+                        if (!item.isFormField()) {
+                            String fileName = UUID.randomUUID().toString() + ".mp3";
+                            String filePath = uploadPath + File.separator + fileName;
+                            File storeFile = new File(filePath);
 
-                        System.out.println(storeFile.getName());
+                            System.out.println(storeFile.getName());
 
-                        // saves the file on disk
-                        item.write(storeFile);
-                        request.setAttribute("message",
-                                "Upload has been done successfully!");
+                            // saves the file on disk
+                            item.write(storeFile);
+                            request.setAttribute("message",
+                                    "Upload has been done successfully!");
 
-                        //Parse mp3 tags
-                        getTags.getTagsFromMP3(storeFile);
+                            //Parse mp3 tags
+                            getTags.getTagsFromMP3(storeFile);
 
-                        if(songName == null){
-                            request.setAttribute("songName", "no information");
-                        }else {
-                            request.setAttribute("songName", songName);
-                        }
+                            if (songName == null) {
+                                request.setAttribute("songName", "no information");
+                            } else {
+                                request.setAttribute("songName", songName);
+                            }
 
-                        if(genre == null){
-                            request.setAttribute("genre", "no information");
-                        }else {
-                            request.setAttribute("genre", genre);
-                        }
+                            if (genre == null) {
+                                request.setAttribute("genre", "no information");
+                            } else {
+                                request.setAttribute("genre", genre);
+                            }
 
-                        if(singer == null){
-                            request.setAttribute("singer", "no information");
-                        }else {
-                            request.setAttribute("singer", singer);
-                        }
+                            if (singer == null) {
+                                request.setAttribute("singer", "no information");
+                            } else {
+                                request.setAttribute("singer", singer);
+                            }
 
-                        if(composer == null){
-                            request.setAttribute("composer", "no information");
-                        }else {
-                            request.setAttribute("composer", composer);
-                        }
+                            if (composer == null) {
+                                request.setAttribute("composer", "no information");
+                            } else {
+                                request.setAttribute("composer", composer);
+                            }
 
-                        if(album == null){
-                            request.setAttribute("album", "no information");
-                        }else {
-                            request.setAttribute("album", album);
+                            if (album == null) {
+                                request.setAttribute("album", "no information");
+                            } else {
+                                request.setAttribute("album", album);
+                            }
                         }
                     }
                 }
+            } catch (Exception ex) {
+                request.setAttribute("message",
+                        "There was an error!" + "<br/>" +
+                                "Try again, and select mp3 format please!");
             }
-        } catch (Exception ex) {
-            request.setAttribute("message",
-                    "There was an error!" + "<br/>" +
-            "Try again, and select mp3 format please!");
         }
 
         getServletContext().getRequestDispatcher("/uploadMusic.jsp").forward(
