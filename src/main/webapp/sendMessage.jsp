@@ -143,13 +143,14 @@ $(document).ready(function(){
 			List<User> friends = ud.getFriends();
 			for(User user : friends){
 			    String photo = user.getPath_to_photo();
+			    String link = user.getLink();
 			    if(photo == null){
 			        photo = "photo/default.jpg";
 				}
 			    out.print("<div class=\"row\">" +
 				"<div class=\"col-md-10 items\">" +
 				"<div class=\"media\">" +
-				"<a class=\"pull-left\" href=\"#\">" +
+				"<a class=\"pull-left\" href=\"" + link + "\">" +
 				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\" style=\"width:75px;height:75px;\">" +
 				"</a>" +
 				"<div class=\"media-body\">" +
