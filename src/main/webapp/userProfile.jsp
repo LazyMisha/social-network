@@ -129,14 +129,14 @@ $(document).ready(function(){
             
 				<div class="panel panel-info" style="margin-top:20px;">
 					<div class="panel-heading">
-						<h3 class="panel-title" style="text-align:center;"><a href="{USER'S LINK}">{USER'S NAME} {USER'S SURNAME}</a></h3>
+						<h3 class="panel-title" style="text-align:center;"><a href="${friendUserLink}">${friendName} ${friendLastName}</a></h3>
 					</div>
 					<div class="panel-body">
 						<table class="table table-user-information">
 						<tbody>
 						  <tr>
 							<td align="center" colspan="2">
-							<div><img src="photo/default.jpg" class="friendspic"></div>
+							<div><img src="${friendPhoto}" class="friendspic"></div>
 							<div><a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i>  Send a Message</a>
                             <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i>  Explore Music</a>
 							</div>
@@ -145,35 +145,35 @@ $(document).ready(function(){
 						  
 						  <tr>
 							<td>Name:</td>
-							<td>{USER'S NAME}</td>
+							<td>${friendName}</td>
 						  </tr>
 						  <tr>
 							<td>Surname:</td>
-							<td>{USER'S SURNAME}</td>
+							<td>${friendLastName}</td>
 						  </tr>
 						  <tr>
 							<td>Date of Birth:</td>
-							<td>{USER'S BIRTHDAY}</td>
+							<td>${friendBirthDay}</td>
 						  </tr>
 							<tr>
 							<td>Country:</td>
-							<td>{USER'S COUNTRY}</td>
+							<td>${friendCountry}</td>
 						    </tr>
 							<tr>
 							<td>City:</td>
-							<td>{USER'S CITY}</td>
+							<td>${friendCity}</td>
 						    </tr>
 						    <tr>
 							<td>Email:</td>
-							<td><a href="mailto:{USER'S EMAIL}">{USER'S EMAIL}</a></td>
+							<td><a href="mailto:${friendEmail}">${friendEmail}</a></td>
 							</tr>
 							<tr>
 							<td>Additional info:</td>
-							<td>{USER'S USER INFO} {USER'S USER INFO} </td>
+							<td>${friendUserInfo}</td>
 							</tr>
 							<tr>
 							<td>Permalink for your profile-page:</td>
-							<td><a href="{USER'S LINK}">{USER'S LINK}</a></td>
+							<td><a href="${friendUserLink}">${friendUserLink}</a></td>
 							</tr>
 						</tbody>
 						</table>

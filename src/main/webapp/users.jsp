@@ -148,7 +148,8 @@ $(document).ready(function(){
 			    String photo = users.getPath_to_photo();
 			    String city = users.getCity();
 			    String country = users.getCountry();
-			    if(photo == null){
+			    String userLink = users.getLink();
+				if(photo == null){
 			        photo = "photo/default.jpg";
 				}
 				if(city == null){
@@ -159,11 +160,11 @@ $(document).ready(function(){
 				}
 				out.print("<div class=\"items col-md-4\">" +
 				"<div class=\"media\">" +
-				"<a class=\"pull-left\" href=\"userProfile.jsp\">" +
+				"<a class=\"pull-left\" href=\"" + userLink + "\">" +
 				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\">" +
 				"</a>" +
 				"<div class=\"media-body\">" +
-				"<h5><a href=\"userProfile.jsp\">" + users.getFirstName() + "</a></h5>" +
+				"<h5><a href=\"" + userLink + "\">" + users.getFirstName() + "</a></h5>" +
 				"<h6>" + city + ", " + country + "</h6>" +
 				"<hr class=\"hruserpage\">" +
 				"<div>" +

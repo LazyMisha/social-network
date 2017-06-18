@@ -5,6 +5,7 @@ import entity.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import service.CheckFile;
 import service.UploadPhoto;
 
 import javax.servlet.ServletException;
@@ -24,6 +25,7 @@ import java.util.List;
 public class UploadPhotoServlet extends HttpServlet {
 
     UploadPhoto uploadPhoto = new UploadPhoto();
+    CheckFile checkFile = new CheckFile();
 
     private static final String UPLOAD_DIRECTORY = "photo";
 
@@ -133,13 +135,20 @@ public class UploadPhotoServlet extends HttpServlet {
                         String filePath = uploadPath + File.separator + fileName;
                         File storeFile = new File(filePath);
 
-                        // saves the file on disk
-                        item.write(storeFile);
+                        if(!checkFile.getFileExtension(storeFile).equalsIgnoreCase("jpg")){
+                            request.setAttribute("message",
+                                    "Photo is not uploaded successfully!" + "</br>" +
+                            "Please, use \".jpg\" extension!");
+                        }else {
 
-                        uploadPhoto.savePhoto(storeFile, request);
+                            // saves the file on disk
+                            item.write(storeFile);
 
-                        request.setAttribute("message",
-                                "Photo has been uploaded successfully!");
+                            uploadPhoto.savePhoto(storeFile, request);
+
+                            request.setAttribute("message",
+                                    "Photo has been uploaded successfully!");
+                        }
 
                     }
                 }
