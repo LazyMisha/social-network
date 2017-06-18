@@ -39,37 +39,56 @@ public class RegistrationPageServlet extends HttpServlet {
         String confirmPass = request.getParameter("confirm-password");
         String url = ((HttpServletRequest)request).getRequestURL().toString().replaceAll("servlet", "profile");
 
-        if(pass.isEmpty()||pass.length()<6){
+        if(pass.isEmpty() || pass.length() < 6){
             request.setAttribute("message",
                     "Sorry, but your password isn't long enough." + "<br/>" +
                             "Try again");
         }else{
             if(pass.equals(confirmPass)){
 
-                String salt=secPass.getSalt();
-                String securedPassword=secPass.getSecurePassword(pass, salt);
-                
-                user.setSalt(salt);
-                user.setPassword(securedPassword);
-                user.setFirstName(firstName);
-                user.setLastName(surName);
-                user.setEmail(email);
-                userDao.save(user);
-                user.setLink(url + "?" + user.getId());
-                userDao.update(user);
+                User checkUser = new UserDao().getUserByEmail(email);
 
-                request.setAttribute("message",
+                if(checkUser != null) {
+                    request.setAttribute("message",
+                            "User with this Email already registered" + "</br>" +
+                                    "Please, use another Email");
+
+                    getServletContext().getRequestDispatcher("/registration.jsp").forward(
+                            request, response);
+
+                    System.out.println("User tried registration with existing email");
+
+                }else {
+                    String salt = secPass.getSalt();
+                    String securedPassword = secPass.getSecurePassword(pass, salt);
+
+                    user.setSalt(salt);
+                    user.setPassword(securedPassword);
+                    user.setFirstName(firstName);
+                    user.setLastName(surName);
+                    user.setEmail(email);
+                    userDao.save(user);
+                    user.setLink(url + "?" + user.getId());
+                    userDao.update(user);
+
+                /*request.setAttribute("message",
                         "Welcome! You are registered successfully!" +
-                                "<p><a href='index.html'>Go to Main Page For Login</a></p>");
-                System.out.println("User " + user.getFirstName() + " successfully registered");
+                                "<p><a href='index.html'>Go to Main Page For Login</a></p>");*/
+                    System.out.println("User " + user.getFirstName() + " successfully registered");
+
+                    getServletContext().getRequestDispatcher("/index.html").forward(
+                            request, response);
+                }
             }else{
                 request.setAttribute("message",
                         "Password and Confirm password must be the same!" + "<br/>" +
                                 "Try again!");
+
                 System.out.println("user inputted not correct password!");
+
+                getServletContext().getRequestDispatcher("/registration.jsp").forward(
+                        request, response);
             }
         }
-        getServletContext().getRequestDispatcher("/registration.jsp").forward(
-                request, response);
     }
 }
