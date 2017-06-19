@@ -1,3 +1,6 @@
+<%@page import="java.util.Locale"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.Date"%>
 <%@page import="dao.UserDao"%>
 <%@page import="entity.User"%>
 <%@page import="entity.Message"%>
@@ -131,11 +134,10 @@ $(document).ready(function(){
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
 	
-			<%
+            <%
                 User user = (User)request.getSession().getAttribute("user");
-                
-                Long friendID=Long.valueOf(request.getParameter("friend_id"));
-                User friend=new UserDao().getById(friendID);
+                Long friendID = Long.valueOf(request.getParameter("friend_id"));
+                User friend = new UserDao().getById(friendID);
                 request.getSession().setAttribute("friendID", friendID);
             %>
 			
@@ -143,40 +145,58 @@ $(document).ready(function(){
             
             <p>
                 <%
-                    List<Message> prevMesseges=new MessageDao().getDialog(user,friend);
-                    String dialog="";
-                    if(!prevMesseges.isEmpty()){
-                        for(Message m:prevMesseges){
-                            if((user.getId().longValue()) != (m.getUser_id_from().getId().longValue()))
-//Стас, можно добавить выравнивание по краю, можно выводить имена, можно ничего не выводить, как решишь.
-//Скажешь как я сделаю. Мне кажется, лучше просто спарва и слева писать.
-                                dialog+="friend:\n"+"-"+m.getMessage()+"\n\n";
-                            else
-//аналогично
-                                dialog+="you:\n"+"-"+m.getMessage()+"\n\n";
+                    List<Message> prevMesseges = new MessageDao().getDialog(user,friend);
+                    String dialog = "";
+                    for(Message m:prevMesseges){
+                        Date messageDate = m.getMessageDate();
+                        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMMMMMMM yyyy 'at' k:m", Locale.ENGLISH);
+                        String formatedDate = sdf.format(messageDate);
+                        
+                        if((user.getId().longValue()) != (m.getUser_id_from().getId().longValue())){
+                            dialog+=friend.getFirstName()+"\non "+formatedDate+"\n-"+m.getMessage()+"\n\n";
                         }
-                    }else
-                        dialog+="There is no messages yet...\nSay Hello to your friend:)"+"\n\n";
+                        else
+                            dialog+=user.getFirstName()+"\non "+formatedDate+"\n-"+m.getMessage()+"\n\n";
+                    }
                 %>
             </p>
             <textarea readonly="readonly" id="messages" rows="15" cols="60"><%= dialog %></textarea><br/>
             <input type="text" id="message"/><br/>
-            <input type="button" value="send" onclick="sendMessage();"/><br/>
+            <input type="button" value="send" id="send"/><br/>
             <script>
-                
-                var websocket=new WebSocket("ws://"+document.location.host+"/socialnetwork/dialogEndpoint");
-                websocket.onmessage=onMessage;
-                
-                function onMessage(event){
-                    messages.value+="friend:\n"+event.data+"\n\n";
-                }
+                var websocket = new WebSocket("ws://"+document.location.host+"/socialnetwork/dialogEndpoint");
+                websocket.onmessage = onMessage;
+                document.getElementById("send").addEventListener("click",sendMessage,false);
                 
                 function sendMessage(){
-                    if (message.value!=""){
+                    if (message.value != ""){
                         websocket.send(message.value);
-                        messages.value+="you:\n"+message.value+"\n\n";
-                        message.value=""; 
+                        messages.value += "<%= user.getFirstName() %>\non " +
+                                getFormatedDate() + "\n-"+message.value + "\n\n";
+                        message.value = ""; 
                     }
+                }
+                
+                function onMessage(event){
+                    var jsonData = JSON.parse(event.data);
+                    if(jsonData != null)
+                        messages.value += jsonData.name + "\non "+jsonData.date + 
+                            "\n-" + jsonData.text + "\n\n";
+                }
+                
+                function getFormatedDate(){
+                    var months = ["January", "February", "March",
+                        "April", "May", "June", "July","August", 
+                        "September", "October", "November", "December"];
+                    var date = new Date();
+                    var day = date.getDate();
+                    var monthIndex = date.getMonth();
+                    var year = date.getFullYear();
+                    var hours = date.getHours();
+                    var minutes = date.getMinutes();
+                    
+                    return  day + " " + months[monthIndex] + " " + year+" at " +
+                            hours + ":" + minutes;
                 }
             </script>
 

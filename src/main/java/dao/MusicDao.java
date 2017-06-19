@@ -2,8 +2,8 @@ package dao;
 
 import entity.Music;
 import java.util.*;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 import util.HibernateUtil;
 
 /**
@@ -26,16 +26,20 @@ public class MusicDao {
             session.clear();
         }
     }
-    public ArrayList<Music> searchMusic(String search){
-        String searchPattern = ".*"+search+".*";
-        ArrayList<Music> musicArr = new ArrayList();
-        List<Music> musicList = session.createQuery("FROM Music").list();
-        for(Music m:musicList){
-            if(m.getSong_name().matches(searchPattern) || m.getSinger().matches(searchPattern)){
-                musicArr.add(m);
-            }
+    public List<Music> searchMusic(String search){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        List<Music> searchResult = new ArrayList<>();
+        try{
+            String hql = "FROM entity.Music m WHERE "
+                    + "lower(m.song_name) LIKE lower('%" + search + "%') or "
+                    + "lower(m.singer) LIKE lower('%" + search + "%')";
+            searchResult = session.createQuery(hql).list();
+        }catch(HibernateException e){
+            System.err.println(e);
+        }finally{
+            session.close();
         }
-        return musicArr;
+        return searchResult;
     }
 
 }

@@ -24,23 +24,18 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         response.setContentType("text/html");
         request.setCharacterEncoding("UTF-8");
 
         String email = request.getParameter("email");
         String password = request.getParameter("password");
-
         User user = new UserDao().isRegistered(email, password);
 
         if(user != null){
             HttpSession hsession=request.getSession();
             hsession.setAttribute("user", user);
             hsession.setMaxInactiveInterval(30*60);
-
             response.sendRedirect(request.getContextPath() + "/homePage");
-
-            System.out.println("User " + user.getFirstName() + " is logged");
         }else
             getServletContext().getRequestDispatcher("/loginerror.html").forward(request, response);
     }

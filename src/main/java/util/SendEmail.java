@@ -16,17 +16,17 @@ import javax.mail.internet.MimeMessage;
  */
 public class SendEmail {
     
-    private static final String SMTP_HOST="smtp.gmail.com";
-    private static final String SMTP_PORT="587";
-    private static final String FROM_EMAIL="yetanothermusicsocialnetwork@gmail.com";
-    private static final String FROM="YAMSN";
-    private static final boolean AUTH=true;
-    private static final boolean STARTTLS=true;
+    private static final String SMTP_HOST = "smtp.gmail.com";
+    private static final String SMTP_PORT = "587";
+    private static final String FROM_EMAIL = "yetanothermusicsocialnetwork@gmail.com";
+    private static final String FROM = "YAMSN";
+    private static final boolean AUTH = true;
+    private static final boolean STARTTLS = true;
 
     public static void sendEmail(String to, String subject, String content){
-        Authenticator auth=new MailAuthenticator();
+        Authenticator auth = new MailAuthenticator();
 
-        Properties props=new Properties();
+        Properties props = new Properties();
         props.put("mail.smtp.host", SMTP_HOST);
         props.put("mail.smtp.port", SMTP_PORT);
         props.put("mail.smtp.auth", AUTH);
@@ -34,7 +34,7 @@ public class SendEmail {
         
         Session session=Session.getDefaultInstance(props, auth);
         
-        Message msg=new MimeMessage(session);
+        Message msg = new MimeMessage(session);
         try {
             msg.setFrom(new InternetAddress(FROM_EMAIL, FROM));
             msg.setRecipient(Message.RecipientType.TO, new InternetAddress(to));
