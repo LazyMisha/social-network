@@ -37,7 +37,12 @@ public class RegistrationPageServlet extends HttpServlet {
         String email = request.getParameter("email");
         String pass = request.getParameter("password");
         String confirmPass = request.getParameter("confirm-password");
-        String url = ((HttpServletRequest)request).getRequestURL().toString().replaceAll("servlet", "profile");
+
+        String url = ((HttpServletRequest)request).getRequestURL().toString();
+        System.out.println(url);
+        if(url.toLowerCase().contains("servlet")){
+            url = url.replaceAll("servlet", "profile");
+        }
 
         if(pass.isEmpty() || pass.length() < 6){
             request.setAttribute("message",

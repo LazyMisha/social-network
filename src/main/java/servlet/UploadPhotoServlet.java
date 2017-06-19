@@ -134,11 +134,14 @@ public class UploadPhotoServlet extends HttpServlet {
                         String fileName = new File(item.getName()).getName();
                         String filePath = uploadPath + File.separator + fileName;
                         File storeFile = new File(filePath);
+                        String fileExtension = checkFile.getFileExtension(storeFile);
 
-                        if(!checkFile.getFileExtension(storeFile).equalsIgnoreCase("jpg")){
+                        if(!fileExtension.equalsIgnoreCase("jpg") ||
+                                !fileExtension.equalsIgnoreCase("png") ||
+                                    !fileExtension.equalsIgnoreCase("gif")){
                             request.setAttribute("message",
                                     "Photo is not uploaded successfully!" + "</br>" +
-                            "Please, use \".jpg\" extension!");
+                            "Please, use \".jpg\", \".png\" or \".gif\" extension!");
                         }else {
 
                             // saves the file on disk

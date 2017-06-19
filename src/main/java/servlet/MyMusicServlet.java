@@ -109,7 +109,7 @@ public class MyMusicServlet extends HttpServlet {
 
             request.setAttribute("songs", songs);
         }else {
-            request.setAttribute("songs", "You don't have ane songs");
+            request.setAttribute("songs", "You don't have any songs");
         }
 
         getServletContext().getRequestDispatcher("/yourSongs.jsp").forward(
