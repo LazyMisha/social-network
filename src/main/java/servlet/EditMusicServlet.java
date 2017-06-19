@@ -43,6 +43,8 @@ public class EditMusicServlet extends HttpServlet {
         User user = (User)request.getSession().getAttribute("user");
         UserDao userDao = new UserDao();
 
+        int songSize = Integer.parseInt(new UserDao().getMusicsSize(user));
+
         String firstName = user.getFirstName();
         String lastName = user.getLastName();
         String city = user.getCity();
@@ -99,36 +101,43 @@ public class EditMusicServlet extends HttpServlet {
         }
 
         try {
-            songName = request.getParameter("songName");
-            genre = request.getParameter("genre");
-            singer = request.getParameter("singer");
-            composer = request.getParameter("composer");
-            album = request.getParameter("album");
+            long generalMusicSize = songSize + fileSizeInMB;
 
-            System.out.println(songName);
-            System.out.println(genre);
-            System.out.println(singer);
-            System.out.println(composer);
-            System.out.println(album);
+            if(generalMusicSize >= 100){
+                request.setAttribute("message",
+                        "Your music space is full!");
+            }else {
 
-            music.setSong_name(songName);
-            music.setSinger(singer);
-            music.setPath(secondPart);
-            music.setGenre(genre);
-            music.setSize(fileSizeInMB);
+                songName = request.getParameter("songName");
+                genre = request.getParameter("genre");
+                singer = request.getParameter("singer");
+                composer = request.getParameter("composer");
+                album = request.getParameter("album");
 
-            musicDao.save(music);
+                System.out.println(songName);
+                System.out.println(genre);
+                System.out.println(singer);
+                System.out.println(composer);
+                System.out.println(album);
 
-            userSongs.setMusic(music);
-            userSongs.setUser(user);
-            userSongsDao.save(userSongs);
+                music.setSong_name(songName);
+                music.setSinger(singer);
+                music.setPath(secondPart);
+                music.setGenre(genre);
+                music.setSize(fileSizeInMB);
 
-            request.setAttribute("message",
-                    "Information has been successfully saved!");
-            System.out.println("Music " + music.getSong_name() + " is uploaded");
+                musicDao.save(music);
+
+                userSongs.setMusic(music);
+                userSongs.setUser(user);
+                userSongsDao.save(userSongs);
+
+                request.setAttribute("message",
+                        "Information has been successfully saved!");
+                System.out.println("Music " + music.getSong_name() + " is uploaded");
+            }
 
         }catch (Exception e){
-
             System.out.println(e.getMessage());
             request.setAttribute("message",
                     "There was an error!" + "<br/>" +
