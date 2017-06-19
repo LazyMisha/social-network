@@ -1,5 +1,6 @@
 package entity;
 
+import java.util.Date;
 import org.hibernate.annotations.OptimisticLockType;
 
 import javax.persistence.*;
@@ -31,7 +32,9 @@ public class Message {
 
     @Column(name = "is_read")
     private Boolean is_read;
-
+    
+    @Column(name = "messageDate")
+    private Date messageDate;
     public Message() {
     }
 
@@ -61,6 +64,14 @@ public class Message {
 
     public User getUser_id_to() {
         return user_id_to;
+    }
+    
+    public Date getMessageDate() {
+        return messageDate;
+    }
+
+    public void setMessageDate(Date messageDate) {
+        this.messageDate = messageDate;
     }
 
     public void setUser_id_to(User user_id_to) {

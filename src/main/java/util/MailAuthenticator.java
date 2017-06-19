@@ -8,6 +8,7 @@ import javax.mail.PasswordAuthentication;
  * @author stepanyuk
  */
 public class MailAuthenticator extends Authenticator{
+    
     private final String mail = "yetanothermusicsocialnetwork@gmail.com";
     private final String password = "yamsn2017";
     

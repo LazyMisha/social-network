@@ -6,7 +6,7 @@ import entity.Music;
 import entity.User;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.*;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -17,8 +17,6 @@ import javax.servlet.http.*;
 
 @WebServlet(name = "SerchMusicServlet", urlPatterns = {"/SerchMusicServlet"})
 public class SearchMusicServlet extends HttpServlet {
-
-    ArrayList<Music> musicArr;
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -91,28 +89,23 @@ public class SearchMusicServlet extends HttpServlet {
                     city);
         }
         
-        musicArr=new MusicDao().searchMusic(request.getParameter("search"));
-        String result="";
-
-        if(!musicArr.isEmpty()){
-            for(int i=0;i<musicArr.size();i++){
-
-                String fullPath = musicArr.get(i).getPath();
+        List<Music> musicList = new MusicDao().searchMusic(request.getParameter("search"));
+        String result = "";
+         if(!musicList.isEmpty()){
+            for(int i = 0; i < musicList.size(); i++){
+                Music song = musicList.get(i);
+                String fullPath = song.getPath();
                 int index = fullPath.indexOf("upload");
-                String path= fullPath.substring(index);
-
-                result+="<p>"+musicArr.get(i).getSinger()+" - "+musicArr.get(i).getSong_name()+
-                        "</p>"+"<audio controls><source src=\""+path+
-                        "\" type=\"audio/mpeg\"></audio><br/><br/>";
+                String path = fullPath.substring(index);
+                result += "<p>" + song.getSinger() + " - " + song.getSong_name() +
+                        "</p>" + "<audio controls><source src=\"" + path +
+                         "\" type=\"audio/mpeg\"></audio><br/><br/>";
             }
-
             request.setAttribute("song", result);
-
         }else{
             request.setAttribute("song","Can't find such song!");
         }
-
-        getServletContext().getRequestDispatcher("/searchResults.jsp").forward(
-                request, response);
+        getServletContext().getRequestDispatcher("/searchResults.jsp")
+                .forward(request, response);
     }
 }

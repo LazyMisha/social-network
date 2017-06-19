@@ -28,33 +28,30 @@ public class RecoverPasswordServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDao userDao=new UserDao();
-                
-        String email=request.getParameter("email");
-        String passwordHash=request.getParameter("hash");
+        UserDao userDao = new UserDao();
+        String email = request.getParameter("email");
+        String passwordHash = request.getParameter("hash");
         
         if(passwordHash.equals(userDao.getPasswordHash(email))){
+            User user = userDao.getUserByEmail(email);
+            SecurePassword secPass = new SecurePassword();
             
-            User user=userDao.getUserByEmail(email);
-            SecurePassword secPass=new SecurePassword();
-            
-            byte[] newPassBytes=new byte[3];
-            StringBuilder newPass=new StringBuilder();
+            byte[] newPassBytes = new byte[3];
+            StringBuilder newPass = new StringBuilder();
             new SecureRandom().nextBytes(newPassBytes);
             for(int i = 0; i < newPassBytes.length; i++){
                     newPass.append(Integer.toString((newPassBytes[i] & 0xff) + 0x100, 16).substring(1));
             }
                                     
-            String salt=secPass.getSalt();
-            String securedPassword=secPass.getSecurePassword(newPass.toString(), salt);
-            
+            String salt = secPass.getSalt();
+            String securedPassword = secPass.getSecurePassword(newPass.toString(), salt);
             user.setSalt(salt);
             user.setPassword(securedPassword);
             userDao.update(user);
             
-            String subject="Password recovering";
-            String to=email;
-            String content="Here's your new pass: "+newPass.toString();
+            String subject = "Password recovering";
+            String to = email;
+            String content = "Here's your new pass: "+newPass.toString();
             SendEmail.sendEmail(to, subject, content);
             
             response.getWriter().write("The new password was send to your email.");          

@@ -26,12 +26,12 @@ public class SendHashServlet extends HttpServlet {
         String passwordHash = new UserDao().getPasswordHash(request.getParameter("email"));
         
         if(passwordHash != null){
-            String subject="Password recovering";
-            String to=request.getParameter("email");
-            String content="Folow this link to recover your password:\n"+
-                    request.getScheme()+"://"+request.getServerName()+":"+
-                    request.getServerPort()+request.getContextPath()+                    
-                    "/recoverPassword.jsp?email="+to+"&passwordHash="+passwordHash;
+            String subject = "Password recovering";
+            String to = request.getParameter("email");
+            String content = "Folow this link to recover your password:\n" +
+                    request.getScheme() + "://"+request.getServerName() + ":" +
+                    request.getServerPort() + request.getContextPath() +                    
+                    "/recoverPassword.jsp?email=" + to + "&passwordHash=" + passwordHash;
             SendEmail.sendEmail(to, subject, content);
         }else{
             request.setAttribute("noSuchEmail", "There is no users with such Email");

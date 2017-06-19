@@ -24,15 +24,12 @@ public class LogoutServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         HttpSession session = request.getSession(false);
         session.invalidate();
         
         ServletContext sc = getServletContext();
         sc.getRequestDispatcher("/index.html").forward(request, response);
-
-        System.out.println("User is logout");
-
+        
         shutdown();
     }
 }
