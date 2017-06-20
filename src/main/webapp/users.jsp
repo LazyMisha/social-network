@@ -49,7 +49,7 @@ $(document).ready(function(){
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
-				<li><a href="#">Manage Playlists</a></li>
+				<li><a href="playlists.jsp">Manage Playlists</a></li>
 			</ul>
 		</li>
 		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
