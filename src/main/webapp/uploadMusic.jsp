@@ -47,7 +47,7 @@ $(document).ready(function(){
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
-				<li><a href="#">Manage Playlists</a></li>
+				<li><a href="playlists.jsp">Manage Playlists</a></li>
 			</ul>
 		</li>
 		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
@@ -128,6 +128,10 @@ $(document).ready(function(){
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
       <h2>Upload new Music</h2>
+	  <h5>Choose new <mark>mp3</mark> file by clicking "Browse" button and then press "Upload".</h5>
+	  <h5>After the file is uploaded, add or edit song details and save changes by clicking "Save" button.</h5>
+	  <h5>Your new song will appear in "My music" section.</h5>
+		<hr>
 	  <form action="uploadFile" method="post" enctype="multipart/form-data">
 	  <div class="form-group">
               <div class="input-group">
@@ -135,7 +139,7 @@ $(document).ready(function(){
                 <div class="input-group-btn">
                   <div class="fileUpload btn btn-info">
                     <span><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Browse</span>
-                    <input name="newtrack" type="file" class="musicupload">
+                    <input name="newtrack" type="file" class="musicupload" accept="audio/mpeg">
                   </div>
                 </div>
               </div>
@@ -147,7 +151,7 @@ $(document).ready(function(){
                					
 				<form action="editMusic" method="post" class="form-horizontal" style="margin-top: 10px;">
 					<fieldset>
-						<legend>Please, fill in song details</legend>
+						<legend>Please, add or edit song details</legend>
 						
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textinput">Song Name:</label>  
