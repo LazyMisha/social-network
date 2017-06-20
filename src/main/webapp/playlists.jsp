@@ -1,6 +1,3 @@
-<%@page import="java.util.List"%>
-<%@page import="entity.User"%>
-<%@page import="dao.UserDao"%>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +9,6 @@
   <link rel="stylesheet" href="css/newstyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/pagesearch.js"></script>
 </head>
 <body>
 
@@ -30,7 +26,7 @@ $(document).ready(function(){
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="${pageContext.request.contextPath}/homePage">YAMSN</a>
+            <a class="navbar-brand" href="${pageContext.request.contextPath}/homePage">YAMSN</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
@@ -80,7 +76,7 @@ $(document).ready(function(){
 			<div class="profile-sidebar">
 				<!-- SIDEBAR Userpic -->
 				<div class="profile-userpic">
-					<a href="${pageContext.request.contextPath}/photoPage"><img src="${photo}" class="img-responsive" alt=""></a>
+					<a href="${pageContext.request.contextPath}/photoPage"><img src="${pathToPhoto}" class="img-responsive" alt="Upload new userpic"></a>
 				</div>
 				<!-- SIDEBAR Userpic End -->
 				<!-- SIDEBAR User title-->
@@ -101,7 +97,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-home"></i>
 							Home </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="${pageContext.request.contextPath}/profile">
 							<i class="glyphicon glyphicon-user"></i>
 							My Account </a>
@@ -116,7 +112,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="${pageContext.request.contextPath}/sendMessage">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
@@ -129,49 +125,37 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Send messages to other Users!</h2>
-	  
-	  <!-- Searchable container -->
-	  <div class="searchable-container">
-		<div style="margin-bottom:20px;">
-            <input type="search" class="form-control" id="input-search" placeholder="Search for a dialog with User..." >
-        </div>
+      <h2>Manage your Playlists</h2>
+      
+		<table class="table table-striped custab">
 		
-		<!-- Dialogs list -->
-		<%
-			UserDao ud=new UserDao();
-			List<User> friends = ud.getFriends();
-			for(User user : friends){
-			    String photo = user.getPath_to_photo();
-			    String link = user.getLink();
-			    if(photo == null){
-			        photo = "photo/default.jpg";
-				}
-			    out.print("<div class=\"row\">" +
-				"<div class=\"col-md-10 items\">" +
-				"<div class=\"media\">" +
-				"<a class=\"pull-left\" href=\"" + link + "\">" +
-				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\" style=\"width:75px;height:75px;\">" +
-				"</a>" +
-				"<div class=\"media-body\">" +
-				"<h4 class=\"media-heading\">" + user.getFirstName() + " " + user.getLastName() + "</h4>" +
-				"<h5><mark>Unread messages:</mark> <span class=\"badge\">5</span></h5>" +
-				"<hr style=\"margin:4px auto\">" +
-				"<form action=\"dialog.jsp\" method=\"POST\" class=\"form-horizontal\">" +
-				"<button name=\"friend_id\" class=\"btn btn-primary\" type=\"submit\" value=\"" + user.getId() + "\">Chat with " + user.getFirstName() + "</button>" +
-				"</form>" +
-				"</div>" +
-				"</div>" +
-				"</div>" +
-				"</div>");
-			}
-		%>
-		<!-- Dialogs list END-->
-		
-		</div>
-		<!-- Searchable container END-->
-
-
+			<thead>
+			<a href="createplaylist.jsp" class="btn btn-info btn-xs pull-right"><b>+</b> Create New Playlist</a>
+				<tr>
+					<th>#</th>
+					<th>Playlist Name</th>
+					<th class="text-center">Action</th>
+				</tr>
+			</thead>
+			
+            <tr>
+                <td>1</td>
+                <td><a href="#">$PLAYLIST1</a></td>
+                <td class="text-center"><a href="#" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>
+            </tr>
+			
+            <tr>
+                <td>2</td>
+                <td><a href="#">$PLAYLIST2</a></td>
+                <td class="text-center"><a href="#" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>
+            </tr>
+			
+            <tr>
+                <td>3</td>
+                <td><a href="#">$PLAYLIST3</a></td>
+                <td class="text-center"><a href="#" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-edit"></span> Edit</a> <a href="#" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Delete</a></td>
+            </tr>
+		</table>
 	  <!-- Main content end -->
     </div>
 	

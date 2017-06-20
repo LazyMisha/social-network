@@ -47,7 +47,7 @@ $(document).ready(function(){
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
-				<li><a href="#">Manage Playlists</a></li>
+				<li><a href="playlists.jsp">Manage Playlists</a></li>
 			</ul>
 		</li>
 		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
@@ -138,7 +138,7 @@ $(document).ready(function(){
                 <div class="input-group-btn">
                   <div class="fileUpload btn btn-info">
                     <span><i class="glyphicon glyphicon-folder-open"></i>&nbsp;&nbsp;Browse</span>
-                    <input id="logo-id" name="photo" type="file" class="attachment_upload">
+                    <input id="logo-id" name="photo" type="file" class="attachment_upload" accept="image/jpeg,image/png,image/gif">
                   </div>
                 </div>
               </div>

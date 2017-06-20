@@ -1,6 +1,4 @@
-<%@page import="java.util.List"%>
 <%@page import="entity.User"%>
-<%@page import="dao.UserDao"%>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +10,6 @@
   <link rel="stylesheet" href="css/newstyle.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="js/pagesearch.js"></script>
 </head>
 <body>
 
@@ -106,7 +103,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-user"></i>
 							My Account </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="${pageContext.request.contextPath}/myMusic">
 							<i class="glyphicon glyphicon-music"></i>
 							My Music </a>
@@ -116,7 +113,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="${pageContext.request.contextPath}/sendMessage">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
@@ -128,49 +125,82 @@ $(document).ready(function(){
     </div>
 	
     <div class="col-sm-7 text-left maincontent"> 
-	<!-- Main content goes here -->
-      <h2>Send messages to other Users!</h2>
+	<!-- Main content goes here -->	
+	<h2>Create New Playlist</strong></h2>
+      <script>
+		function toggle(source) {
+		  checkboxes = document.getElementsByName('tracklist');
+		  for(var i=0, n=checkboxes.length;i<n;i++) {
+			checkboxes[i].checked = source.checked;
+		  }
+		}
+	  </script>
 	  
-	  <!-- Searchable container -->
-	  <div class="searchable-container">
-		<div style="margin-bottom:20px;">
-            <input type="search" class="form-control" id="input-search" placeholder="Search for a dialog with User..." >
-        </div>
-		
-		<!-- Dialogs list -->
-		<%
-			UserDao ud=new UserDao();
-			List<User> friends = ud.getFriends();
-			for(User user : friends){
-			    String photo = user.getPath_to_photo();
-			    String link = user.getLink();
-			    if(photo == null){
-			        photo = "photo/default.jpg";
-				}
-			    out.print("<div class=\"row\">" +
-				"<div class=\"col-md-10 items\">" +
-				"<div class=\"media\">" +
-				"<a class=\"pull-left\" href=\"" + link + "\">" +
-				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\" style=\"width:75px;height:75px;\">" +
-				"</a>" +
-				"<div class=\"media-body\">" +
-				"<h4 class=\"media-heading\">" + user.getFirstName() + " " + user.getLastName() + "</h4>" +
-				"<h5><mark>Unread messages:</mark> <span class=\"badge\">5</span></h5>" +
-				"<hr style=\"margin:4px auto\">" +
-				"<form action=\"dialog.jsp\" method=\"POST\" class=\"form-horizontal\">" +
-				"<button name=\"friend_id\" class=\"btn btn-primary\" type=\"submit\" value=\"" + user.getId() + "\">Chat with " + user.getFirstName() + "</button>" +
-				"</form>" +
-				"</div>" +
-				"</div>" +
-				"</div>" +
-				"</div>");
-			}
-		%>
-		<!-- Dialogs list END-->
-		
-		</div>
-		<!-- Searchable container END-->
+	  <!-- Form start -->
+			<form class="form-horizontal">
+				<fieldset>
+				<h5>Choose a name for your new Playlist, check songs You want to add to it and then press "Save" button.</h5>
+				<hr>
+				<!-- Text input-->
+				<div class="form-group">
+				  <label class="col-md-4 control-label" for="playlistname">Playlist Name</label>  
+				  <div class="col-md-7">
+				  <input id="playlistname" name="playlistname" type="text" placeholder="Choose a name for Playlist" class="form-control input-md" required="">
+				  </div>
+				</div>
 
+				<!-- Checkboxes With Songs! -->
+				<div class="form-group">
+				  <label class="col-md-4 control-label" for="tracklist">Choose Songs to add</label>
+				  <div class="col-md-7">
+				  
+				   <!-- Song 1 -->
+				  <div class="checkbox">
+					<label for="tracklist-0">
+					  <input type="checkbox" name="tracklist" id="tracklist-0" value="value1">
+					  $Song1
+					</label>
+					</div>
+					
+					<!-- Song 2 -->
+				  <div class="checkbox">
+					<label for="tracklist-1">
+					  <input type="checkbox" name="tracklist" id="tracklist-1" value="value2">
+					  $Song2
+					</label>
+					</div>
+					
+					<!-- Song 3 -->
+				  <div class="checkbox">
+					<label for="tracklist-2">
+					  <input type="checkbox" name="tracklist" id="tracklist-2" value="value3">
+					  $Song3
+					</label>
+					</div>
+					
+					<!-- Select\Deselect button -->
+					<hr style="margin:0px;">
+					<div class="checkbox">
+					<label>
+					  <input type="checkbox" name="select-all" onClick="toggle(this)">
+					  Select/Deselect all
+					</label>
+					</div>
+					
+				  </div>
+				</div>
+
+				<!-- Button -->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="submit"></label>
+					  <div class="col-md-4">
+						<input type="submit" name="submit" class="btn btn-info" value="Save">
+					  </div>
+					</div>
+
+				</fieldset>
+				</form>
+		<!-- Form End-->
 
 	  <!-- Main content end -->
     </div>
