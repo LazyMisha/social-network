@@ -8,8 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/newstyle.css">
+  <link rel="stylesheet" href="css/audioplayer.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="js/audiojs/audio.js"></script>
 </head>
 <body>
 
@@ -46,7 +48,7 @@ $(document).ready(function(){
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
-				<li><a href="#">Manage Playlists</a></li>
+				<li><a href="playlists.jsp">Manage Playlists</a></li>
 			</ul>
 		</li>
 		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
@@ -126,19 +128,88 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Your Music collection</strong></h2>
-		<div class="row container-fluid gutterless">
-			<div class="col-md-7">
-				${songs}
+      <h2>Your Music collection</h2>
+	  <script>
+      $(function() { 
+        // Setup the player to autoplay the next track
+        var a = audiojs.createAll({
+          trackEnded: function() {
+            var next = $('ol li.playing').next();
+            if (!next.length) next = $('ol li').first();
+            next.addClass('playing').siblings().removeClass('playing');
+            audio.load($('a', next).attr('data-src'));
+            audio.play();
+          }
+        });
+        
+        // Load in the first track
+        var audio = a[0];
+            first = $('ol a').attr('data-src');
+        $('ol li').first().addClass('playing');
+        audio.load(first);
+
+        // Load in a track on click
+        $('ol li').click(function(e) {
+          e.preventDefault();
+          $(this).addClass('playing').siblings().removeClass('playing');
+          audio.load($('a', this).attr('data-src'));
+          audio.play();
+        });
+        // Keyboard shortcuts
+        $(document).keydown(function(e) {
+          var unicode = e.charCode ? e.charCode : e.keyCode;
+             // right arrow
+          if (unicode == 39) {
+            var next = $('li.playing').next();
+            if (!next.length) next = $('ol li').first();
+            next.click();
+            // back arrow
+          } else if (unicode == 37) {
+            var prev = $('li.playing').prev();
+            if (!prev.length) prev = $('ol li').last();
+            prev.click();
+            // spacebar
+          } else if (unicode == 32) {
+            audio.playPause();
+          }
+        })
+      });
+    </script>			
+	  
+	<div class="row container-fluid gutterless">
+			<div class="col-md-6">
+				<div id="shortcuts">
+					<div>
+					<h1>Keyboard shortcuts:</h1>
+					<p><em>&rarr;</em> Next track &nbsp;&nbsp;<em>&larr;</em> Previous track</p>
+					<p><em>&darr;</em> Volume down &nbsp;&nbsp;<em>&uarr;</em> Volume up</p>
+					<p><em>Space</em> Play/pause</p>
+					</div>
+			</div>
 			</div>
 			
-			<div class="col-md-5">
-				<p>As for now your music quota is 100Mb.</p>
-				<p>You have uploaded: ${count}Mb.</p>
-				<p>Click to <a href="${pageContext.request.contextPath}/uploadMusicPage">Upload New</a> music.</p>
-				<p>Click to <a href="#">Manage Playlists</a>.</p>
+			<div class="col-md-6">
+				<p>As for now your music quota is <strong>100Mb</strong>.</p>
+				<p>You have uploaded: <strong>${count}Mb</strong>.</p>
+				<p>Click to <a href="${pageContext.request.contextPath}/uploadMusicPage" class="btn	btn-info btn-xs" role="button">Upload New</a> music.</p>
+				<p>Click to <a href="playlists.jsp" class="btn btn-info btn-xs" role="button">Manage Playlists</a>.</p>
 			</div>
+	</div>
+		
+		<div class="row container-fluid gutterless">
+			<!-- PLAYER  -->
+			<div class="col-md-12">
+				<div id="wrapper">
+					<audio preload="none"></audio>
+					<ol>
+					${songs}
+					</ol>
+				</div>
+			</div>
+			<!-- PLAYER end -->
+			
 		</div>
+			<!-- Playlists column END -->
 
 	  <!-- Main content end -->
     </div>
