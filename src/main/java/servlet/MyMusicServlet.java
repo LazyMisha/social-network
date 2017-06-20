@@ -102,14 +102,14 @@ public class MyMusicServlet extends HttpServlet {
                 int index = path.indexOf("upload");
                 path = path.substring(index);
 
-                songs += "<p>" + music.get(i).getSinger() + " - " + music.get(i).getSong_name() +
-                        "</p>" + "<audio controls><source src=\"" + path +
-                        "\" type=\"audio/mpeg\"></audio><br/><br/>";
+                songs += "<li><a href=\"#\" data-src=\"" + path +
+                        "\">" + music.get(i).getSinger() + " - " + music.get(i).getSong_name() +
+                        "</li>";
             }
 
             request.setAttribute("songs", songs);
         }else {
-            request.setAttribute("songs", "You don't have any songs");
+            request.setAttribute("songs", "You don't have ane songs");
         }
 
         getServletContext().getRequestDispatcher("/yourSongs.jsp").forward(
