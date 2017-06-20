@@ -46,7 +46,7 @@ $(document).ready(function(){
 			<ul class="dropdown-menu">
 				<li><a href="${pageContext.request.contextPath}/myMusic">My Music</a></li>
 				<li><a href="${pageContext.request.contextPath}/uploadMusicPage">Upload new</a></li>
-				<li><a href="#">Manage Playlists</a></li>
+				<li><a href="playlists.jsp">Manage Playlists</a></li>
 			</ul>
 		</li>
 		<li><a href="${pageContext.request.contextPath}/anotherUsers"><span class="glyphicon glyphicon-globe"></span> Users</a></li>
@@ -130,166 +130,112 @@ $(document).ready(function(){
 	  
 		<form action="editUser" method="post" class="form-horizontal">
 					<fieldset>
-						<legend>Please, fill in your data</legend>
+						<legend>Add or edit Your Data</legend>
 						<div class="upload-message">${message}</div>
 						
-								<div class="form-group" style="margin-top: 10px;">
+								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textinput">First Name:</label>  
 								  <div class="col-md-6">
-								  <input type="text" name="firstName" value="${oldFirstName}" class="form-control input-md">
+								  <input type="text" name="firstName" value="${oldFirstName}" class="form-control input-md" required="" maxlength="20">
 								  </div>
 								</div>
 
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textinput">Last Name:</label>  
 								  <div class="col-md-6">
-								  <input type="text" name="lastName" value="${oldLastName}" class="form-control input-md">
+								  <input type="text" name="lastName" value="${oldLastName}" class="form-control input-md" required="" maxlength="20">
 									
 								  </div>
 								</div>
 
+								<!-- New BIRTHDAY input -->
 								<div class="form-group">
-								  <label class="col-md-4 control-label" for="textinput">E-mail:</label>  
-								  <div class="col-md-6">
-								  <input type="email" name="email" value="${oldEmail}" class="form-control input-md">
+								  <label class="col-md-4 control-label" for="textinput">Date of Birth:</label>
+								  
+								  <div class="col-md-2">
+								  <input id="birth-year-field" name="birth-year" type="number" value="${oldbdyear}" placeholder="YYYY" class="form-control" min="1900" max="2017" maxlength="4">
+								  <span class="help-block">Year (e.g. 1990)</span>
+									</div>
 									
-								  </div>
+								   <div class="col-md-2">
+								  <input id="birth-month-field" name="birth-month" type="number" value="${oldbdmonth}" placeholder="MM" class="form-control" min="1" max="12" maxlength="2">
+								  <span class="help-block">Month (e.g. 09)</span>
+									</div>
+								  
+								   <div class="col-md-2">
+								  <input id="birth-day-field" name="birth-day" type="number" value="${oldbdday}" placeholder="DD" class="form-control" min="1" max="31" maxlength="2">
+								  <span class="help-block">Day (e.g. 29)</span>
+									</div>
 								</div>
-
-								<div class="form-group">
-								  <label class="col-md-4 control-label" for="textinput">Password:</label>  
-								  <div class="col-md-6">
-								  <input type="password" name="password" value="" class="form-control input-md">
-								  </div>
-								</div>
-								
-								<!-- Select Basic -->
-								<div class="form-group">
-								  <label class="col-md-4 control-label" for="uregency">Date of Birth</label>
-								  <div class="col-md-2">
-									<select id="birth-day-field" name="birth-day" class="form-control">
-										<option value="01">1</option>
-										<option value="02">2</option>
-										<option value="03">3</option>
-										<option value="04">4</option>
-										<option value="05">5</option>
-										<option value="06">6</option>
-										<option value="07">7</option>
-										<option value="08">8</option>
-										<option value="09">9</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-										<option value="13">13</option>
-										<option value="14">14</option>
-										<option value="15">15</option>
-										<option value="16">16</option>
-										<option value="17">17</option>
-										<option value="18">18</option>
-										<option value="19">19</option>
-										<option value="20">20</option>
-										<option value="21">21</option>
-										<option value="22">22</option>
-										<option value="23">23</option>
-										<option value="24">24</option>
-										<option value="25">25</option>
-										<option value="26">26</option>
-										<option value="27">26</option>
-										<option value="28">28</option>
-										<option value="29">29</option>
-										<option value="30">30</option>
-										<option value="31">31</option>
-									</select>
-								  </div>
-								  <div class="col-md-2">
-									<select id="birth-month-field" name="birth-month" class="form-control">
-										<option value="01">01</option>
-										<option value="02">02</option>
-										<option value="03">03</option>
-										<option value="04">04</option>
-										<option value="05">05</option>
-										<option value="06">06</option>
-										<option value="07">07</option>
-										<option value="08">08</option>
-										<option value="09">09</option>
-										<option value="10">10</option>
-										<option value="11">11</option>
-										<option value="12">12</option>
-									</select>
-								  </div>
-								  <div class="col-md-2">
-									<select id="birth-year-field" name="birth-year" class="form-control">
-										<option value="1970">1970</option>
-										<option value="1971">1971</option>
-										<option value="1972">1972</option>
-										<option value="1973">1973</option>
-										<option value="1974">1974</option>
-										<option value="1975">1975</option>
-										<option value="1976">1976</option>
-										<option value="1977">1977</option>
-										<option value="1978">1978</option>
-										<option value="1979">1979</option>
-										<option value="1980">1980</option>
-										<option value="1981">1981</option>
-										<option value="1982">1982</option>
-										<option value="1983">1983</option>
-										<option value="1984">1984</option>
-										<option value="1985">1985</option>
-										<option value="1986">1986</option>
-										<option value="1987">1987</option>
-										<option value="1988">1988</option>
-										<option value="1989">1989</option>
-										<option value="1990">1990</option>
-										<option value="1991">1991</option>
-										<option value="1992">1992</option>
-										<option value="1993">1993</option>
-										<option value="1994">1994</option>
-										<option value="1995">1995</option>
-										<option value="1996">1996</option>
-										<option value="1997">1997</option>
-										<option value="1998">1998</option>
-										<option value="1999">1999</option>
-										<option value="2001">2001</option>
-										<option value="2002">2002</option>
-										<option value="2003">2003</option>
-										<option value="2004">2004</option>
-										<option value="2005">2005</option>
-										<option value="2006">2006</option>
-										<option value="2007">2007</option>
-										<option value="2008">2008</option>
-										<option value="2009">2009</option>
-										<option value="2010">2010</option>
-									</select>
-								  </div>
-								</div>
+								<!-- New BIRTHDAY input END -->
 								
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textinput">Country:</label>  
 								  <div class="col-md-6">
-								  <input type="text" name="country" value="${oldCountry}" class="form-control input-md">
+								  <input type="text" name="country" value="${oldCountry}" class="form-control input-md" maxlength="20">
 								  </div>
 								</div>
 								
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textinput">City:</label>  
 								  <div class="col-md-6">
-								  <input type="text" name="city" value="${oldCity}" class="form-control input-md">
+								  <input type="text" name="city" value="${oldCity}" class="form-control input-md" maxlength="20">
 								  </div>
 								</div>
 								
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="textinput">Additional Information:</label>  
 								  <div class="col-md-6">
-								  <textarea name="userInfo" class="form-control" rows="8" id="textinput">${oldUserInfo}</textarea>
+								  <textarea name="userInfo" class="form-control" rows="8" id="textinput" maxlength="120">${oldUserInfo}</textarea>
+								  <span class="help-block">120 characters max.</span>
 								  </div>
 								</div>
-
+																
 								<div class="form-group">
 								  <label class="col-md-4 control-label" for="button1id">Save changes</label>
 								  <div class="col-md-8">
 									<button name="submitchanges" class="btn btn-success" type="submit">Save</button>
 								  </div>
 								</div>
+								
+					</fieldset>
+				</form>
+				
+				<form action="editUser" method="post" class="form-horizontal" style="margin-top: 20px;">
+					<fieldset>
+						<legend>Edit your Email/Password</legend>
+						<div class="upload-message">${message}</div>
+						
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="textinput">E-mail:</label>  
+								  <div class="col-md-6">
+								  <input type="email" name="email" value="${oldEmail}" class="form-control input-md" required="">
+									
+								  </div>
+								</div>
+								
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="textinput">Password:</label>  
+								  <div class="col-md-6">
+								  <input type="password" name="password" value="" class="form-control input-md" minlength="6" maxlength="20">
+								  </div>
+								</div>
+								
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="textinput">Confirm Password:</label>  
+								  <div class="col-md-6">
+								  <input type="password" name="confirm-password" value="" class="form-control input-md" minlength="6" maxlength="20">
+								  </div>
+								</div>
+								
+																
+								<div class="form-group">
+								  <label class="col-md-4 control-label" for="button1id">Apply changes</label>
+								  <div class="col-md-8">
+									<button name="submitchanges" class="btn btn-warning" type="submit">Apply</button>
+								  </div>
+								</div>
+								
 					</fieldset>
 				</form>
 			
