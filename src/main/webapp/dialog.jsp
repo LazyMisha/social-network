@@ -1,11 +1,11 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
-<%@page import="dao.UserDao"%>
-<%@page import="entity.User"%>
+<%@page import="dao.MessageDao"%>
 <%@page import="entity.Message"%>
 <%@page import="java.util.List"%>
-<%@page import="dao.MessageDao"%>
+<%@page import="dao.UserDao"%>
+<%@page import="entity.User"%>
 <%@page contentType="text/html" pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +84,7 @@ $(document).ready(function(){
 			<div class="profile-sidebar">
 				<!-- SIDEBAR Userpic -->
 				<div class="profile-userpic">
-					<a href="${pageContext.request.contextPath}/photoPage"><img src="${photo}" class="img-responsive" alt=""></a>
+					<a href="${pageContext.request.contextPath}/photoPage"><img src="${pathToPhoto}" class="img-responsive" alt="Upload new userpic"></a>
 				</div>
 				<!-- SIDEBAR Userpic End -->
 				<!-- SIDEBAR User title-->
@@ -100,7 +100,7 @@ $(document).ready(function(){
 				<!-- SIDEBAR Menu -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<li>
+						<li class="active">
 							<a href="${pageContext.request.contextPath}/homePage">
 							<i class="glyphicon glyphicon-home"></i>
 							Home </a>
@@ -120,7 +120,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
 						</li>
-						<li class="active">
+						<li>
 							<a href="${pageContext.request.contextPath}/sendMessage">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
@@ -134,54 +134,115 @@ $(document).ready(function(){
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
 	
-            <%
-                User user = (User)request.getSession().getAttribute("user");
-                Long friendID = Long.valueOf(request.getParameter("friend_id"));
-                User friend = new UserDao().getById(friendID);
-                request.getSession().setAttribute("friendID", friendID);
-            %>
-			
-            <h1>Your dialog with <%= friend.getFirstName() %>:</h1>
+<%
+    User user = (User)request.getSession().getAttribute("user");
+    Long friendID = Long.valueOf(request.getParameter("friend_id"));
+    User friend = new UserDao().getById(friendID);
+    request.getSession().setAttribute("friendID", friendID);
+%>
+        
+	<div class="row">
+        <div class="col-md-12" style="margin-top:20px">
             
-            <p>
-                <%
+			<div class="panel panel-primary">
+                <div class="panel-heading">
+                    <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Your dialog with <%= friend.getFirstName() %>
+                </div>
+                <div class="panel-body">
+                    <% 
                     List<Message> prevMesseges = new MessageDao().getDialog(user,friend);
                     String dialog = "";
                     for(Message m:prevMesseges){
                         Date messageDate = m.getMessageDate();
                         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMMMMMMM yyyy 'at' k:m", Locale.ENGLISH);
                         String formatedDate = sdf.format(messageDate);
-                        
-                        if((user.getId().longValue()) != (m.getUser_id_from().getId().longValue())){
-                            dialog+=friend.getFirstName()+"\non "+formatedDate+"\n-"+m.getMessage()+"\n\n";
+
+                        if((user.getId().longValue()) != (m.getUser_id_from().getId().longValue())){                            
+                            dialog +=
+                                "<li class=\"left clearfix\">"+
+                                    "<div class=\"chat-body clearfix\">"+
+                                        "<div class=\"header\">"+
+                                            "<strong class=\"primary-font\">"+user.getFirstName()+"</strong>"+
+                                                "<small class=\"text-muted\">"+
+                                                    "<span class=\"glyphicon glyphicon-time\"></span><strong>"+formatedDate+"</strong></small>"+
+                                        "</div>"+
+                                        "<p class=\"msg\">"+
+                                            m.getMessage()+
+                                        "</p>"+
+                                    "</div>"+
+                                "</li>";
                         }
-                        else
-                            dialog+=user.getFirstName()+"\non "+formatedDate+"\n-"+m.getMessage()+"\n\n";
+                        else{
+//                            dialog+=user.getFirstName()+"\non "+formatedDate+"\n-"+m.getMessage()+"\n\n";
+                            dialog +=
+                                "<li class=\"right clearfix\">"+
+                                    "<div class=\"chat-body clearfix\">"+
+                                        "<div class=\"header text-right\">"+
+                                            "<strong class=\"primary-font\">"+friend.getFirstName()+"</strong>"+
+                                                "<small class=\"text-muted\">"+
+                                                    "<span class=\"glyphicon glyphicon-time\"></span><strong>"+formatedDate+"</strong></small>"+
+                                        "</div>"+
+                                        "<p class=\"msg-other\">"+
+                                            m.getMessage()+
+                                        "</p>"+
+                                    "</div>"+
+                                "</li>";
+                        }
                     }
-                %>
-            </p>
-            <textarea readonly="readonly" id="messages" rows="15" cols="60"><%= dialog %></textarea><br/>
-            <input type="text" id="message"/><br/>
-            <input type="button" value="send" id="send"/><br/>
-            <script>
+                    %> 
+                    <ul class="chat" id="ulMessages">
+                    <%= dialog%>
+                    </ul>
+                </div>
+				
+                <div class="panel-footer">
+                    <div class="input-group">
+                        <input type="text" id="message" class="form-control input-sm" placeholder="Type your message here..." minlength="1" maxlength="300">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-warning btn-sm" id="send">Send</button>
+                            <script>
                 var websocket = new WebSocket("ws://"+document.location.host+"/socialnetwork/dialogEndpoint");
                 websocket.onmessage = onMessage;
                 document.getElementById("send").addEventListener("click",sendMessage,false);
                 
                 function sendMessage(){
                     if (message.value != ""){
+                        document.getElementById("ulMessages").innerHTML +=
+                       "<li class=\"left clearfix\">"+
+                                    "<div class=\"chat-body clearfix\">"+
+                                        "<div class=\"header\">"+
+                                            "<strong class=\"primary-font\">"+"<%= user.getFirstName() %>"+"</strong>"+
+                                                "<small class=\"text-muted\">"+
+                                                    "<span class=\"glyphicon glyphicon-time\"></span><strong>"+getFormatedDate()+"</strong></small>"+
+                                        "</div>"+
+                                        "<p class=\"msg\">"+
+                                            message.value+
+                                        "</p>"+
+                                    "</div>"+
+                                "</li>";
                         websocket.send(message.value);
-                        messages.value += "<%= user.getFirstName() %>\non " +
-                                getFormatedDate() + "\n-"+message.value + "\n\n";
-                        message.value = ""; 
+                        message.value = "";
                     }
                 }
                 
                 function onMessage(event){
                     var jsonData = JSON.parse(event.data);
-                    if(jsonData != null)
-                        messages.value += jsonData.name + "\non "+jsonData.date + 
-                            "\n-" + jsonData.text + "\n\n";
+                    if(jsonData != null){
+                        
+                        document.getElementById("ulMessages").innerHTML +=
+                        "<li class=\"right clearfix\">"+
+                                    "<div class=\"chat-body clearfix\">"+
+                                        "<div class=\"header text-right\">"+
+                                            "<strong class=\"primary-font\">"+jsonData.name+"</strong>"+
+                                                "<small class=\"text-muted\">"+
+                                                    "<span class=\"glyphicon glyphicon-time\"></span><strong>"+jsonData.date+"</strong></small>"+
+                                        "</div>"+
+                                        "<p class=\"msg-other\">"+
+                                            jsonData.text+
+                                        "</p>"+
+                                    "</div>"+
+                                "</li>";
+                    }    
                 }
                 
                 function getFormatedDate(){
@@ -199,6 +260,16 @@ $(document).ready(function(){
                             hours + ":" + minutes;
                 }
             </script>
+                        </span>
+                    </div>
+                </div>
+				
+            </div>
+			
+        </div>
+    </div>
+			
+			
 
 	  <!-- Main content end -->
     </div>
