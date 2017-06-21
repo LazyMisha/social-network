@@ -3,16 +3,12 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-		<link rel="stylesheet" href="css/bootstrap.min.css">
-		<link rel="stylesheet" href="css/style.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		 <link rel="stylesheet" href="css/style.css">
 		<title>Yet Another Music Social Network | DataArt IT School Project</title>
 	</head>
 	<body>
-		<script src="http://code.jquery.com/jquery-latest.js"></script>
-   		<script src="js/bootstrap.min.js"></script>
-		
 		<script>$('.carousel').carousel();</script>
 		<!-- CAROUSEL -->
 		<div class="carousel slide carousel-fade" data-ride="carousel">
