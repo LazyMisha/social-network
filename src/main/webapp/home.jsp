@@ -8,8 +8,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/newstyle.css">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  
 </head>
 <body>
 
@@ -126,14 +128,109 @@ $(document).ready(function(){
 	
     <div class="col-sm-7 text-left maincontent"> 
 	<!-- Main content goes here -->
-      <h2>Welcome, <strong>${name} ${lastName}</strong>!</h2>
-			<div class="songname">Papa Roach - My Medication</div>
-			<div class="musictrack"><audio controls><source src="upload/Papa Roach - My Medication.mp3"></audio></div>
-			<div class="songname">Shakira - Amarillo</div>
-			<div class="musictrack"><audio controls><source src="upload/Shakira - Amarillo.mp3"></audio></div>
-			<div>
-			</div>
-	  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+      <h2>Welcome to YAMSN, <strong>${name} ${lastName}</strong>!</h2>
+	  
+	  <hr class="hruserpage">
+	  <h4 style="margin:5px;">Your Dashboard:</h4>
+	  <div class="row container-fluid gutterless">
+	  	<div class="col-md-4">
+	    
+	    <div class="panel panel-default dashpanel">
+          <div class="panel-heading dashpanel">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-music fa-4x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <p class="announcement-heading"><span class="badge">0</span></p>
+                <p class="announcement-text">Songs Uploaded</p>
+              </div>
+            </div>
+          </div>
+          <a href="${pageContext.request.contextPath}/uploadMusicPage">
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-6">
+                  Upload new
+                </div>
+                <div class="col-xs-6 text-right">
+                  <i class="fa fa-arrow-circle-right"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+		</div>
+		
+		<div class="col-md-4">
+	    <div class="panel panel-default dashpanel">
+          <div class="panel-heading dashpanel">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-envelope-o fa-4x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <p class="announcement-heading"><span class="badge">0</span></p>
+                <p class="announcement-text"> New Messages</p>
+              </div>
+            </div>
+          </div>
+          <a href="${pageContext.request.contextPath}/sendMessage">
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-3">
+                  Respond
+                </div>
+                <div class="col-xs-9 text-right">
+                  <i class="fa fa-arrow-circle-right"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+		</div>
+		
+		<div class="col-md-4">
+	    <div class="panel panel-info dashpanel">
+          <div class="panel-heading dashpanel">
+            <div class="row">
+              <div class="col-xs-3">
+                <i class="fa fa-users fa-4x"></i>
+              </div>
+              <div class="col-xs-9 text-right">
+                <p class="announcement-heading"><span class="badge">0</span></p>
+                <p class="announcement-text">Registered Users</p>
+              </div>
+            </div>
+          </div>
+          <a href="${pageContext.request.contextPath}/anotherUsers">
+            <div class="panel-footer announcement-bottom">
+              <div class="row">
+                <div class="col-xs-6">
+                  View
+                </div>
+                <div class="col-xs-6 text-right">
+                  <i class="fa fa-arrow-circle-right"></i>
+                </div>
+              </div>
+            </div>
+          </a>
+        </div>
+		</div>
+	</div>
+	<hr class="hruserpage">
+	
+	<div class="row container-fluid">
+	  <p>Dear <em>${name}</em>! We proudly present you our new project - <strong>Yet Another Music Social Network!</strong></p>
+	  <ul><strong>As for now you can:</strong>
+	  <li><a href="${pageContext.request.contextPath}/uploadMusicPage">add</a>, <a href="${pageContext.request.contextPath}/myMusic">manage and listen</a> to your music;</li>
+	  <li><a href="${pageContext.request.contextPath}/anotherUsers">find</a> and <a href="${pageContext.request.contextPath}/sendMessage">chat</a> with other users;</li>
+	  <li><a href="${pageContext.request.contextPath}/editUserOldInfoServlet">manage your profile</a> information and <a href="${pageContext.request.contextPath}/photoPage">userpic</a>.</li>
+	  </ul>
+	  <p>Your music quota for now is: 100Mb. <a href="#">Click to know</a> how to increase it.</p>
+	 </div>
+	 
+	  
 
 	  <!-- Main content end -->
     </div>
