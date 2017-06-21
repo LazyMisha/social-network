@@ -148,14 +148,14 @@ $(document).ready(function(){
 			        photo = "photo/default.jpg";
 				}
 			    out.print("<div class=\"row\">" +
-				"<div class=\"col-md-10 items\">" +
+				"<div class=\"col-md-8 items\">" +
 				"<div class=\"media\">" +
 				"<a class=\"pull-left\" href=\"" + link + "\">" +
 				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\" style=\"width:75px;height:75px;\">" +
 				"</a>" +
 				"<div class=\"media-body\">" +
 				"<h4 class=\"media-heading\">" + user.getFirstName() + " " + user.getLastName() + "</h4>" +
-				"<h5><mark>Unread messages:</mark> <span class=\"badge\">5</span></h5>" +
+				"<h5><mark>Unread messages:</mark> <span class=\"badge\">0</span></h5>" +
 				"<hr style=\"margin:4px auto\">" +
 				"<form action=\"dialog.jsp\" method=\"POST\" class=\"form-horizontal\">" +
 				"<button name=\"friend_id\" class=\"btn btn-primary\" type=\"submit\" value=\"" + user.getId() + "\">Chat with " + user.getFirstName() + "</button>" +

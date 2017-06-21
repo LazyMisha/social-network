@@ -324,7 +324,7 @@ footer {
 .panel-heading {
 	font-size: 18px;
 }
-.panel-body
+.panelmsg
 {
     overflow-y: scroll;
     height: 400px;
@@ -351,3 +351,12 @@ footer {
     padding-right: 30px;
 }
 /* CHAT Styles */
+
+/* Dashboard Home Page */
+.dashpanel {
+	font-size: 12px;
+}
+.announcement-text {
+	font-weight: bold;
+	font-size: 14px;
+}

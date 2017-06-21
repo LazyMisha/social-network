@@ -158,7 +158,7 @@ $(document).ready(function(){
 				if(country == null){
 					country = "no country";
 				}
-				out.print("<div class=\"items col-md-4\">" +
+				out.print("<div class=\"items col-md-6\">" +
 				"<div class=\"media\">" +
 				"<a class=\"pull-left\" href=\"" + userLink + "\">" +
 				"<img class=\"media-object dp img-circle\" src=\"" + photo + "\">" +
