@@ -137,7 +137,7 @@ $(document).ready(function(){
 						  <tr>
 							<td align="center" colspan="2">
 							<div><img src="${friendPhoto}" class="friendspic"></div>
-							<div><a href="sendMessage.jsp" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i>  Send a Message</a>
+							<div><a href="${pageContext.request.contextPath}/sendMessage" data-original-title="Send a message to this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-primary"><i class="glyphicon glyphicon-send"></i>  Send a Message</a>
                             <a href="#" data-original-title="Explore user's music" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-headphones"></i>  Explore Music</a>
 							</div>
 							</td>
@@ -178,11 +178,6 @@ $(document).ready(function(){
 						</tbody>
 						</table>
 					</div>
-						<!-- <div class="panel-footer">
-							<div align="right">
-                            <a href="${pageContext.request.contextPath}/editUserOldInfoServlet" data-original-title="Edit Profile" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-							</div>
-						</div> -->
 						<div class="panel-footer"></div>
 				</div>
 	  <!-- Main content end -->
