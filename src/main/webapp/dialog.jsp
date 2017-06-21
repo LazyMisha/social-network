@@ -100,7 +100,7 @@ $(document).ready(function(){
 				<!-- SIDEBAR Menu -->
 				<div class="profile-usermenu">
 					<ul class="nav">
-						<li class="active">
+						<li>
 							<a href="${pageContext.request.contextPath}/homePage">
 							<i class="glyphicon glyphicon-home"></i>
 							Home </a>
@@ -120,7 +120,7 @@ $(document).ready(function(){
 							<i class="glyphicon glyphicon-globe"></i>
 							Users </a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="${pageContext.request.contextPath}/sendMessage">
 							<i class="glyphicon glyphicon-envelope"></i>
 							Messages </a>
@@ -148,7 +148,7 @@ $(document).ready(function(){
                 <div class="panel-heading">
                     <span class="glyphicon glyphicon-comment"></span>&nbsp;&nbsp;Your dialog with <%= friend.getFirstName() %>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body panelmsg">
                     <% 
                     List<Message> prevMesseges = new MessageDao().getDialog(user,friend);
                     String dialog = "";
