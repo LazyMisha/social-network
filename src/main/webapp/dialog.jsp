@@ -157,7 +157,7 @@ $(document).ready(function(){
                         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMMMMMMM yyyy 'at' k:m", Locale.ENGLISH);
                         String formatedDate = sdf.format(messageDate);
 
-                        if((user.getId().longValue()) != (m.getUser_id_from().getId().longValue())){                            
+                        if((user.getId().longValue()) == (m.getUser_id_from().getId().longValue())){                            
                             dialog +=
                                 "<li class=\"left clearfix\">"+
                                     "<div class=\"chat-body clearfix\">"+
