@@ -44,16 +44,15 @@ public class RegistrationPageServlet extends HttpServlet {
             url = url.replaceAll("servlet", "profile");
         }
 
+        User checkUser = new UserDao().getUserByEmail(email);
+
         if(pass.isEmpty() || pass.length() < 6){
             request.setAttribute("message",
                     "Sorry, but your password isn't long enough." + "<br/>" +
                             "Try again");
         }else{
             if(pass.equals(confirmPass)){
-
-                User checkUser = new UserDao().getUserByEmail(email);
-
-                if(checkUser != null) {
+                if(checkUser != null){
                     request.setAttribute("message",
                             "User with this Email already registered" + "</br>" +
                                     "Please, use another Email");
@@ -62,7 +61,6 @@ public class RegistrationPageServlet extends HttpServlet {
                             request, response);
 
                     System.out.println("User tried registration with existing email");
-
                 }else {
                     String salt = secPass.getSalt();
                     String securedPassword = secPass.getSecurePassword(pass, salt);
@@ -76,9 +74,9 @@ public class RegistrationPageServlet extends HttpServlet {
                     user.setLink(url + "?" + user.getId());
                     userDao.update(user);
 
-                /*request.setAttribute("message",
-                        "Welcome! You are registered successfully!" +
-                                "<p><a href='index.html'>Go to Main Page For Login</a></p>");*/
+            /*request.setAttribute("message",
+                    "Welcome! You are registered successfully!" +
+                            "<p><a href='index.html'>Go to Main Page For Login</a></p>");*/
                     System.out.println("User " + user.getFirstName() + " successfully registered");
 
                     getServletContext().getRequestDispatcher("/index.html").forward(

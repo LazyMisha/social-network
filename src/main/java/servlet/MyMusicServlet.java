@@ -99,9 +99,6 @@ public class MyMusicServlet extends HttpServlet {
         if(!music.isEmpty()) {
             for (int i = 0; i < music.size(); i++) {
                 String path = music.get(i).getPath();
-                int index = path.indexOf("upload");
-                path = path.substring(index);
-
                 songs += "<li><a href=\"#\" data-src=\"" + path +
                         "\">" + music.get(i).getSinger() + " - " + music.get(i).getSong_name() +
                         "</li>";

@@ -5,6 +5,7 @@ import entity.User;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import service.CheckFile;
 import service.GetTags;
 
 import java.io.*;
@@ -153,48 +154,57 @@ public class UploadMusicServlet extends HttpServlet {
                     for (FileItem item : formItems) {
                         // processes only fields that are not form fields
                         if (!item.isFormField()) {
-                            String fileName = UUID.randomUUID().toString() + ".mp3";
-                            String filePath = uploadPath + File.separator + fileName;
-                            File storeFile = new File(filePath);
+                            String fileName = new File(item.getName()).getName();
 
-                            System.out.println(storeFile.getName());
+                            String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
 
-                            // saves the file on disk
-                            item.write(storeFile);
-                            request.setAttribute("message",
-                                    "Upload has been done successfully!");
+                            if(extension.equalsIgnoreCase("mp3")){
+                                fileName = UUID.randomUUID().toString() + ".mp3";
+                                String filePath = uploadPath + File.separator + fileName;
+                                File storeFile = new File(filePath);
 
-                            //Parse mp3 tags
-                            getTags.getTagsFromMP3(storeFile);
+                                System.out.println(storeFile.getName());
 
-                            if (songName == null) {
-                                request.setAttribute("songName", "no information");
-                            } else {
-                                request.setAttribute("songName", songName);
-                            }
+                                // saves the file on disk
+                                item.write(storeFile);
+                                request.setAttribute("message",
+                                        "Upload has been done successfully!");
 
-                            if (genre == null) {
-                                request.setAttribute("genre", "no information");
-                            } else {
-                                request.setAttribute("genre", genre);
-                            }
+                                //Parse mp3 tags
+                                getTags.getTagsFromMP3(storeFile);
 
-                            if (singer == null) {
-                                request.setAttribute("singer", "no information");
-                            } else {
-                                request.setAttribute("singer", singer);
-                            }
+                                if (songName == null) {
+                                    request.setAttribute("songName", "no information");
+                                } else {
+                                    request.setAttribute("songName", songName);
+                                }
 
-                            if (composer == null) {
-                                request.setAttribute("composer", "no information");
-                            } else {
-                                request.setAttribute("composer", composer);
-                            }
+                                if (genre == null) {
+                                    request.setAttribute("genre", "no information");
+                                } else {
+                                    request.setAttribute("genre", genre);
+                                }
 
-                            if (album == null) {
-                                request.setAttribute("album", "no information");
-                            } else {
-                                request.setAttribute("album", album);
+                                if (singer == null) {
+                                    request.setAttribute("singer", "no information");
+                                } else {
+                                    request.setAttribute("singer", singer);
+                                }
+
+                                if (composer == null) {
+                                    request.setAttribute("composer", "no information");
+                                } else {
+                                    request.setAttribute("composer", composer);
+                                }
+
+                                if (album == null) {
+                                    request.setAttribute("album", "no information");
+                                } else {
+                                    request.setAttribute("album", album);
+                                }
+                            }else {
+                                request.setAttribute("message",
+                                        "Please, use \"mp3\" files!");
                             }
                         }
                     }

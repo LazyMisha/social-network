@@ -83,6 +83,8 @@ public class EditUserOldInfoServlet extends HttpServlet {
         request.setAttribute("oldLastName", user.getLastName());
         request.setAttribute("oldEmail", user.getEmail());
         request.setAttribute("oldUserInfo", user.getUser_info());
+        request.setAttribute("oldCountry", user.getCountry());
+        request.setAttribute("oldCity", user.getCity());
 
         getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
                 request, response);

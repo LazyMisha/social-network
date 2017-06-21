@@ -2,6 +2,7 @@ package servlet;
 
 import dao.UserDao;
 import entity.User;
+import util.SecurePassword;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,21 +10,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import util.SecurePassword;
 
 /**
- * Created by misha on 23.05.17.
+ * Created by misha on 20.06.17.
  */
 
-@WebServlet(name="editUser", urlPatterns="/editUser")
-public class EditUserServlet extends HttpServlet {
+@WebServlet(name="editUserSecur", urlPatterns="/editUserSecur")
+public class EditUserServletSecur extends HttpServlet {
 
-    UserDao userDao = new UserDao();
+    SecurePassword secPass=new SecurePassword();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -37,7 +32,7 @@ public class EditUserServlet extends HttpServlet {
 
         request.setCharacterEncoding("UTF-8");
 
-        User user = (User)request.getSession().getAttribute("user");
+        User user = (User) request.getSession().getAttribute("user");
 
         String firstNameMain = user.getFirstName();
         String lastNameMain = user.getLastName();
@@ -45,7 +40,7 @@ public class EditUserServlet extends HttpServlet {
         String countryMain = user.getCountry();
         String photoMain = user.getPath_to_photo();
         try {
-            String musicSize = userDao.getMusicsSize(user);
+            String musicSize = new UserDao().getMusicsSize(user);
             if(musicSize == null || musicSize.isEmpty()){
                 request.setAttribute("count", "0");
             }else {
@@ -94,43 +89,36 @@ public class EditUserServlet extends HttpServlet {
                     cityMain);
         }
 
-        String firstName = request.getParameter("firstName");
-        String lastName = request.getParameter("lastName");
-        String birthDay = request.getParameter("birth-day");
-        String birthMonth = request.getParameter("birth-month");
-        String birthYear = request.getParameter("birth-year");
-        String birthDate = birthDay + "-" + birthMonth + "-" + birthYear;
-        String userInfo = request.getParameter("userInfo");
-        String city = request.getParameter("city");
-        String country = request.getParameter("country");
 
-        if(!firstName.isEmpty())
-            user.setFirstName(firstName);
+        String email = request.getParameter("email");
+        String pass = request.getParameter("password");
+        String confPass = request.getParameter("confirm-password");
 
-        if(!lastName.isEmpty())
-            user.setLastName(lastName);
+        if(pass.isEmpty() || pass.length() < 6){
+            request.setAttribute("message",
+                    "Password must be more longer");
+        }else {
+            if (pass.equals(confPass)) {
+                if (!email.isEmpty())
+                    user.setEmail(email);
 
-        if(!birthDate.isEmpty()){
-            Date date = null;
-            DateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
-            try {
-                date = formatter.parse(birthDate);
-            } catch (ParseException e) {
-                System.out.println(e.getMessage());
+                String salt = secPass.getSalt();
+                String securedPassword = secPass.getSecurePassword(pass, salt);
+
+                user.setSalt(salt);
+                user.setPassword(securedPassword);
+
+                new UserDao().update(user);
+
+                request.setAttribute("message",
+                        "Password is updated");
+            }else {
+                request.setAttribute("message",
+                        "Password and Confirm Password must be the same");
+                getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
+                        request, response);
             }
-            user.setBirthday(date);
         }
-
-        if(!userInfo.isEmpty())
-            user.setUser_info(userInfo);
-
-        if(!city.isEmpty())
-            user.setCity(city);
-
-        if(!country.isEmpty())
-            user.setCountry(country);
-
-        userDao.update(user);
 
         request.setAttribute("oldFirstName", user.getFirstName());
         request.setAttribute("oldLastName", user.getLastName());
@@ -139,12 +127,7 @@ public class EditUserServlet extends HttpServlet {
         request.setAttribute("oldCity", user.getCity());
         request.setAttribute("oldEmail", user.getEmail());
 
-        request.setAttribute("message",
-                "Your profile is updated");
-
-        System.out.println("User " + user.getFirstName() + " is updated");
-
         getServletContext().getRequestDispatcher("/editProfile.jsp").forward(
-            request, response);
+                    request, response);
+        }
     }
-}

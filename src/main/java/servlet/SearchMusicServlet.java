@@ -95,10 +95,8 @@ public class SearchMusicServlet extends HttpServlet {
             for(int i = 0; i < musicList.size(); i++){
                 Music song = musicList.get(i);
                 String fullPath = song.getPath();
-                int index = fullPath.indexOf("upload");
-                String path = fullPath.substring(index);
                 result += "<p>" + song.getSinger() + " - " + song.getSong_name() +
-                        "</p>" + "<audio controls><source src=\"" + path +
+                        "</p>" + "<audio controls><source src=\"" + fullPath +
                          "\" type=\"audio/mpeg\"></audio><br/><br/>";
             }
             request.setAttribute("song", result);

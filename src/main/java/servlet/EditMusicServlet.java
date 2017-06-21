@@ -42,12 +42,14 @@ public class EditMusicServlet extends HttpServlet {
  
        User user = (User) request.getSession().getAttribute("user");
        UserDao userDao = new UserDao();
+
        int songSize = 0;
+       String strSongSize = new UserDao().getMusicsSize(user);
  
        try {
-           songSize = Integer.parseInt(new UserDao().getMusicsSize(user));
+           songSize = Integer.parseInt(strSongSize);
        } catch (Exception e) {
-           System.out.println(e.toString());
+           System.out.println(e.getMessage());
        }
  
        String firstName = user.getFirstName();
@@ -55,12 +57,12 @@ public class EditMusicServlet extends HttpServlet {
        String city = user.getCity();
        String country = user.getCountry();
        String photo = user.getPath_to_photo();
+
        try {
-           String musicSize = userDao.getMusicsSize(user);
-           if (musicSize == null || musicSize.isEmpty()) {
+           if (strSongSize == null || strSongSize.isEmpty()) {
                request.setAttribute("count", "0");
            } else {
-               request.setAttribute("count", musicSize);
+               request.setAttribute("count", strSongSize);
            }
        } catch (Exception e) {
            System.out.println(e.getMessage());
@@ -108,7 +110,7 @@ public class EditMusicServlet extends HttpServlet {
        try {
            long generalMusicSize = songSize + fileSizeInMB;
  
-           if (generalMusicSize >= 100) {
+           if (generalMusicSize > 100) {
                request.setAttribute("message",
                        "Your music space is full!");
            } else {

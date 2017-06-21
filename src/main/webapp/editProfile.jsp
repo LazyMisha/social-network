@@ -201,7 +201,7 @@ $(document).ready(function(){
 					</fieldset>
 				</form>
 				
-				<form action="editUser" method="post" class="form-horizontal" style="margin-top: 20px;">
+				<form action="editUserSecur" method="post" class="form-horizontal" style="margin-top: 20px;">
 					<fieldset>
 						<legend>Edit your Email/Password</legend>
 						<div class="upload-message">${message}</div>
