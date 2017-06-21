@@ -168,7 +168,7 @@ $(document).ready(function(){
 				"<h6>" + city + ", " + country + "</h6>" +
 				"<hr class=\"hruserpage\">" +
 				"<div>" +
-				"<a href=\"sendMessage.jsp\" data-original-title=\"Send a message to this user\" data-toggle=\"tooltip\" type=\"button\" class=\"btn btn-sm btn-primary\"><i class=\"glyphicon glyphicon-send\"></i></a>" +
+				"<a href=\"sendMessage\" data-original-title=\"Send a message to this user\" data-toggle=\"tooltip\" type=\"button\" class=\"btn btn-sm btn-primary\"><i class=\"glyphicon glyphicon-send\"></i></a>" +
 				"<a href=\"#\" data-original-title=\"Explore user's music\" data-toggle=\"tooltip\" type=\"button\" class=\"btn btn-sm btn-warning\"><i class=\"glyphicon glyphicon-headphones\"></i></a>" +
 				"</div>" +
 				"</div>" +
