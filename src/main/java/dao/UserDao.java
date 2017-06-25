@@ -16,6 +16,9 @@ import util.SecurePassword;
 public class UserDao {
 
     String QUERY_MUSIC_SIZE = "select sum(size) from Music where id in (select music from User_songs where user = ?)";
+    String QUERY_TO_GET_COUNT_OF_MUSIC = "select count(id) from Music where id in (select music from User_songs where user = ?)";
+    String QUERY_TO_GET_COUNT_OF_REGISTERED_USERS = "select max(id) from User";
+
 
     public void save(User user) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -132,6 +135,34 @@ public class UserDao {
             Query query = session.createQuery("FROM entity.User WHERE email = ?").setParameter(0, email);
             User user = (User) query.uniqueResult();
             return user;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            session.close();
+        }
+        return null;
+    }
+
+    public String getCountOfUserSongs(User user){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery(QUERY_TO_GET_COUNT_OF_MUSIC).setParameter(0, user);
+            String countOfSongs = query.uniqueResult().toString();
+            return countOfSongs;
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }finally {
+            session.close();
+        }
+        return null;
+    }
+
+    public String getCountOfRegisteredUsers(){
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            Query query = session.createQuery(QUERY_TO_GET_COUNT_OF_REGISTERED_USERS);
+            String countOfUsers = query.uniqueResult().toString();
+            return countOfUsers;
         }catch (Exception e){
             System.out.println(e.getMessage());
         }finally {

@@ -37,6 +37,7 @@ public class HomePageServlet extends HttpServlet {
         String city = user.getCity();
         String country = user.getCountry();
         String photo = user.getPath_to_photo();
+
         try {
             String musicSize = userDao.getMusicsSize(user);
             if(musicSize == null || musicSize.isEmpty()){
@@ -47,6 +48,30 @@ public class HomePageServlet extends HttpServlet {
         }catch (Exception e){
             System.out.println(e.getMessage());
             request.setAttribute("count", "0");
+        }
+
+        try{
+            String countOfMusic = userDao.getCountOfUserSongs(user);
+            if(countOfMusic == null || countOfMusic.isEmpty()){
+                request.setAttribute("countOfMusic", "0");
+            }else {
+                request.setAttribute("countOfMusic", countOfMusic);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            request.setAttribute("countOfMusic", "0");
+        }
+
+        try{
+            String countOfRegisteredUsers = userDao.getCountOfRegisteredUsers();
+            if(countOfRegisteredUsers == null || countOfRegisteredUsers.isEmpty()){
+                request.setAttribute("countOfRegisteredUsers", "0");
+            }else {
+                request.setAttribute("countOfRegisteredUsers", countOfRegisteredUsers);
+            }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            request.setAttribute("countOfRegisteredUsers", "0");
         }
 
         if(photo == null){

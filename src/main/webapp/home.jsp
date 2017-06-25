@@ -142,7 +142,7 @@ $(document).ready(function(){
                 <i class="fa fa-music fa-4x"></i>
               </div>
               <div class="col-xs-9 text-right">
-                <p class="announcement-heading"><span class="badge">0</span></p>
+                <p class="announcement-heading"><span class="badge">${countOfMusic}</span></p>
                 <p class="announcement-text">Songs Uploaded</p>
               </div>
             </div>
@@ -198,7 +198,7 @@ $(document).ready(function(){
                 <i class="fa fa-users fa-4x"></i>
               </div>
               <div class="col-xs-9 text-right">
-                <p class="announcement-heading"><span class="badge">0</span></p>
+                <p class="announcement-heading"><span class="badge">${countOfRegisteredUsers}</span></p>
                 <p class="announcement-text">Registered Users</p>
               </div>
             </div>
