@@ -16,7 +16,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
- 
+import java.util.UUID;
+
 /**
 * Created by misha on 30.05.17.
 */
@@ -135,10 +136,33 @@ public class UploadPhotoServlet extends HttpServlet {
                        String filePath = uploadPath + File.separator + fileName;
                        File storeFile = new File(filePath);
                        String fileExtension = checkFile.getFileExtension(storeFile);
- 
+
+                       //check photo extension
                        if(fileExtension.equalsIgnoreCase("jpg") ||
                                fileExtension.equalsIgnoreCase("png") ||
                                    fileExtension.equalsIgnoreCase("gif")){
+
+                           //resolve problems with encoding jpg
+                           if(fileExtension.equalsIgnoreCase("jpg")){
+                               fileName = UUID.randomUUID().toString() + ".jpg";
+                               filePath = uploadPath + File.separator + fileName;
+                               storeFile = new File(filePath);
+                           }
+
+                           //resolve problems with encoding png
+                           if(fileExtension.equalsIgnoreCase("png")){
+                               fileName = UUID.randomUUID().toString() + ".png";
+                               filePath = uploadPath + File.separator + fileName;
+                               storeFile = new File(filePath);
+                           }
+
+                           //resolve problems with encoding gif
+                           if(fileExtension.equalsIgnoreCase("gif")){
+                               fileName = UUID.randomUUID().toString() + ".gif";
+                               filePath = uploadPath + File.separator + fileName;
+                               storeFile = new File(filePath);
+                           }
+
                            // saves the file on disk
                            item.write(storeFile);
  
